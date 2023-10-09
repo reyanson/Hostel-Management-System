@@ -1,9 +1,11 @@
 package com.example.hms_android;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,9 +32,12 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        loginbtn = (Button) findViewById(R.id.loginButton);
+        // Hook Edit text fields
         username = (EditText) findViewById(R.id.usernameEditText);
         password = (EditText) findViewById(R.id.passwordEditText);
+
+        //Hook button
+        loginbtn = (Button) findViewById(R.id.loginButton);
 
         //set login button on click listener
         loginbtn.setOnClickListener(new View.OnClickListener() {
@@ -46,12 +51,12 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-    // end of on create activity
+    // End of on create activity
 
-    public void authenticateUser(){
+    public void authenticateUser() {
         //check for error
-        if(!validateEmail() || !validatePassword()){
-           return;
+        if (!validateEmail() || !validatePassword()) {
+            return;
         }
         //end of check for error
 
@@ -60,12 +65,12 @@ public class LoginActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
 
         //The url posting to
-        String url = "springboot url";
+        String url = "http://www.192.168.8.100:8080/api/v1/user/login";
 
         //set parameters
-        HashMap<String,String> params = new HashMap<String,String>();
-        params.put("email",username.getText().toString());
-        params.put("password",password.getText().toString());
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("email", username.getText().toString());
+        params.put("password", password.getText().toString());
 
         //Set Request object
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(params),
@@ -75,9 +80,22 @@ public class LoginActivity extends AppCompatActivity {
                         try {
                             //Get  Values  from response object
                             String first_name = (String) response.get("first_name");
-                         
+                            String last_name = (String) response.get("last_name");
+                            String email = (String) response.get("email");
 
-                        }catch (JSONException e){
+                            //Set Intent Actions
+                            Intent goToProfile = new Intent(LoginActivity.this, ProfileActivity.class);
+                            //pass Value to profile Activity;
+                            goToProfile.putExtra("first_name", first_name);
+                            goToProfile.putExtra("last_name", last_name);
+                            goToProfile.putExtra("email", email);
+
+                            //Start Activity
+                            startActivity(goToProfile);
+                            finish();
+
+
+                        } catch (JSONException e) {
                             e.printStackTrace();
                             System.out.println(e.getMessage());
 
@@ -88,11 +106,16 @@ public class LoginActivity extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                error.printStackTrace();
+                System.out.println(error.getMessage());
+                Toast.makeText(LoginActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
             }
         }
 
         ); //End of Set request object
+
+        queue.add(jsonObjectRequest);
+    }
 
 
     public boolean validateEmail(){
@@ -120,6 +143,6 @@ public class LoginActivity extends AppCompatActivity {
             password.setError(null);
             return true;
         }
-    }
+    }//End of password validation
 
-}
+}//End of Login activity class
