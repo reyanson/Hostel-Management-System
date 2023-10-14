@@ -9,8 +9,65 @@ CREATE TABLE users(
     email VARCHAR(50) NOT NULL UNIQUE ,
     password VARCHAR(255) NOT NULL ,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT '0000-00-00 00:00:00',
+    updated_at TIMESTAMP,
     PRIMARY KEY (user_id)
+);
 
+CREATE TABLE user(
+    username VARCHAR(60), 
+    password VARCHAR(255)
+);
+
+CREATE TABLE dean(
+    dean_id VARCHAR(5) PRIMARY KEY, 
+    first_Name VARCHAR(50), 
+    last_Name VARCHAR(50), 
+    Email VARCHAR(50), 
+    nic VARCHAR(12), 
+    address VARCHAR(100), 
+    personal_no INT, 
+    office_no INT
+);
+
+CREATE TABLE subwarden(
+    swarden_id VARCHAR(5) PRIMARY KEY, 
+    first_Name VARCHAR(50), 
+    last_Name VARCHAR(50), 
+    Email VARCHAR(50), 
+    nic VARCHAR(12), 
+    address VARCHAR(100), 
+    personal_no INT, 
+    office_no INT
+); 
+
+CREATE TABLE security(
+    security_id VARCHAR(5) PRIMARY KEY, 
+    first_Name VARCHAR(50), 
+    last_Name VARCHAR(50), 
+    Email VARCHAR(50), 
+    nic VARCHAR(12), address VARCHAR(100), 
+    personal_no INT, 
+    office_no INT
+); 
+
+CREATE TABLE warden(warden_id VARCHAR(5) PRIMARY KEY, 
+    first_Name VARCHAR(50), 
+    last_Name VARCHAR(50), 
+    Email VARCHAR(50), 
+    nic VARCHAR(12), 
+    address VARCHAR(100), 
+    personal_no INT, 
+    office_no INT
+);  
+
+CREATE TABLE student(
+    st_id INT PRIMARY KEY, 
+    reg_no VARCHAR(15), 
+    first_Name VARCHAR(50), 
+    last_Name VARCHAR(50), 
+    Email VARCHAR(50), 
+    nic VARCHAR(12), 
+    address VARCHAR(100), 
+    phone_no INT
 );
 
