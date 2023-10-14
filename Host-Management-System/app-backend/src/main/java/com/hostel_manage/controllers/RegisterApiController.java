@@ -37,6 +37,6 @@ public class RegisterApiController {
             return new ResponseEntity<>("Failed to Register user", HttpStatus.BAD_REQUEST);
         }
 
-        return new ResponseEntity<>("User Registered Successfully",HttpStatus.OK);
+        return new ResponseEntity<>("Success",HttpStatus.OK);
     }
 }

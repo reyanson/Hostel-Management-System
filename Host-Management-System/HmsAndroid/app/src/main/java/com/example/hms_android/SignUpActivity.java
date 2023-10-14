@@ -42,14 +42,7 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        initializeComponents();
-
-
-
-
-    }    // End Of On Create Method.
-
-    private void initializeComponents() {
+        //initializeComponents();
         // Hook Edit Text Fields:
         first_name  = findViewById(R.id.first_name);
         last_name   = findViewById(R.id.last_name);
@@ -60,43 +53,67 @@ public class SignUpActivity extends AppCompatActivity {
         // Hook Sign Up Button:
         sign_up_btn = findViewById(R.id.sign_up_btn);
 
-        RetrofitService retrofitService = new RetrofitService();
-        UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
         sign_up_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String fname = first_name.getText().toString();
-                String lname = last_name.getText().toString();
-                String gmail = email.getText().toString();
-                String passw = password.getText().toString();
-
-                User user =  new User();
-                user.setFirst_name(fname);
-                user.setLast_name(lname);
-                user.setEmail(gmail);
-                user.setPassword(passw);
-
-                userApi.registerNewUser(fname,lname,gmail,passw)
-                                .enqueue(new Callback<Void>() {
-                                    @Override
-                                    public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
-                                        Toast.makeText(SignUpActivity.this,"Save Success",Toast.LENGTH_LONG).show();
-
-                                    }
-
-                                    @Override
-                                    public void onFailure(Call<Void> call, Throwable t) {
-                                        Toast.makeText(SignUpActivity.this,"Save Failed",Toast.LENGTH_LONG).show();
-                                        Logger.getLogger(SignUpActivity.class.getName()).log(Level.SEVERE,"Error occurred",t);
-
-                                    }
-                                });
-
-
                 processFormFields();
             }
         });
-    }
+
+        
+
+
+
+    }    // End Of On Create Method.
+
+//    private void initializeComponents() {
+//        // Hook Edit Text Fields:
+//        first_name  = findViewById(R.id.first_name);
+//        last_name   = findViewById(R.id.last_name);
+//        email       = findViewById(R.id.email);
+//        password    = findViewById(R.id.password);
+//        confirm     = findViewById(R.id.confirm);
+//
+//        // Hook Sign Up Button:
+//        sign_up_btn = findViewById(R.id.sign_up_btn);
+//
+//        RetrofitService retrofitService = new RetrofitService();
+//        UserApi userApi = retrofitService.getRetrofit().create(UserApi.class);
+//        sign_up_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                String fname = first_name.getText().toString();
+//                String lname = last_name.getText().toString();
+//                String gmail = email.getText().toString();
+//                String passw = password.getText().toString();
+//
+//                User user =  new User();
+//                user.setFirst_name(fname);
+//                user.setLast_name(lname);
+//                user.setEmail(gmail);
+//                user.setPassword(passw);
+//
+//                userApi.registerNewUser(fname,lname,gmail,passw)
+//                                .enqueue(new Callback<Void>() {
+//                                    @Override
+//                                    public void onResponse(Call<Void> call, retrofit2.Response<Void> response) {
+//                                        Toast.makeText(SignUpActivity.this,"Save Success",Toast.LENGTH_LONG).show();
+//
+//                                    }
+//
+//                                    @Override
+//                                    public void onFailure(Call<Void> call, Throwable t) {
+//                                        Toast.makeText(SignUpActivity.this,"Save Failed",Toast.LENGTH_LONG).show();
+//                                        Logger.getLogger(SignUpActivity.class.getName()).log(Level.SEVERE,"Error occurred",t);
+//
+//                                    }
+//                                });
+//
+//
+//                //processFormFields();
+//            }
+//        });
+//    }
 
 
     public void goToHome(View view){
@@ -121,7 +138,7 @@ public class SignUpActivity extends AppCompatActivity {
         // Instantiate The Request Queue:
         RequestQueue queue = Volley.newRequestQueue(SignUpActivity.this);
         // The URL Posting TO:
-        String url = "http://192.168.8.101  ```:8080/api/v1/user/register";
+        String url = "http://192.168.8.103:8080/api/v1/user/register";
 
 
 
@@ -137,6 +154,9 @@ public class SignUpActivity extends AppCompatActivity {
                     password.setText(null);
                     confirm.setText(null);
                     Toast.makeText(SignUpActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
+
+                    // Debugging statement
+                    System.out.println("Response from server: " + response);
                 }
                 // End Of Response If Block.
 
