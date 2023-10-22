@@ -99,7 +99,7 @@ VALUES
 ('tg_2019_509', 'Hammil', 'Rajanikanth', 'hammil@example.com', '200052104409', 'Pointpettro Road Kodikamam, Jaffna', 0766831044),
 ('tg_2020_841', 'Krishanth', 'Veluraj', 'krishanth@example.com', '200065432164', 'PTK Road Pandiruppu, Batticalo', 0719832164);
 
-<<<<<<< Updated upstream
+
 ---------------------tg509------------------------------
 
 CREATE TABLE `bathroom` (
@@ -268,6 +268,4 @@ ALTER TABLE `complain`
 
   ALTER TABLE `toilet`
   ADD PRIMARY KEY (`toilet_id`);
-=======
 
->>>>>>> Stashed changes
