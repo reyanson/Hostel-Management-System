@@ -110,14 +110,30 @@ CREATE TABLE `bathroom` (
 
 
 INSERT INTO `bathroom` (`bathroom_id`, `floor`) VALUES
-('b01', 'ground flo'),
-('b02', 'ground flo'),
-('b03', '1st floor'),
-('b04', '1st floor'),
-('b05', '2nd floor'),
-('b06', '2nd floor'),
-('b07', '3rd floor'),
-('b08', '3rd floor');
+('l1_l_b1', 'L1'),
+('l1_l_b2', 'L1'),
+('l1_l_b3', 'L1'),
+('l1_l_b4', 'L1'),
+('l1_l_b5', 'L1'),
+('l1_l_b6', 'L1'),
+('l1_r_b1', 'L1'),
+('l1_r_b2', 'L1'),
+('l1_r_b3', 'L1'),
+('l1_r_b4', 'L1'),
+('l1_r_b5', 'L1'),
+('l1_r_b6', 'L1'),
+('l2_l_b1', 'L2'),
+('l2_l_b2', 'L2'),
+('l2_l_b3', 'L2'),
+('l2_l_b4', 'L2'),
+('l2_l_b5', 'L2'),
+('l2_l_b6', 'L2'),
+('l2_r_b1', 'L2'),
+('l2_r_b2', 'L2'),
+('l2_r_b3', 'L2'),
+('l2_r_b4', 'L2'),
+('l2_r_b5', 'L2'),
+('l2_r_b6', 'L2');
 
 
 CREATE TABLE `complain` (
@@ -133,8 +149,7 @@ CREATE TABLE `complain` (
 
 
 INSERT INTO `complain` (`c_id`, `reg_no`, `date`, `category`, `action`, `remark`, `subject`, `description`) VALUES
-('c01', 'tg_2019_101', '2023-09-03', 'room issue', 0, 'warden not approve', 'chair is broken', NULL);
-
+('c1', 'tg_2019_101', '2023-09-03', 'room issue', 0, 'warden not approve', 'chair is broken', NULL);
 
 CREATE TABLE `damage` (
   `damage_id` varchar(11) NOT NULL,
@@ -143,10 +158,9 @@ CREATE TABLE `damage` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-INSERT INTO `damage` (`damage_id`, `asset_id`, `description`) VALUES
-('d01', 'a04', 'table is broken.'),
-('d02', 'a09', 'lock missing');
-
+INSERT INTO `damage` (`damage_id`, `asset_id`, `room_no`, `description`) VALUES
+('d1', 'ass_t1', 101, 'table is broken.'),
+('d2', 'ass_c1', 101, 'lock missing');
 
 
 CREATE TABLE `notice` (
@@ -159,8 +173,7 @@ CREATE TABLE `notice` (
 
 
 INSERT INTO `notice` (`notice_id`, `date`, `content`, `subject`) VALUES
-('n01', '2023-10-20', 'Please respect quiet hours, maintain cleanliness, and report damages. Visitors must register, and security is crucial. Follow Covid-19 guidelines, and treat fellow residents with respect. Non-compliance may result in disciplinary action. Thank you for contributing to a safe and pleasant hostel environment.', 'NOTICE FOR THE STUDENTS USING HOSTEL FACILITIES');
-
+('n1', '2023-10-20', 'Please respect quiet hours, maintain cleanliness, and report damages. Visitors must register, and security is crucial. Follow Covid-19 guidelines, and treat fellow residents with respect. Non-compliance may result in disciplinary action. Thank you for contributing to a safe and pleasant hostel environment.', 'NOTICE FOR THE STUDENTS USING HOSTEL FACILITIES');
 
 CREATE TABLE `repair` (
   `repair_id` varchar(11) NOT NULL,
@@ -169,10 +182,10 @@ CREATE TABLE `repair` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
-INSERT INTO `repair` (`repair_id`, `asset_id`, `date`) VALUES
-('r01', 'a04', '2023-09-13'),
-('r02', 'a09', '2023-10-03'),
-('r03', 'a14', '2023-10-18');
+INSERT INTO `repair` (`repair_id`, `asset_id`, `room_no`, `date`) VALUES
+('r01', 'ass_c1', 101, '2023-09-13'),
+('r02', 'ass_b1', 101, '2023-10-03'),
+('r03', 'ass_m1', 101, '2023-10-18');
 
 
 
@@ -184,14 +197,15 @@ CREATE TABLE `room` (
 
 
 INSERT INTO `room` (`room_no`, `floor`) VALUES
-(101, 'ground flo'),
-(128, 'ground flo'),
-(201, '1st floor'),
-(225, '1st floor'),
-(301, '2nd floor'),
-(328, '2nd floor'),
-(401, '3rd floor'),
-(428, '3rd floor');
+(101, 'L1'),
+(128, 'L1'),
+(201, 'L2'),
+(225, 'L2'),
+(301, 'L3'),
+(328, 'L3'),
+(401, 'L4'),
+(428, 'L4');
+
 
 
 CREATE TABLE `room_asset` (
@@ -202,24 +216,24 @@ CREATE TABLE `room_asset` (
 
 
 INSERT INTO `room_asset` (`asset_id`, `name`, `room_no`) VALUES
-('a01', 'table', 101),
-('a02', 'table', 101),
-('a03', 'table', 101),
-('a04', 'table', 101),
-('a05', 'blub', 101),
-('a06', 'bulb', 101),
-('a07', 'bed', 101),
-('a08', 'bed', 101),
-('a09', 'cupboard', 101),
-('a10', 'cupboard', 101),
-('a11', 'chair', 101),
-('a12', 'chair', 101),
-('a13', 'chair', 101),
-('a14', 'chair', 101),
-('a15', 'bed', 101),
-('a16', 'bed', 101),
-('a17', 'bed', 101),
-('a18', 'bed', 101);
+('ass_b1', 'blub', 101),
+('ass_b2', 'bulb', 101),
+('ass_bed1', 'bed', 101),
+('ass_bed2', 'bed', 101),
+('ass_c1', 'cupboard', 101),
+('ass_c2', 'cupboard', 101),
+('ass_chair1', 'chair', 101),
+('ass_chair2', 'chair', 101),
+('ass_chair3', 'chair', 101),
+('ass_chair4', 'chair', 101),
+('ass_m1', 'mattress', 101),
+('ass_m2', 'mattress', 101),
+('ass_m3', 'mattress', 101),
+('ass_m4', 'mattress', 101),
+('ass_t1', 'table', 101),
+('ass_t2', 'table', 101),
+('ass_t3', 'table', 101),
+('ass_t4', 'table', 101);
 
 
 
@@ -232,14 +246,30 @@ CREATE TABLE `toilet` (
 
 
 INSERT INTO `toilet` (`toilet_id`, `floor`) VALUES
-('t01', 'ground flo'),
-('t02', 'ground flo'),
-('t03', '1st floor'),
-('t04', '1st floor'),
-('t05', '2nd floor'),
-('t06', '2nd floor'),
-('t07', '3rd floor'),
-('t08', '3rd floor');
+('l1_l_t1', 'L1'),
+('l1_l_t2', 'L1'),
+('l1_l_t3', 'L1'),
+('l1_l_t4', 'L1'),
+('l1_l_t5', 'L1'),
+('l1_l_t6', 'L1'),
+('l1_r_t1', 'L1'),
+('l1_r_t2', 'L1'),
+('l1_r_t3', 'L1'),
+('l1_r_t4', 'L1'),
+('l1_r_t5', 'L1'),
+('l1_r_t6', 'L1'),
+('l2_l_t1', 'L2'),
+('l2_l_t2', 'L2'),
+('l2_l_t3', 'L2'),
+('l2_l_t4', 'L2'),
+('l2_l_t5', 'L2'),
+('l2_l_t6', 'L2'),
+('l2_r_t1', 'L2'),
+('l2_r_t2', 'L2'),
+('l2_r_t3', 'L2'),
+('l2_r_t4', 'L2'),
+('l2_r_t5', 'L2'),
+('l2_r_t6', 'L2');
 
 
 ALTER TABLE `bathroom`
@@ -262,10 +292,32 @@ ALTER TABLE `complain`
   ADD PRIMARY KEY (`repair_id`);
 
 
+ALTER TABLE `room`
+  ADD PRIMARY KEY (`room_no`);
+
+
   ALTER TABLE `room_asset`
-  ADD PRIMARY KEY (`asset_id`);
+  ADD PRIMARY KEY (`asset_id`,`room_no`);
 
 
   ALTER TABLE `toilet`
   ADD PRIMARY KEY (`toilet_id`);
+
+
+  ALTER TABLE `damage`
+  ADD CONSTRAINT `damage_ibfk_1` FOREIGN KEY (`room_no`) REFERENCES `room` (`room_no`),
+  ADD CONSTRAINT `damage_ibfk_2` FOREIGN KEY (`asset_id`) REFERENCES `room_asset` (`asset_id`);
+
+
+ALTER TABLE `repair`
+  ADD CONSTRAINT `repair_ibfk_1` FOREIGN KEY (`room_no`) REFERENCES `room` (`room_no`),
+  ADD CONSTRAINT `repair_ibfk_2` FOREIGN KEY (`asset_id`) REFERENCES `room_asset` (`asset_id`);
+
+
+  ALTER TABLE complain
+ADD FOREIGN KEY (reg_no) REFERENCES student(reg_no);
+
+
+
+
 
