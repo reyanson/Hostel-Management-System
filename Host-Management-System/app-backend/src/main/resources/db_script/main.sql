@@ -71,3 +71,19 @@ CREATE TABLE student(
     phone_no INT
 );
 
+
+-------------TG508----------------------------------------------------------------------------------------
+
+/*Trigger for users table update*/
+
+DELIMITER //
+CREATE TRIGGER after_dean_insert
+AFTER
+INSERT
+ON dean FOR EACH ROW
+BEGIN
+IF NEW.dean_id IS NOT NULL THEN
+INSERT INTO user VALUES(NEW.email,MD5(NEW.nic));
+END IF;
+END//
+DELIMITER ;

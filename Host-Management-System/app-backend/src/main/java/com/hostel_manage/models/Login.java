@@ -1,16 +1,43 @@
 package com.hostel_manage.models;
 
-public class Login {
-    private String email;
-    private String password;
-    private String Test;
 
-    public String getEmail() {
-        return email;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "user")
+
+
+//For procedure
+//@NamedStoredProcedureQuery(
+//        name = "checkLogin",
+//        procedureName = "CheckLogin",
+//        parameters = {
+//                @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "username"),
+//                @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "password")
+//        }
+//)
+
+//define the store function for login check
+@NamedQueries({
+        @NamedQuery(
+                name = "checkLogin",
+                query = "SELECT CheckLogin(:username, :password) FROM Login "
+
+        )
+})
+public class Login {
+    @Id
+    private String username;
+    private String password;
+
+    // Getters and setters
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
@@ -21,3 +48,6 @@ public class Login {
         this.password = password;
     }
 }
+
+
+

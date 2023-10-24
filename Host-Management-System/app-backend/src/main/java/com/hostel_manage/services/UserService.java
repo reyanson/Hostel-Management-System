@@ -1,7 +1,11 @@
 package com.hostel_manage.services;
 
+import com.hostel_manage.models.Login;
 import com.hostel_manage.models.User;
 import com.hostel_manage.repository.UserRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -12,24 +16,30 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public int registerNewUserServiceMethod(String fname,String lname,String email,String password){
-        return userRepository.registerNewUser(fname,lname,email,password);
+    //Declare the Entity Manager
+    private final EntityManager entityManager;
+
+    @Autowired
+    public UserService(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
-    // End Of Register New User Service Method.
+
+    //Method for the check the username and password with database username and password through store function
+    public String executeCheckLoginFunction(String username, String password) {
+        Query query = entityManager.createNamedQuery("checkLogin");
+        query.setParameter("username", username); //set username parameter
+        query.setParameter("password", password); //set password parameter
+
+        System.out.println("Username in service: "+username);// for debugging purpose
 
 
-    public List<String> checkUserEmail(String email){
-        return userRepository.checkUserEmail(email);
-    }
-    // End Of Check User Email Services Method.
 
-    public String checkUserPasswordByEmail(String email){
-        return userRepository.checkUserPasswordByEmail(email);
-    }
-    // End Of Check User Password Services Method.
+        String result = (String) query.getSingleResult();
 
-    public User getUserDetailsByEmail(String email){
-        return userRepository.GetUserDetailsByEmail(email);
+        System.out.println(result);// for debugging purpose
+        return result; // return the database function output
+
     }
-    // End Of Get User Details By Email.
+
+
 }

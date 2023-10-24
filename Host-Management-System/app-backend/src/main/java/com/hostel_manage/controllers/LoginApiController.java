@@ -1,39 +1,45 @@
 package com.hostel_manage.controllers;
 
 import com.hostel_manage.models.Login;
-import com.hostel_manage.models.User;
 import com.hostel_manage.services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCrypt;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/api/v1")
 public class LoginApiController {
-@Autowired
-UserService userService;
-@PostMapping("/user/login")
-public ResponseEntity authenticateUser(@RequestBody Login login){
-// Get User Email:
-List<String> userEmail = userService.checkUserEmail(login.getEmail());
-// Check If Email Is Empty:
-if(userEmail.isEmpty() || userEmail == null){
-return new ResponseEntity("Email does not exist", HttpStatus.NOT_FOUND);
+
+    //declare the userService variable
+    private final UserService userService;
+
+
+    //Constructor
+    public LoginApiController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/login") //login end point
+    // Method for the Login Response display
+    public ResponseEntity<String> login(@RequestBody Login loginRequest) {
+        String username = loginRequest.getUsername();
+        String password = loginRequest.getPassword();
+
+        System.out.println(username + password); // for testing purpose
+
+        //Get the value from userService.executeCheckLoginFunction
+        //The mysql function provided msg . Then i used this msg for display for the acknowledgment
+        String loginMsg = userService.executeCheckLoginFunction(username, password);
+
+
+        if (loginMsg.equalsIgnoreCase("Login Successful")) { //check the loginMsg and that msg equal to "Login Successful" then Http status is ok
+            return new ResponseEntity<>(loginMsg, HttpStatus.OK);
+        } else {//else http status is unauthorized
+            return new ResponseEntity<>(loginMsg, HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+
 }
-// End Of Check If Email Is Empty.
-// Get Hashed User Password:
-String hashed_password = userService.checkUserPasswordByEmail(login.getEmail());
-// Validate User Password:
-if(!BCrypt.checkpw(login.getPassword(), hashed_password)){
-return new ResponseEntity("Incorrect username or password", HttpStatus.BAD_REQUEST);
-}
-// Set User Object:
-User user = userService.getUserDetailsByEmail(login.getEmail());
-return new ResponseEntity(user, HttpStatus.OK);
-}
-}
+
+
