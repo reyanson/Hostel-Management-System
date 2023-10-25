@@ -90,31 +90,17 @@ CREATE TABLE student(
     address VARCHAR(100) NOT NULL, 
     phone_no INT(10) NOT NULL
 );
-
-
-
--------------TG508----------------------------------------------------------------------------------------
-
-/*Trigger for users table update*/
-
-DELIMITER //
-CREATE TRIGGER after_dean_insert
-AFTER
-INSERT
-ON dean FOR EACH ROW
-BEGIN
-IF NEW.dean_id IS NOT NULL THEN
-INSERT INTO user VALUES(NEW.email,MD5(NEW.nic));
-END IF;
-END//
-DELIMITER ;
 INSERT INTO student (reg_no, first_Name, last_Name, Email, nic, address, phone_no)
 VALUES
-('tg_2019_508', 'Reyanson', 'Sosai', 'reyanson@example.com', '990910703V', '3/6 Raja Road Vankala, Mannar', 0769678453),
-('tg_2019_492', 'Sunil', 'Vadivel', 'sunil@example.com', '997024986V', '39A Boundary Road, Kalmunai', 0760725590),
-('tg_2018_317', 'Jane', 'Jeyan', 'jane@example.com', '9876543213V', 'Elme Street, Colombo', 0756958721),
-('tg_2019_509', 'Hammil', 'Rajanikanth', 'hammil@example.com', '200052104409', 'Pointpettro Road Kodikamam, Jaffna', 0766831044),
-('tg_2020_841', 'Krishanth', 'Veluraj', 'krishanth@example.com', '200065432164', 'PTK Road Pandiruppu, Batticalo', 0719832164);
+    ('tg_2019_508', 'Reyanson', 'Sosai', 'reyanson@example.com', '990910703V', '3/6 Raja Road Vankala, Mannar', 0769678453),
+    ('tg_2019_492', 'Sunil', 'Vadivel', 'sunil@example.com', '997024986V', '39A Boundary Road, Kalmunai', 0760725590),
+    ('tg_2018_317', 'Jane', 'Jeyan', 'jane@example.com', '9876543213V', 'Elme Street, Colombo', 0756958721),
+    ('tg_2019_509', 'Hammil', 'Rajanikanth', 'hammil@example.com', '200052104409', 'Pointpettro Road Kodikamam, Jaffna', 0766831044),
+    ('tg_2020_841', 'Krishanth', 'Veluraj', 'krishanth@example.com', '200065432164', 'PTK Road Pandiruppu, Batticalo', 0719832164);
+
+
+
+
 
 
 ---------------------tg509------------------------------
@@ -333,6 +319,87 @@ ALTER TABLE `repair`
 
   ALTER TABLE complain
 ADD FOREIGN KEY (reg_no) REFERENCES student(reg_no);
+
+
+-------------TG508----------------------------------------------------------------------------------------
+
+/*Trigger for users table update*/
+
+DELIMITER //
+CREATE TRIGGER after_dean_insert
+    AFTER
+        INSERT
+    ON dean FOR EACH ROW
+BEGIN
+    IF NEW.dean_id IS NOT NULL THEN
+INSERT INTO user VALUES(NEW.email,MD5(NEW.nic));
+END IF;
+END//
+DELIMITER ;
+
+   /* Trigger for user table update with student table*/
+DELIMITER //
+CREATE TRIGGER after_student_insert
+AFTER
+INSERT
+ON student FOR EACH ROW
+BEGIN
+DECLARE tgNo VARCHAR(10);
+
+IF NEW.reg_no IS NOT NULL THEN
+SELECT CONCAT('TG', SUBSTRING(reg_no, 9)) INTO tgNo FROM student WHERE reg_no = NEW.reg_no;
+IF tgNo IS NOT NULL THEN
+INSERT INTO user VALUES(tgNo,MD5(NEW.nic));
+END IF;
+END IF;
+END//
+DELIMITER ;
+
+DELIMITER //
+
+CREATE TRIGGER after_student_insert
+    AFTER INSERT ON student FOR EACH ROW
+BEGIN
+    DECLARE tgNo VARCHAR(10);
+
+    -- Extract the numeric part from reg_no
+    SET tgNo = CONCAT('TG',SUBSTRING(NEW.reg_no, 9));
+
+    -- Insert a new user record
+    INSERT INTO user (username, password)
+    VALUES (tgNo, MD5(NEW.nic));
+END//
+
+DELIMITER ;
+
+
+
+/*Strored function*/
+DELIMITER //
+CREATE FUNCTION CheckLogin(in_username VARCHAR(255), in_password VARCHAR(32)) RETURNS VARCHAR(255)
+BEGIN
+    DECLARE hashed_password VARCHAR(32);
+
+SELECT MD5(in_password) INTO hashed_password;
+
+IF EXISTS (
+        SELECT 1
+        FROM user
+        WHERE username = in_username AND password = hashed_password
+    ) THEN
+        RETURN 'Login Successful';
+ELSE
+        IF NOT EXISTS (SELECT 1 FROM user WHERE username = in_username) THEN
+            RETURN 'Username wrong';
+ELSE
+            RETURN 'Password wrong';
+END IF;
+END IF;
+END //
+DELIMITER ;
+
+
+
 
 
 
