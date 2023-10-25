@@ -19,6 +19,7 @@ import com.example.hms_android.models.Login;
 import com.example.hms_android.models.ResponseClass;
 import com.example.hms_android.retrofit.LoginApi;
 import com.example.hms_android.retrofit.RetrofitService;
+import android.util.Log;
 
 public class SignInActivity extends AppCompatActivity {
     private EditText etEmail;
@@ -56,9 +57,11 @@ public class SignInActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         // Authentication is successful
                         ResponseClass responseObject = response.body();
-                        String loginMsg = responseObject.getLoginMsg();
+                        String loginMsg = responseObject.getMessage().toString();
 
-                        if (loginMsg.equals("Login Successfully")) {
+
+
+                        if (loginMsg.equals("Login Successful")) {
                             // Navigate to the next activity when login is successful
                             Intent intent = new Intent(SignInActivity.this, ProfileActivity.class);
                             startActivity(intent);
@@ -75,6 +78,7 @@ public class SignInActivity extends AppCompatActivity {
 
                 @Override
                 public void onFailure(Call<ResponseClass> call, Throwable t) {
+                    Log.e("Error", t.getMessage());
                     // Handle network or request failure
                     Toast.makeText(SignInActivity.this, "Login Failed. Please check your network.", Toast.LENGTH_LONG).show();
                 }
@@ -84,6 +88,8 @@ public class SignInActivity extends AppCompatActivity {
 
     // Other methods and logic in your activity
 }
+
+
 
 
 

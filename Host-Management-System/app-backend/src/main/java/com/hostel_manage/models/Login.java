@@ -8,29 +8,31 @@ import jakarta.persistence.*;
 
 
 //For procedure
-//@NamedStoredProcedureQuery(
-//        name = "checkLogin",
-//        procedureName = "CheckLogin",
-//        parameters = {
-//                @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "username"),
-//                @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "password")
-//        }
-//)
+@NamedStoredProcedureQuery(
+        name = "checkLogin",
+        procedureName = "CheckLogin",
+        parameters = {
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "username"),
+                @StoredProcedureParameter(mode = ParameterMode.IN, type = String.class, name = "password")
+        }
+)
 
 //define the store function for login check
-@NamedQueries({
-        @NamedQuery(
-                name = "checkLogin",
-                query = "SELECT CheckLogin(:username, :password) FROM Login "
-
-        )
-})
+//@NamedQueries({
+//        @NamedQuery(
+//                name = "checkLogin",
+//                query = "SELECT CheckLogin(:username, :password) FROM Login "
+//
+//        )
+//})
 public class Login {
     @Id
     private String username;
     private String password;
 
     // Getters and setters
+
+
 
     public String getUsername() {
         return username;
