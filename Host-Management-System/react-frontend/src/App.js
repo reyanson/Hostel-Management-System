@@ -3,14 +3,19 @@ import './App.css';
 import Dashboard from './Dashboard';
 
 import Registration from './Registration';
-import Login from './Login';
-import Forgot from './ForgotPage';
+// import Login from './Login';
+// import Forgot from './ForgotPage';
 
 
 function App() {
   return (
-    
-    <BrowserRouter>
+
+
+    <div className="App">
+
+      <Registration />
+
+      <BrowserRouter>
       <div>
         <Routes>
           <Route path="/signin" element={<Login />} />
@@ -19,6 +24,10 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
+
+    </div>
+        
+    
   );
 }
 
