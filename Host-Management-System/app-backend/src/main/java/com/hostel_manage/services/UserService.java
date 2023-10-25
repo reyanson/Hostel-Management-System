@@ -31,12 +31,13 @@ public class UserService {
         query.setParameter("password", password); //set password parameter
 
         System.out.println("Username in service: "+username);// for debugging purpose
+        System.out.println("Password in server: "+password);
 
 
 
         String result = (String) query.getSingleResult();
 
-        System.out.println(result);// for debugging purpose
+        System.out.println("Results: "+result);// for debugging purpose
         return result; // return the database function output
 
     }

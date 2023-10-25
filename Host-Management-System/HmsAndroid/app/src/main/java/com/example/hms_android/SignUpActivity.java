@@ -3,7 +3,6 @@ package com.example.hms_android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,18 +19,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hms_android.helpers.StringHelper;
-import com.example.hms_android.models.User;
-import com.example.hms_android.retrofit.RetrofitService;
-import com.example.hms_android.retrofit.UserApi;
 
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import retrofit2.Call;
-import retrofit2.Callback;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -138,7 +129,7 @@ public class SignUpActivity extends AppCompatActivity {
         // Instantiate The Request Queue:
         RequestQueue queue = Volley.newRequestQueue(SignUpActivity.this);
         // The URL Posting TO:
-        String url = "http://192.168.8.103:8080/api/v1/user/register";
+        String url = "http://192.168.8.100:8080/api/v1/user/register";
 
 
 

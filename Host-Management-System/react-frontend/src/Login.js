@@ -1,21 +1,21 @@
 // import * as React from 'react';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 //import {  useState } from "react";
-//import { useNavigate } from 'react-router-dom';
-//import axios from "axios";
+import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-//import {Link} from 'react-router-dom';
-//import Grid from '@mui/material/Grid';
+import {Link} from 'react-router-dom';
+import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-//import LinkMui from '@mui/material/Link';
+import LinkMui from '@mui/material/Link';
 import Logo from "./logo1.png";
 //import { IconButton, InputAdornment, FormControl } from '@mui/material';
 //import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -23,6 +23,35 @@ import Logo from "./logo1.png";
 const theme = createTheme();
 
 export default function SignIn() {
+
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  async function login(event) {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:8080/api/v1/login", {
+        username: username,
+        password: password,
+      });
+
+      if (response.status === 200) {
+        // Login was successful, navigate to the dashboard
+        navigate('/dashboard');
+      } else {
+        // Handle login failure and show an error message
+        // You can have a function or component to handle login failure and show errors
+        handleLoginFailure();
+      }
+    } catch (error) {
+      // Handle errors here, for example, network errors or server issues
+      // You can have a function or component to handle error scenarios
+      handleLoginError(error);
+    }
+  
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -77,13 +106,13 @@ export default function SignIn() {
               label="Remember me"
             />
             
-            {/* <Grid container >
+            <Grid container >
             <Grid item xs >            
                 <LinkMui to variant="body2"  display="flex" justifyContent="flex-end" sx={{ mt: '-30px' }} > 
-                <Link to={`/forgot`} >Forgot password?</Link>
+                  <Link to={`/forgot`} >Forgot password?</Link>
                 </LinkMui>
               </Grid>
-            </Grid> */}
+            </Grid>
   
             <Button
               type="submit"
