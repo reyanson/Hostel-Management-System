@@ -9,21 +9,13 @@ import Registration from './Registration';
 
 function App() {
   return (
-    <>
+
 
     <div className="App">
 
       <Registration />
 
-      {/* <Login /> */}
-      
-
-
-    </div>
-        
-    
-
-    <BrowserRouter>
+      <BrowserRouter>
       <div>
         <Routes>
           <Route path="/signin" element={<Login />} />
@@ -32,7 +24,10 @@ function App() {
         </Routes>
       </div>
     </BrowserRouter>
-    </>
+
+    </div>
+        
+    
   );
 }
 
