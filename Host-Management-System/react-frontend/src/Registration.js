@@ -5,7 +5,7 @@ export default function Registration(){
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
           <h2 className="text-center m-4">Attendance Marking</h2>
 
-          <form onSubmit={(e) => onSubmit(e)}>
+          {/* <form onSubmit={(e) => onSubmit(e)}>
             <div className="mb-3">
               <label htmlFor="Userid" className="form-label">
                 User Id
@@ -95,7 +95,7 @@ export default function Registration(){
             <Link className="btn btn-outline-danger mx-2" to="/">
               Cancel
             </Link>
-          </form>
+          </form> */}
         </div>
       </div>
     </div>
