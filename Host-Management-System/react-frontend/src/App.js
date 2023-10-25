@@ -9,6 +9,7 @@ import Forgot from './ForgotPage';
 
 function App() {
   return (
+    
     <BrowserRouter>
       <div>
         <Routes>
