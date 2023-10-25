@@ -2,8 +2,8 @@
 import './App.css';
 
 import Registration from './Registration';
-import Login from './Login';
-import Forgot from './ForgotPage';
+// import Login from './Login';
+// import Forgot from './ForgotPage';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
 
       <Registration/>
 
-      <Login />
+      {/* <Login /> */}
       
 
 
