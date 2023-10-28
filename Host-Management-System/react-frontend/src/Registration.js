@@ -27,14 +27,14 @@ export default function Registration(){
     }
   }
     return(
-        <div>
-          <div class="container mt-4">
-          <div class="card">
-            <h1>User Registration</h1>
+        <div className="container">
+          <div className="row">
+          <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
+            <h2 className="text-center m-4">User Registration</h2>
             <form>
-              <div class="form-group">
-                <label>First Name</label>
-                <input type="text" class="form-control" id="firstname" 
+              <div className="mb-3">
+                <label className="form-label">First Name</label>
+                <input type="text" className="form-control" id="firstname" 
                 placeholder="Enter First Name" value={firstname}
                 onChange={(event)=> {setFirstname(event.target.value);
                 } } 
