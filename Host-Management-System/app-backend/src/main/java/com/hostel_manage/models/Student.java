@@ -12,13 +12,13 @@ public class Student {
     @Column(name = "reg_no")
     private String regNo;
 
-    @Column(name = "first_Name")
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name = "last_Name")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "Email")
+    @Column(name = "email")
     private String email;
 
     @Column(name = "nic")

@@ -374,27 +374,27 @@ DELIMITER ;
 
 
 
-/*Strored function*/
+/*Strored procedure*/
 DELIMITER //
 CREATE FUNCTION CheckLogin(in_username VARCHAR(255), in_password VARCHAR(32)) RETURNS VARCHAR(255)
 BEGIN
     DECLARE hashed_password VARCHAR(32);
 
-SELECT MD5(in_password) INTO hashed_password;
+    SELECT MD5(in_password) INTO hashed_password;
 
-IF EXISTS (
+    IF EXISTS (
         SELECT 1
         FROM user
         WHERE username = in_username AND password = hashed_password
     ) THEN
-        RETURN 'Login Successful';
-ELSE
+        SELECT 'Login Successful' AS result;
+    ELSE
         IF NOT EXISTS (SELECT 1 FROM user WHERE username = in_username) THEN
-            RETURN 'Username wrong';
-ELSE
-            RETURN 'Password wrong';
-END IF;
-END IF;
+            SELECT 'Username wrong' AS result;
+        ELSE
+            SELECT 'Password wrong' AS result;
+        END IF;
+    END IF;
 END //
 DELIMITER ;
 
