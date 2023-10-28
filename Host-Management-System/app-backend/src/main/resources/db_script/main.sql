@@ -106,9 +106,9 @@ VALUES
 ---------------------tg509------------------------------
 
 CREATE TABLE `bathroom` (
-  `bathroom_id` varchar(11) NOT NULL,
-  `floor` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `bathroom_id` varchar(10) NOT NULL,
+  `floor` varchar(2) NOT NULL
+);
 
 
 
@@ -148,7 +148,7 @@ CREATE TABLE `complain` (
   `remark` varchar(50) DEFAULT NULL,
   `subject` varchar(50) DEFAULT NULL,
   `description` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
 
 
 INSERT INTO `complain` (`c_id`, `reg_no`, `date`, `category`, `action`, `remark`, `subject`, `description`) VALUES
@@ -321,7 +321,12 @@ ALTER TABLE `repair`
 ADD FOREIGN KEY (reg_no) REFERENCES student(reg_no);
 
 
--------------TG508----------------------------------------------------------------------------------------
+------------------------------------------------------------------TG508----------------------------------------------------------------------------------------
+/*Level table*/
+create table level (year int(4), level int(1));
+INSERT INTO level VALUES 
+(2019,3),
+(2022,1);
 
 /*Trigger for users table update*/
 
@@ -397,6 +402,41 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+
+
+
+---------------------------------------------------------------------Strored function----------------------------------------------------------------------------------------------------------
+/* START Find student reg_no with "TG___"*/
+DELIMITER //
+CREATE FUNCTION getRegNo(IN num VARCHAR(50))
+RETURNS VARCHAR(50)
+DETERMINISTIC --always produces the same output for the same input It helps the database optimize query execution.
+BEGIN
+  DECLARE regnum VARCHAR(50);
+  SELECT reg_no INTO regnum FROM student WHERE SUBSTRING(reg_no, 9) = SUBSTRING(num, 3);
+  RETURN regnum;
+END//
+DELIMITER ;
+
+
+/* END Find student reg_no with "TG___"*/
+
+/*START FIND THE LEVEL */
+DELIMITER //
+CREATE FUNCTION getLevelOfStudent(IN num VARCHAR(50))
+RETURNS INT(1)
+DETERMINISTIC
+BEGIN
+    DECLARE result INT(1);
+    SELECT level INTO result FROM level WHERE year = SUBSTRING(num, 4, 4);
+    RETURN result;
+END//
+DELIMITER ;
+
+
+/*END FIND THE LEVEL */
+
 
 
 
