@@ -3,8 +3,8 @@ import './App.css';
 import Dashboard from './Dashboard';
 
 import Registration from './Registration';
-// import Login from './Login';
-// import Forgot from './ForgotPage';
+import Login from './Login';
+import Forgot from './ForgotPage';
 
 
 function App() {
@@ -13,12 +13,12 @@ function App() {
 
     <div className="App">
 
-      <Registration />
+      {/* <Registration /> */}
 
       <BrowserRouter>
       <div>
         <Routes>
-          <Route path="/signin" element={<Login />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/forgot" element={<Forgot />} />
         </Routes>
