@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import axios from "axios";
 
 export default function Registration(){
 
@@ -11,7 +11,20 @@ export default function Registration(){
   const [officenum,setOfficenum] = useState("");
 
   async function save (event){
-    
+    event.preventDefault();
+    try{
+      await axios.post("http://localhost:8080/api/v1/", {
+      firstname : firstname,
+      lastname : lastname,
+      email : email,
+      nic : nic,
+      personalnum : personalnum,
+      officenum :officenum,
+    });
+    alert("Empoyee Registation Successfully");
+      }catch(err){
+        alert (err);
+    }
   }
     return(
         <div>
@@ -46,7 +59,7 @@ export default function Registration(){
               <div class="form-group">
                 <label>NIC</label>
                 <input type="text" class="form-control" id="nic" 
-                placeholder="Enter NIC" value={lastname}
+                placeholder="Enter NIC" value={nic}
                 onChange={(event)=> {setNic(event.target.value);
                 } } 
                 />
@@ -67,6 +80,8 @@ export default function Registration(){
                 } } 
                 />
               </div>
+              <button type="submit" class="btn btn-primary mt-4" onClick={save}>Register</button>
+              <button type="reset" class="btn btn-primary mt-4">Clear</button>
             </form>
           </div>
           </div>

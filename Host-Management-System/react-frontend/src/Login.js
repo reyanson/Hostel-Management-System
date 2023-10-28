@@ -43,12 +43,12 @@ export default function SignIn() {
       } else {
         // Handle login failure and show an error message
         // You can have a function or component to handle login failure and show errors
-        handleLoginFailure();
+        // handleLoginFailure();
       }
     } catch (error) {
       // Handle errors here, for example, network errors or server issues
       // You can have a function or component to handle error scenarios
-      handleLoginError(error);
+      // handleLoginError(error);
     }
   
   }
