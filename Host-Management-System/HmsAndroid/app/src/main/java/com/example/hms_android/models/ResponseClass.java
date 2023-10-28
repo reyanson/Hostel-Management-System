@@ -7,8 +7,6 @@ public class ResponseClass {
     @SerializedName("status")
     private String message;
 
-
-
     // Constructors, getters, and setters
     // You can generate these using your IDE or write them manually
 

@@ -31,13 +31,13 @@ public class LoginApiController {
         System.out.println(username + password); // for testing purpose
 
         //Get the value from userService.executeCheckLoginFunction
-        //The mysql function provided msg . Then i used this msg for display for the acknowledgment
+        //The mysql function provided msg . Then I used this msg for display for the acknowledgment
         String loginMsg = userService.executeCheckLoginFunction(username, password);
         System.out.println("LoginMsg "+loginMsg);
 
 
         if (loginMsg.equalsIgnoreCase("Login Successful")) { //check the loginMsg and that msg equal to "Login Successful" then Http status is ok
-            return new ResponseEntity(loginMsg,HttpStatus.OK);
+            return new ResponseEntity(login,HttpStatus.OK);
         } else {//else http status is unauthorized
             return new ResponseEntity(loginMsg, HttpStatus.UNAUTHORIZED);
         }
