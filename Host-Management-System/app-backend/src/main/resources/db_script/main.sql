@@ -53,7 +53,7 @@ CREATE TABLE security(
     security_id INT AUTO_INCREMENT PRIMARY KEY, 
     first_Name VARCHAR(50) NOT NULL, 
     last_Name VARCHAR(50) NOT NULL, 
-    Email VARCHAR(50), 
+    Email VARCHAR(50) UNIQUE ,
     nic VARCHAR(12) UNIQUE, 
     address VARCHAR(100) NOT NULL, 
     personal_no INT(10) NOT NULL,  
