@@ -1,33 +1,51 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import './App.css';
-import Dashboard from './Dashboard';
 
-import Registration from './Registration';
+import { ColorModeContext, useMode } from './theme';
+import {CssBaseline, ThemeProvider} from "@mui/material";
+
+//import Dash from './Dashboard';
+//import Registration from './Registration';
 import Login from './Login';
 import Forgot from './ForgotPage';
 
+import Dashboard from './scenes/dashboard';
+//import Topbar from './scenes/global/Topbar';
+//import Sidebar from './scenes/global/Sidebar';
+
+
 
 function App() {
+  const [theme, colorMode] = useMode();
+
+
   return (
+    <ColorModeContext.Provider value = {colorMode}>
+      <ThemeProvider theme={theme}>
 
+        <CssBaseline />
 
-    <div className="App">
+        <div className="App">
+          <main className='content'>
+            
+            <BrowserRouter>
+            <div>
+              <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/forgot" element={<Forgot />} />
+                <Route path="/home" element={<Dashboard />} />
 
-      {/* <Registration /> */}
-
-      <BrowserRouter>
-      <div>
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/forgot" element={<Forgot />} />
-        </Routes>
+                {/* <Route path="/topbar" element={<Topbar />} /> */}
+                {/* <Route path="/sidebar" element={<Sidebar />} /> */}
+              </Routes>
+            </div>
+            </BrowserRouter>
+          </main>
       </div>
-    </BrowserRouter>
 
-    </div>
-        
-    
+      </ThemeProvider>
+
+    </ColorModeContext.Provider>
+
   );
 }
 

@@ -48,7 +48,7 @@ export default function SignIn() {
 
       if (response.status === 200) {
         // Login was successful, navigate to the dashboard
-        navigate('/dashboard');
+        navigate('/home');
       } else {
         setError('Login failed. Please try again.');
       }
