@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.hms_android.barcode.BarCodeActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     Button sign_in, sign_up;
@@ -23,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     // End Of On Create Method.
 
     public void goToSignUp(View view){
-        Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+        Intent intent = new Intent(MainActivity.this, BarCodeActivity.class);
         startActivity(intent);
         finish();
     }
