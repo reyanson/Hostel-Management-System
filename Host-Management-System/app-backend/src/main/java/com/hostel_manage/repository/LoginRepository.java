@@ -19,6 +19,10 @@ public interface LoginRepository extends JpaRepository<Login,String> {
     @Procedure(name = "checkLogin")
     Login findByUsername(String username);
 
+    @Query(value = "SELECT findUserOccasion(?1)",nativeQuery = true)
+    public String getUserOccasiono(String username);
+
+
     //Old code same time it is useful
 
 //    @Query(value = "SELECT username FROM user WHERE username = :email ", nativeQuery = true)

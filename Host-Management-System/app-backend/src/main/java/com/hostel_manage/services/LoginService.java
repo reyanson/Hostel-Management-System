@@ -5,6 +5,7 @@ import com.hostel_manage.repository.LoginRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -50,6 +51,12 @@ public class LoginService {
 
         return result;
 
+
+    }
+
+
+    public String getUserOccasiono(String username){
+        return loginRepository.getUserOccasiono(username);
     }
 
 

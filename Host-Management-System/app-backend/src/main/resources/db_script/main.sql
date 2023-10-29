@@ -446,6 +446,34 @@ DELIMITER ;
 
 /*END FIND THE LEVEL */
 
+/*START find user occasion*/
+DELIMITER //
+CREATE FUNCTION findUserOccasion(IN username VARCHAR(60))
+RETURNS VARCHAR(10)
+DETERMINISTIC
+BEGIN
+    DECLARE result VARCHAR(10);
+    IF SUBSTRING(username, 1,2)="TG" THEN
+        SET result = "student";
+    ELSEIF SUBSTRING(username, LENGTH(username)- 3, 3) = "sec" THEN
+        SET result = "security";
+    ELSEIF SUBSTRING(username, LENGTH(username) - 4, 4)="dean" THEN
+        SET result = "dean";
+    ELSEIF SUBSTRING(username, LENGTH(username)- 3, 3) = "sub" THEN
+        SET result = "subwarden";
+    ELSEIF SUBSTRING(username, LENGTH(username)- 3, 3) = "war" THEN
+        SET result = "warden";
+    ELSE
+        SET result="wrong";
+    END IF;
+
+    RETURN result;
+
+END //
+DELIMITER ;
+
+
+/*END find user occasion*/
 
 
 

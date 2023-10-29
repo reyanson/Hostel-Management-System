@@ -33,5 +33,10 @@ public class StudentController {
             return new ResponseEntity<>("Error processing the file", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @RequestMapping("/regno")
+    public String getStudentRegNo(@RequestParam String num){
+        return studentService.getStudentRegNo(num);
+    }
 }
 
