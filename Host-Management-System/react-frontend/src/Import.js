@@ -59,7 +59,7 @@ const IndividualData = ({ individualExcelData }) => {
       <TableCell>{individualExcelData.Email}</TableCell>
       <TableCell>{individualExcelData.nic}</TableCell>
       <TableCell>{individualExcelData.address}</TableCell>
-      <TableCell>{individualExcelData.phone_number}</TableCell>
+      <TableCell>{individualExcelData.phone_no}</TableCell>
     </TableRow>
   );
 };
@@ -159,7 +159,7 @@ function Import() {
       }));
 
       try {
-        // Post data to the "user" table and "Position" table in a single API call
+        // Post data to the "student" table in an  API call
         await axios.post('http://localhost:8080/student/uploadStudent', dataToStore);
 
         console.log("Data registered successfully.");

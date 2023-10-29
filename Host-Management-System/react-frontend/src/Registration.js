@@ -21,7 +21,7 @@ export default function Registration(){
       personalnum : personalnum,
       officenum :officenum,
     });
-    alert("Empoyee Registation Successfully");
+    alert("User Registation Successfully");
       }catch(err){
         alert (err);
     }
@@ -40,48 +40,48 @@ export default function Registration(){
                 } } 
                 />
               </div>
-              <div class="form-group">
-                <label>Last Name</label>
-                <input type="text" class="form-control" id="lastname" 
+              <div className="mb-3">
+                <label className="form-label">Last Name</label>
+                <input type="text" className="form-control" id="lastname" 
                 placeholder="Enter Last Name" value={lastname}
                 onChange={(event)=> {setLastname(event.target.value);
                 } } 
                 />
               </div>
-              <div class="form-group">
-                <label>Email</label>
-                <input type="text" class="form-control" id="email" 
+              <div className="mb-3">
+                <label className="form-label">Email</label>
+                <input type="text" className="form-control" id="email" 
                 placeholder="Enter email" value={email}
                 onChange={(event)=> {setEmail(event.target.value);
                 } } 
                 />
               </div>
-              <div class="form-group">
-                <label>NIC</label>
-                <input type="text" class="form-control" id="nic" 
+              <div className="mb-3">
+                <label className="form-label">NIC</label>
+                <input type="text" className="form-control" id="nic" 
                 placeholder="Enter NIC" value={nic}
                 onChange={(event)=> {setNic(event.target.value);
                 } } 
                 />
               </div>
-              <div class="form-group">
-                <label>Personal Number</label>
-                <input type="text" class="form-control" id="personalnum" 
+              <div className="mb-3">
+                <label className="form-label">Personal Number</label>
+                <input type="text" className="form-control" id="personalnum" 
                 placeholder="Enter personalnum" value={personalnum}
                 onChange={(event)=> {setPersonalnum(event.target.value);
                 } } 
                 />
               </div>
-              <div class="form-group">
-                <label>Office Number</label>
-                <input type="text" class="form-control" id="officenum" 
+              <div className="mb-3">
+                <label className="form-label">Office Number</label>
+                <input type="text" className="form-control" id="officenum" 
                 placeholder="Enter officenum" value={officenum}
                 onChange={(event)=> {setOfficenum(event.target.value);
                 } } 
                 />
               </div>
-              <button type="submit" class="btn btn-primary mt-4" onClick={save}>Register</button>
-              <button type="reset" class="btn btn-primary mt-4">Clear</button>
+              <button type="submit" className="btn btn-outline-primary" onClick={save}>Register</button>
+              <button type="reset" className="btn btn-outline-danger mx-2">Clear</button>
             </form>
           </div>
           </div>
