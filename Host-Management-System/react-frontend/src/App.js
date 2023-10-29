@@ -3,7 +3,7 @@ import Dashboard from './Dashboard';
 import Registration from './Registration';
 import Login from './Login';
 import Forgot from './ForgotPage';
-import Import from './Import';
+// import Import from './Import';
 import Importsample from './Importsample';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -18,7 +18,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/forgot" element={<Forgot />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="/import" element={<Import />} />
+          {/* <Route path="/import" element={<Import />} /> */}
           <Route path="/importsample" element={<Importsample />} />
         </Routes>
       </div>
