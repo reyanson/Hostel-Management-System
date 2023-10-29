@@ -1,0 +1,22 @@
+<hibernate-configuration>
+
+<session-factory>
+    <!-- Database connection settings -->
+    <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/user_manage</property>
+    <property name="hibernate.connection.username">hms</property>
+    <property name="hibernate.connection.password">1234</property>
+
+    <!-- Specify dialect -->
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+
+    <!-- Echo all executed SQL to stdout for debugging -->
+    <property name="hibernate.show_sql">true</property>
+
+    <!-- Mapping of entity classes -->
+    <!-- Add your entity classes here -->
+    <mapping class="com.hostel_manage.models.Login"/>
+
+</session-factory>
+
+</hibernate-configuration>

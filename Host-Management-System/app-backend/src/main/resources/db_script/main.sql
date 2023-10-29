@@ -332,13 +332,15 @@ ADD FOREIGN KEY (reg_no) REFERENCES student(reg_no);
 
 
 ------------------------------------------------------------------TG508----------------------------------------------------------------------------------------
-/*Level table*/
+/*Level table - for find student level*/
 create table level (year int(4), level int(1));
 INSERT INTO level VALUES 
 (2019,3),
 (2022,1);
 
-/*Trigger for users table update*/
+****************************************************************Triggesr*******************************************************************
+
+/*Trigger for users table update with dean details*/
 
 DELIMITER //
 CREATE TRIGGER after_dean_insert
@@ -352,26 +354,8 @@ END IF;
 END//
 DELIMITER ;
 
-   /* Trigger for user table update with student table*/
+   /* Trigger for user table update with student details*/
 DELIMITER //
-CREATE TRIGGER after_student_insert
-AFTER
-INSERT
-ON student FOR EACH ROW
-BEGIN
-DECLARE tgNo VARCHAR(10);
-
-IF NEW.reg_no IS NOT NULL THEN
-SELECT CONCAT('TG', SUBSTRING(reg_no, 9)) INTO tgNo FROM student WHERE reg_no = NEW.reg_no;
-IF tgNo IS NOT NULL THEN
-INSERT INTO user VALUES(tgNo,MD5(NEW.nic));
-END IF;
-END IF;
-END//
-DELIMITER ;
-
-DELIMITER //
-
 CREATE TRIGGER after_student_insert
     AFTER INSERT ON student FOR EACH ROW
 BEGIN
@@ -384,14 +368,27 @@ BEGIN
     INSERT INTO user (username, password)
     VALUES (tgNo, MD5(NEW.nic));
 END//
+DELIMITER ;
 
+/* Trigger for user table update with security details */
+DELIMITER //
+CREATE TRIGGER after_security_insert
+AFTER INSERT ON security FOR EACH ROW
+BEGIN
+IF NEW.security_id IS NOT NULL THEN
+    INSERT INTO user(username, password)
+    VALUES (CONCAT(NEW.first_Name,"sec",NEW.security_id),MD5(NEW.nic));
+
+END IF;
+END //
 DELIMITER ;
 
 
 
-/*Strored procedure*/
+
+---------------------------------------------------------------------Strored procedure-----------------------------------------------------------------------------------------------------------
 DELIMITER //
-CREATE FUNCTION CheckLogin(in_username VARCHAR(255), in_password VARCHAR(32)) RETURNS VARCHAR(255)
+CREATE PROCEDURE CheckLogin(IN in_username VARCHAR(255), IN in_password VARCHAR(32))
 BEGIN
     DECLARE hashed_password VARCHAR(32);
 
@@ -412,6 +409,8 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+
 
 
 
