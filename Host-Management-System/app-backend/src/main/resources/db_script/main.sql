@@ -106,9 +106,9 @@ VALUES
 ---------------------tg509------------------------------
 
 CREATE TABLE `bathroom` (
-  `bathroom_id` varchar(11) NOT NULL,
-  `floor` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `bathroom_id` varchar(10) NOT NULL,
+  `floor` varchar(2) NOT NULL
+);
 
 
 
@@ -148,11 +148,14 @@ CREATE TABLE `complain` (
   `remark` varchar(50) DEFAULT NULL,
   `subject` varchar(50) DEFAULT NULL,
   `description` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
 
 
 INSERT INTO `complain` (`c_id`, `reg_no`, `date`, `category`, `action`, `remark`, `subject`, `description`) VALUES
-('c1', 'tg_2019_101', '2023-09-03', 'room issue', 0, 'warden not approve', 'chair is broken', NULL);
+('c1', 'tg_2019_101', '2023-09-03', 'room issue', 0, 'warden not approve', 'chair is broken', NULL),
+('c2', 'tg_2019_150', '2023-10-03', 'common issue', 1, 'warden approved', 'washroom light is not working', NULL),
+('c3', 'tg_2022_1052', '2023-10-05', 'room issue', 0, 'warden not approve', 'room light is not working', NULL),
+('c4', 'tg_2022_909', '2023-10-06', 'room issue', 0, 'warden not approve', 'door lock is broken', NULL);
 
 CREATE TABLE `damage` (
   `damage_id` varchar(11) NOT NULL,
@@ -163,7 +166,9 @@ CREATE TABLE `damage` (
 
 INSERT INTO `damage` (`damage_id`, `asset_id`, `room_no`, `description`) VALUES
 ('d1', 'ass_t1', 101, 'table is broken.'),
-('d2', 'ass_c1', 101, 'lock missing');
+('d2', 'ass_c1', 101, 'lock missing'),
+('d3', 'ass_t1', 301, 'table is broken'),
+('d4', 'ass_c2', 428, 'lock missing');
 
 
 CREATE TABLE `notice` (
@@ -176,7 +181,11 @@ CREATE TABLE `notice` (
 
 
 INSERT INTO `notice` (`notice_id`, `date`, `content`, `subject`) VALUES
-('n1', '2023-10-20', 'Please respect quiet hours, maintain cleanliness, and report damages. Visitors must register, and security is crucial. Follow Covid-19 guidelines, and treat fellow residents with respect. Non-compliance may result in disciplinary action. Thank you for contributing to a safe and pleasant hostel environment.', 'NOTICE FOR THE STUDENTS USING HOSTEL FACILITIES');
+('n1', '2023-10-20', 'Please respect quiet hours, maintain cleanliness, and report damages. Visitors must register, and security is crucial. Follow Covid-19 guidelines, and treat fellow residents with respect. Non-compliance may result in disciplinary action. Thank you for contributing to a safe and pleasant hostel environment.', 'NOTICE FOR THE STUDENTS USING HOSTEL FACILITIES'),
+('n2', '2023-10-22', 'Dear students,\r\nStudents who are currently under the industrial training can download the attached application to request hostels for next year.  Please post the filled application and the relevant documents to the Assistant Registrar, Faculty of Technology, University of Ruhuna, Karagoda Uyangoda, Kamburupitiya before the 2023-11-01.\r\n', 'Hostel Registration Form for level 3 student'),
+('n3', '2023-10-27', 'Dear student,\r\nStudents who are in the level 1 now can apply for the hostel facilities before the 2023-11-10.\r\n', 'Hostel Application for freshers');
+
+
 
 CREATE TABLE `repair` (
   `repair_id` varchar(11) NOT NULL,
@@ -186,9 +195,11 @@ CREATE TABLE `repair` (
 
 
 INSERT INTO `repair` (`repair_id`, `asset_id`, `room_no`, `date`) VALUES
-('r01', 'ass_c1', 101, '2023-09-13'),
-('r02', 'ass_b1', 101, '2023-10-03'),
-('r03', 'ass_m1', 101, '2023-10-18');
+('r1', 'ass_c1', 101, '2023-09-13'),
+('r2', 'ass_b1', 201, '2023-10-03'),
+('r3', 'ass_m1', 328, '2023-10-18'),
+('r4', 'ass_c2', 428, '2023-10-25');
+
 
 
 
@@ -199,16 +210,15 @@ CREATE TABLE `room` (
 
 
 
-INSERT INTO `room` (`room_no`, `floor`) VALUES
-(101, 'L1'),
-(128, 'L1'),
-(201, 'L2'),
-(225, 'L2'),
-(301, 'L3'),
-(328, 'L3'),
-(401, 'L4'),
-(428, 'L4');
-
+INSERT INTO `room` (`room_no`, `floor`, `reg_no`) VALUES
+(101, 'L1', 'tg_2022_1062'),
+(128, 'L1', 'tg_2022_800'),
+(201, 'L2', 'tg_2021_760'),
+(225, 'L2', 'tg_2021_780'),
+(301, 'L3', 'tg_2020_490'),
+(328, 'L3', 'tg_2021_423'),
+(401, 'L4', 'tg_2019_101'),
+(428, 'L4', 'tg_2019_256');
 
 
 CREATE TABLE `room_asset` (
@@ -321,7 +331,12 @@ ALTER TABLE `repair`
 ADD FOREIGN KEY (reg_no) REFERENCES student(reg_no);
 
 
--------------TG508----------------------------------------------------------------------------------------
+------------------------------------------------------------------TG508----------------------------------------------------------------------------------------
+/*Level table*/
+create table level (year int(4), level int(1));
+INSERT INTO level VALUES 
+(2019,3),
+(2022,1);
 
 /*Trigger for users table update*/
 
@@ -397,6 +412,41 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+
+
+
+---------------------------------------------------------------------Strored function----------------------------------------------------------------------------------------------------------
+/* START Find student reg_no with "TG___"*/
+DELIMITER //
+CREATE FUNCTION getRegNo(IN num VARCHAR(50))
+RETURNS VARCHAR(50)
+DETERMINISTIC --always produces the same output for the same input It helps the database optimize query execution.
+BEGIN
+  DECLARE regnum VARCHAR(50);
+  SELECT reg_no INTO regnum FROM student WHERE SUBSTRING(reg_no, 9) = SUBSTRING(num, 3);
+  RETURN regnum;
+END//
+DELIMITER ;
+
+
+/* END Find student reg_no with "TG___"*/
+
+/*START FIND THE LEVEL */
+DELIMITER //
+CREATE FUNCTION getLevelOfStudent(IN num VARCHAR(50))
+RETURNS INT(1)
+DETERMINISTIC
+BEGIN
+    DECLARE result INT(1);
+    SELECT level INTO result FROM level WHERE year = SUBSTRING(num, 4, 4);
+    RETURN result;
+END//
+DELIMITER ;
+
+
+/*END FIND THE LEVEL */
+
 
 
 

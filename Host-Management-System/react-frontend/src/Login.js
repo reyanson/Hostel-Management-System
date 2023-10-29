@@ -50,11 +50,14 @@ export default function SignIn() {
         // Login was successful, navigate to the dashboard
         navigate('/home');
       } else {
+
         setError('Login failed. Please try again.');
       }
+    
     } catch (error) {
       // Handle other errors, for example, network errors or server issues
       setError('An error occurred. Please try again later.');
+
     }
   }
 
