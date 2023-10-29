@@ -2,17 +2,16 @@ import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 import { ColorModeContext, useMode } from './theme';
 import {CssBaseline, ThemeProvider} from "@mui/material";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Registration from './Registration';
 import Login from './Login';
 import Forgot from './ForgotPage';
 import Import from './ImportRegistration';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
 import Dashboard from './scenes/dashboard';
+
 //import Topbar from './scenes/global/Topbar';
 //import Sidebar from './scenes/global/Sidebar';
-
 
 
 function App() {
