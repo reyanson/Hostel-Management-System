@@ -1,13 +1,11 @@
 package com.hostel_manage.controllers;
 
 import com.hostel_manage.models.Login;
-import com.hostel_manage.models.LoginResponse;
-import com.hostel_manage.services.UserService;
+import com.hostel_manage.services.LoginService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -15,12 +13,12 @@ import java.util.Map;
 public class LoginApiController {
 
     //declare the userService variable
-    private final UserService userService;
+    private final LoginService loginService;
 
 
     //Constructor
-    public LoginApiController(UserService userService) {
-        this.userService = userService;
+    public LoginApiController(LoginService userService) {
+        this.loginService = userService;
     }
 
     @PostMapping("/login") //login end point
@@ -33,7 +31,7 @@ public class LoginApiController {
 
         //Get the value from userService.executeCheckLoginFunction
         //The mysql function provided msg . Then I used this msg for display for the acknowledgment
-        String loginMsg = userService.executeCheckLoginFunction(username, password);
+        String loginMsg = loginService.executeCheckLoginFunction(username, password);
         System.out.println("LoginMsg "+loginMsg);
 
 
@@ -46,5 +44,4 @@ public class LoginApiController {
 
 
 }
-
 
