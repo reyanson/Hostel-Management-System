@@ -31,4 +31,10 @@ public class ComplainController {
         String result = complainService.saveComplain(complain);
         return ResponseEntity.ok(result);
     }
+
+    //method for delete complain using id
+    @DeleteMapping("/delete/{complainId}")
+    public String deleteComplaint(@PathVariable int complainId) {
+        return complainService.deleteComplaint(complainId);
+    }
 }

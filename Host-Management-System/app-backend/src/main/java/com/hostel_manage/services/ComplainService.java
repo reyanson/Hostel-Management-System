@@ -28,21 +28,6 @@ public class ComplainService {
         this.entityManager = entityManager;
     }
 
-    //Method for the check the username and password with database username and password through store function
-
-    public void saveNotice(Notice notice) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("InsertNotice");
-        query.registerStoredProcedureParameter("p_content", String.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter("p_subject", String.class, ParameterMode.IN);
-
-        query.setParameter("p_content", notice.getContent());
-        query.setParameter("p_subject", notice.getSubject());
-
-        query.execute();
-    }
-
-
-
 
     public String saveComplain(Complain complain) {
         StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery("insertComplain");
@@ -59,6 +44,11 @@ public class ComplainService {
         System.out.println("result is: "+result);
 
         return result;
+    }
+
+    //method for delete complain using id
+    public String deleteComplaint(int complainId) {
+        return complainRepository.deleteComplain(complainId);
     }
 }
 
