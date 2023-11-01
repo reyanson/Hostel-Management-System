@@ -15,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.hms_android.barcode.BarCodeActivity;
 
 
 import org.json.JSONException;
@@ -26,6 +27,7 @@ public class SignInActivity extends AppCompatActivity {
 
     Button sign_in_btn;
     EditText et_email, et_password;
+    Intent goToProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,7 @@ public class SignInActivity extends AppCompatActivity {
         // Instantiate The Request Queue:
         RequestQueue queue = Volley.newRequestQueue(SignInActivity.this);
         // The URL Posting TO:
-        String url = "http://192.168.8.100:8080/api/v1/login";
+        String url = "http://192.168.8.101:8080/api/v1/login";
 
         // Set Parameters:
         HashMap<String, String> params = new HashMap<String, String>();
@@ -74,16 +76,31 @@ public class SignInActivity extends AppCompatActivity {
                     String msg = null;
                     try {
                         msg = (String) response.get("username");
+                        String occasion = (String) response.get("occasion");
                         Toast.makeText(SignInActivity.this,msg,Toast.LENGTH_LONG).show();
 
+                        if(occasion.equals("student")){
+                            // Set Intent Actions:
+                            goToProfile = new Intent(SignInActivity.this,HomeActivity.class);
+                            //goToProfile.putExtra("first_name", msg);
 
-                        // Set Intent Actions:
-                        Intent goToProfile = new Intent(SignInActivity.this, ProfileActivity.class);
-                        goToProfile.putExtra("first_name", msg);
+                            // Start Activity:
+                            startActivity(goToProfile);
+                            finish();
+                        } else if (occasion.equals("security")) {
+                            // Set Intent Actions:
+                            goToProfile = new Intent(SignInActivity.this, BarCodeActivity.class);
+                            //goToProfile.putExtra("first_name", msg);
 
-                        // Start Activity:
-                        startActivity(goToProfile);
-                        finish();
+                            // Start Activity:
+                            startActivity(goToProfile);
+                            finish();
+
+                        }else{
+                            Toast.makeText(SignInActivity.this, "Login Failed", Toast.LENGTH_LONG).show();
+                        }
+
+
                     } catch (JSONException e) {
                         Toast.makeText(SignInActivity.this,"Error",Toast.LENGTH_LONG).show();
                         throw new RuntimeException(e);

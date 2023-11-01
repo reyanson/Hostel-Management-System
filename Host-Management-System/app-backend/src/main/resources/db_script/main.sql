@@ -139,16 +139,23 @@ INSERT INTO `bathroom` (`bathroom_id`, `floor`) VALUES
 ('l2_r_b6', 'L2');
 
 
-CREATE TABLE `complain` (
-  `c_id` varchar(11) NOT NULL,
-  `reg_no` varchar(20) DEFAULT NULL,
-  `date` date DEFAULT NULL,
-  `category` varchar(50) DEFAULT NULL,
-  `action` int(2) DEFAULT NULL,
-  `remark` varchar(50) DEFAULT NULL,
-  `subject` varchar(50) DEFAULT NULL,
-  `description` varchar(50) DEFAULT NULL
+
+
+CREATE TABLE complain (
+c_id INT AUTO_INCREMENT PRIMARY KEY,
+reg_no VARCHAR(20),
+category VARCHAR(50),
+subject VARCHAR(50),
+description VARCHAR(50),
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+action INT(1) default 0,
+remark VARCHAR(50) default null
 );
+
+ALTER TABLE complain MODIFY COLUMN action INT(2) AFTER updated_at;
+
+
 
 
 INSERT INTO `complain` (`c_id`, `reg_no`, `date`, `category`, `action`, `remark`, `subject`, `description`) VALUES
@@ -172,11 +179,12 @@ INSERT INTO `damage` (`damage_id`, `asset_id`, `room_no`, `description`) VALUES
 
 
 CREATE TABLE `notice` (
-  `notice_id` varchar(11) NOT NULL,
-  `date` date NOT NULL,
+  `notice_id` int auto_increment primary key NOT NULL,
+  `date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `content` mediumtext NOT NULL,
   `subject` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
+ALTER TABLE complain MODIFY COLUMN action INT(2) AFTER updated_at;
 
 
 
@@ -409,6 +417,43 @@ BEGIN
     END IF;
 END //
 DELIMITER ;
+
+/*for store data store in complain table*/
+DELIMITER //
+
+CREATE PROCEDURE InsertComplain(
+    IN p_reg_no VARCHAR(20),
+    IN p_category VARCHAR(50),
+    IN p_subject VARCHAR(50),
+    IN p_description VARCHAR(50)
+)
+BEGIN
+    INSERT INTO complain (reg_no, category,subject, description)
+    VALUES (p_reg_no, p_category, p_subject, p_description);
+
+    SELECT 'Success' AS Message;
+END//
+
+DELIMITER ;
+CALL InsertComplain('TG508', 'Service', 'Excellent service', 'Feedback');
+
+
+
+DELIMITER //
+CREATE PROCEDURE InsertNotice(
+    IN p_content MEDIUMTEXT,
+    IN p_subject VARCHAR(255)
+)
+BEGIN
+    INSERT INTO notice ( content, subject)
+    VALUES ( p_content, p_subject);
+END//
+DELIMITER ;
+
+
+
+
+
 
 
 
