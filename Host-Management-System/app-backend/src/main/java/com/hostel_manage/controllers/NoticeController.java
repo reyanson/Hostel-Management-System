@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/notices")
+@CrossOrigin("http://localhost:3000")
 public class NoticeController {
 
     @Autowired

@@ -9,6 +9,8 @@ import Login from './Login';
 import Forgot from './ForgotPage';
 import Import from './ImportRegistration';
 import Dashboard from './scenes/dashboard';
+import Notice from './Notice';
+import Noticetable from './Noticetable';
 
 //import Topbar from './scenes/global/Topbar';
 //import Sidebar from './scenes/global/Sidebar';
@@ -35,6 +37,8 @@ function App() {
                 <Route path="/home" element={<Dashboard />} />
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/importRegistration" element={<Import />} />
+                <Route path="/notice" element={<Notice />} />
+                <Route path="/noticetable" element={<Noticetable />} />
 
                 {/* <Route path="/topbar" element={<Topbar />} /> */}
                 {/* <Route path="/sidebar" element={<Sidebar />} /> */}
