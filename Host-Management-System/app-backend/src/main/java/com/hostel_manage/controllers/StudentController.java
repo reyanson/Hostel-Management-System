@@ -38,5 +38,33 @@ public class StudentController {
     public String getStudentRegNo(@RequestParam String num){
         return studentService.getStudentRegNo(num);
     }
+
+    @GetMapping("/view/{regno}")
+    User getStudentById(@PathVariable String regno){
+        return userRepository.findById(regno)
+                .orElseThrow(()-> new UserNotFoundException(regno));
+
+    }
+
+    @PutMapping("/update/{regno}")
+    User updateStudent(@RequestBody Student newStudent,@PathVariable String regno){
+        return studentRepository.findById(regno)
+                .map(student -> {
+                    student.setFirstname(newUser.getFirstname());
+                    student.setEmail(newUser.getEmail());
+                    student.setAddress(newUser.getAddress());
+                    return  studentRepository.uploadStudent(student);
+                }).orElseThrow(()->new UserNotFoundException(regno));
+    }
+
+    @DeleteMapping("/delete/{regno}")
+    String deleteStudent(@PathVariable String regno){
+        if(!userRepository.existsById(regno)){
+            throw new UserNotFoundException(regno);
+        }
+        userRepository.deleteById(regno);
+        return "Student with id "+regno+" has been deleted success.";
+    }
+
 }
 

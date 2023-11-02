@@ -19,6 +19,7 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Logo from "../../logo1.png";
+//import { useNavigate } from 'react-router-dom';
 
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
@@ -44,12 +45,14 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  //const navigator = useNavigate();
 
   return (
     <Box
       sx={{
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
+          marginTop: "0",
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -138,10 +141,11 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Manage Students"
-              to="/team"
+              to="/studentlist"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
+              //onClick={()=> {navigator("/studentlist")}}
             />
             <Item
               title="Manage Rooms"
