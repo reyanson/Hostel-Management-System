@@ -125,7 +125,7 @@ const Sidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/"
+              to="/home"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -147,28 +147,36 @@ const Sidebar = () => {
             />
             <Item
               title="Manage Rooms"
-              to="/invoices"
+              to="/roomlist"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Manage Complaints"
-              to="/invoices"
+              to="/complainlist"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
+              title="Manage Notice"
+              to="/noticetable"
+              icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
               title="Manage Assets"
-              to="/invoices"
+              to="/assetslist"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Manage Damages"
-              to="/invoices"
+              to="/damagetable"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -183,14 +191,14 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Student Registration"
-              to="/form"
+              to="/importRegistration"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Create Notice"
-              to="/form"
+              to="/notice"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

@@ -5,12 +5,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Registration from './Registration';
 import Login from './Login';
-import Forgot from './ForgotPage';
-import Import from './ImportRegistration';
+import Forgot from './Components/ForgotPage';
+import Import from './Components/ImportRegistration';
 import Dashboard from './scenes/dashboard';
 
-import Notice from './Notice';
-import Noticetable from './Noticetable';
+import Notice from './Components/Notice';
+import Noticetable from './scenes/notice/Noticetable';
 
 import Studentlist from './scenes/students';
 
