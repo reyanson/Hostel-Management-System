@@ -9,6 +9,7 @@ public interface StudentRepository extends JpaRepository<Student, String> {
     @Query(value = "SELECT getRegNo(?1)",nativeQuery = true)
     public String getStudentRegNo(String num);
 
+
 //    DELIMITER //
 //    CREATE FUNCTION getRegNo(IN num VARCHAR(50))
 //    RETURNS VARCHAR(50)

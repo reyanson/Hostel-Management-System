@@ -81,3 +81,38 @@ DELIMITER ;
 /* END delete complain data using id */
 
 
+/*room*/
+/* START Toggle room status */
+DELIMITER //
+CREATE FUNCTION ToggleRoomStatus(
+    p_reg_no VARCHAR(15)
+) RETURNS VARCHAR(255)
+BEGIN
+    DECLARE room_id INT;
+    DECLARE current_status INT;
+    DECLARE result_message VARCHAR(255);
+
+    SELECT room_id, status INTO room_id, current_status
+    FROM room
+    WHERE reg_no = p_reg_no;
+
+    IF room_id IS NOT NULL THEN
+        IF current_status = 0 THEN
+            UPDATE room
+            SET status = 1
+            WHERE room_id = room_id;
+        ELSE
+            UPDATE room
+            SET status = 0
+            WHERE room_id = room_id;
+        END IF;
+
+        SET result_message = 'Success';
+    ELSE
+        SET result_message = CONCAT('Room not found for reg_no ', p_reg_no);
+    END IF;
+
+RETURN result_message;
+END //
+DELIMITER ;
+/* END Toggle room status */

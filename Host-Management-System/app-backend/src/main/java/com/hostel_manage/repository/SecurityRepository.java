@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface SecurityRepository extends JpaRepository<Security,Integer> {
+    @Query(value = "SELECT ToggleRoomStatus(?1)",nativeQuery = true)
+    public String toggleRoomStatus(String num);
+
 
 }
 
