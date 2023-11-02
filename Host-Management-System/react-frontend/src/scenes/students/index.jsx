@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { Link, Route } from 'react-router-dom'; // Import Route
-import Sidebar from '../../scenes/global/Sidebar';
-import Topbar from '../../scenes/global/Topbar';
+import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Header from '../../Components/Header';
 import axios from 'axios';
+import { useTheme } from '@emotion/react';
+import {tokens} from "../../theme";
 
-// Modify your Students component
+
 export default function Students() {
+
+    const theme = useTheme();
+    const colors = tokens(theme.palette.mode);
+
     const [students, setStudents] = useState([]);
 
     useEffect(() => {
@@ -31,8 +35,7 @@ export default function Students() {
             <Box sx={{ display: 'flex' }}>
             
                 <Box mt={-10} ml={-20} component="main" sx={{ flexGrow: 1, p: 3 }}>
-                    {/* Use Route to display student data when the URL matches */}
-                    {/* <Route path="/manage-students"> */}
+
                         <div className='container mt-5'>
                             <div className='py-4'>
                                 <table className="table border shadow">
@@ -78,7 +81,7 @@ export default function Students() {
                                 </table>
                             </div>
                         </div>
-                    {/* </Route> */}
+                    
                 </Box>
             </Box>
         </>
