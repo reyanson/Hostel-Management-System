@@ -8,6 +8,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureParameter;
 import jakarta.persistence.StoredProcedureQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +50,33 @@ public class ComplainService {
     //method for delete complain using id
     public String deleteComplaint(int complainId) {
         return complainRepository.deleteComplain(complainId);
+    }
+
+
+
+    public String updateComplaint(Complain complain) {
+        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("updateComplaint");
+        query.registerStoredProcedureParameter("complaint_id", Integer.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("new_category", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("new_subject", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("new_description", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("result_message", String.class, ParameterMode.OUT);
+
+        query.setParameter("complaint_id",complain.getcId());
+        query.setParameter("new_category",complain.getCategory());
+        query.setParameter("new_subject",complain.getSubject());
+        query.setParameter("new_description",complain.getDescription());
+
+        query.execute();
+
+        String resultMessage = (String) query.getOutputParameterValue("result_message");
+        System.out.println("Result: " + resultMessage);
+        return resultMessage;
+    }
+
+    @Transactional
+    public List<Complain> getComplaintDetails(Integer c_id) {
+        return complainRepository.getComplaintDetails(c_id);
     }
 }
 

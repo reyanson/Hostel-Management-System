@@ -1,4 +1,6 @@
 ---------------------------------------------------------------------Strored procedure-----------------------------------------------------------------------------------------------------------
+/* ---------------------------------------User table procedures-------------------------------------------------------------- */
+/*START checkLogin procedure for check login credential*/
 DELIMITER //
 CREATE PROCEDURE CheckLogin(IN in_username VARCHAR(255), IN in_password VARCHAR(32))
 BEGIN
@@ -6,38 +8,39 @@ BEGIN
 
 SELECT MD5(in_password) INTO hashed_password;
 
-IF EXISTS (
+    IF EXISTS (
         SELECT 1
         FROM user
         WHERE username = in_username AND password = hashed_password
     ) THEN
-SELECT 'Login Successful' AS result;
-ELSE
+        SELECT 'Login Successful' AS result;
+    ELSE
         IF NOT EXISTS (SELECT 1 FROM user WHERE username = in_username) THEN
-SELECT 'Username wrong' AS result;
-ELSE
-SELECT 'Password wrong' AS result;
-END IF;
-END IF;
+            SELECT 'Username wrong' AS result;
+        ELSE
+            SELECT 'Password wrong' AS result;
+        END IF;
+    END IF;
 END //
 DELIMITER ;
+/* END checkLogin procedure for check login credential*/
 
 
-
-
+/* ---------------------------------------Notice table procedures-------------------------------------------------------------- */
+/* START insert notice  procedure for insert notice */
 DELIMITER //
 CREATE PROCEDURE InsertNotice(
     IN p_content MEDIUMTEXT,
     IN p_subject VARCHAR(255)
 )
 BEGIN
-INSERT INTO notice ( content, subject)
-VALUES ( p_content, p_subject);
+    INSERT INTO notice ( content, subject)
+    VALUES ( p_content, p_subject);
 END//
 DELIMITER ;
+/*END insert notice  procedure for insert notice */
 
-
-   /* complain table */
+/* ---------------------------------------Complain table procedures-------------------------------------------------------------- */
 
 /* START store data store in complain table*/
 DELIMITER //
@@ -72,11 +75,11 @@ BEGIN
     DECLARE rows_affected INT;
     SELECT COUNT(*) INTO rows_affected FROM complain WHERE c_id = complaint_id;
     IF rows_affected > 0 THEN
-        UPDATE complaints
+        UPDATE complain
         SET category = new_category,
             subject = new_subject,
             description = new_description
-        WHERE id = complaint_id;
+        WHERE c_id = complaint_id;
         SET result_message = 'Success';
     ELSE
         SET result_message = 'Complaint not found or not updated.';
@@ -84,6 +87,16 @@ END IF;
 END //
 DELIMITER ;
 /* END update the complain data using c_id */
+
+/* START find complaint details by id */
+DELIMITER //
+CREATE PROCEDURE GetComplaintDetails(IN p_c_id INT)
+BEGIN
+SELECT * FROM complain WHERE c_id = p_c_id;
+END //
+DELIMITER ;
+/* END find complaint details by id */
+
 
 
 

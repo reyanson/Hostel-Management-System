@@ -59,7 +59,7 @@ DELIMITER ;
 /*END find user occasion*/
 
 
-/* complain table */
+/* ---------------------------------------COMPLAIN TABLE FUNCTIONS-------------------------------------------------------------- */
 
 /* START delete complain data using id */
 DELIMITER //
@@ -80,26 +80,4 @@ END //
 DELIMITER ;
 /* END delete complain data using id */
 
-/*START update complain data using id */
-DELIMITER //
-CREATE FUNCTION UpdateComplaint(
-    new_category VARCHAR(255),
-    new_subject VARCHAR(255),
-    new_description TEXT
-) RETURNS VARCHAR(255)
-BEGIN
-    DECLARE rows_affected INT;
-    SELECT COUNT(*) INTO rows_affected FROM complaints WHERE c_id = complaint_id;
-    IF rows_affected > 0 THEN
-        UPDATE complaints
-        SET category = new_category,
-        subject = new_subject,
-        description = new_description
-        WHERE id = complaint_id;
-        RETURN 'Success';
-    ELSE
-        RETURN 'Complaint not found or not updated.';
-    END IF;
-END //
-DELIMITER ;
-/*END update complain data using id */
+
