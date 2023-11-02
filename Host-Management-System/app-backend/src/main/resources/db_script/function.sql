@@ -59,7 +59,7 @@ DELIMITER ;
 /*END find user occasion*/
 
 
-/* complain table */
+/* ---------------------------------------COMPLAIN TABLE FUNCTIONS-------------------------------------------------------------- */
 
 /* START delete complain data using id */
 DELIMITER //
@@ -80,26 +80,39 @@ END //
 DELIMITER ;
 /* END delete complain data using id */
 
-/*START update complain data using id */
+
+/*room*/
+/* START Toggle room status */
 DELIMITER //
-CREATE FUNCTION UpdateComplaint(
-    new_category VARCHAR(255),
-    new_subject VARCHAR(255),
-    new_description TEXT
+CREATE FUNCTION ToggleRoomStatus(
+    p_reg_no VARCHAR(15)
 ) RETURNS VARCHAR(255)
 BEGIN
-    DECLARE rows_affected INT;
-    SELECT COUNT(*) INTO rows_affected FROM complaints WHERE c_id = complaint_id;
-    IF rows_affected > 0 THEN
-        UPDATE complaints
-        SET category = new_category,
-        subject = new_subject,
-        description = new_description
-        WHERE id = complaint_id;
-        RETURN 'Success';
+    DECLARE room_id INT;
+    DECLARE current_status INT;
+    DECLARE result_message VARCHAR(255);
+
+    SELECT room_id, status INTO room_id, current_status
+    FROM room
+    WHERE reg_no = p_reg_no;
+
+    IF room_id IS NOT NULL THEN
+        IF current_status = 0 THEN
+            UPDATE room
+            SET status = 1
+            WHERE room_id = room_id;
+        ELSE
+            UPDATE room
+            SET status = 0
+            WHERE room_id = room_id;
+        END IF;
+
+        SET result_message = 'Success';
     ELSE
-        RETURN 'Complaint not found or not updated.';
+        SET result_message = CONCAT('Room not found for reg_no ', p_reg_no);
     END IF;
+
+RETURN result_message;
 END //
 DELIMITER ;
-/*END update complain data using id */
+/* END Toggle room status */

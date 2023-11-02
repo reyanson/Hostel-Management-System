@@ -42,6 +42,7 @@ public class StudentController {
         return studentService.getStudentRegNo(num);
     }
 
+
     @GetMapping("/viewall")
     public List<Student> getAllStudents() {
         StoredProcedureQuery storedProcedure = entityManager.createNamedStoredProcedureQuery("get_all_students");
