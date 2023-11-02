@@ -88,26 +88,28 @@ CREATE FUNCTION ToggleRoomStatus(
     p_reg_no VARCHAR(15)
 ) RETURNS VARCHAR(255)
 BEGIN
-    DECLARE room_id INT;
+    DECLARE roomId INT;
     DECLARE current_status INT;
     DECLARE result_message VARCHAR(255);
 
-    SELECT room_id, status INTO room_id, current_status
+    SELECT room_id, status INTO roomId, current_status
     FROM room
     WHERE reg_no = p_reg_no;
 
-    IF room_id IS NOT NULL THEN
+    IF roomId IS NOT NULL THEN
         IF current_status = 0 THEN
             UPDATE room
             SET status = 1
-            WHERE room_id = room_id;
+            WHERE room_id = roomId;
+            SET result_message = 'In';
         ELSE
             UPDATE room
             SET status = 0
-            WHERE room_id = room_id;
+            WHERE room_id = roomId;
+            SET result_message = 'Out';
         END IF;
 
-        SET result_message = 'Success';
+
     ELSE
         SET result_message = CONCAT('Room not found for reg_no ', p_reg_no);
     END IF;
