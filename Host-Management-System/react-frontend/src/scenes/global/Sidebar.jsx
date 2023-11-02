@@ -145,7 +145,6 @@ const Sidebar = () => {
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-              //onClick={()=> {navigator("/studentlist")}}
             />
             <Item
               title="Manage Rooms"

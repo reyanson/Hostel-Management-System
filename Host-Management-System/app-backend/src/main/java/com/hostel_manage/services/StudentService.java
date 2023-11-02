@@ -2,7 +2,7 @@ package com.hostel_manage.services;
 
 import com.hostel_manage.models.Student;
 import com.hostel_manage.repository.StudentRepository;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
+import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

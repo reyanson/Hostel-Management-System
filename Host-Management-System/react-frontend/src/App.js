@@ -1,5 +1,4 @@
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
-
 import { ColorModeContext, useMode } from './theme';
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,10 +25,7 @@ function App() {
         <CssBaseline />
 
         <div className="App">
-          <main className='content'>
-            
             <BrowserRouter>
-            <div>
               <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="/forgot" element={<Forgot />} />
@@ -37,15 +33,9 @@ function App() {
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/importRegistration" element={<Import />} />
                 <Route path="/studentlist" element={<Studentlist />} />
-
-                {/* <Route path="/topbar" element={<Topbar />} /> */}
-                {/* <Route path="/sidebar" element={<Sidebar />} /> */}
               </Routes>
-            </div>
             </BrowserRouter>
-          </main>
-      </div>
-
+          </div>
       </ThemeProvider>
 
     </ColorModeContext.Provider>
