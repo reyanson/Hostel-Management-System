@@ -1,11 +1,13 @@
 package com.hostel_manage.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
+@NamedStoredProcedureQuery(
+        name = "get_all_students",
+        procedureName = "get_all_students",
+        resultClasses = Student.class
+)
 @Table(name = "student")
 public class Student {
     @Id

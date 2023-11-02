@@ -92,11 +92,11 @@ CREATE TABLE student(
 );
 INSERT INTO student (reg_no, first_Name, last_Name, Email, nic, address, phone_no)
 VALUES
-    ('tg_2019_508', 'Reyanson', 'Sosai', 'reyanson@example.com', '990910703V', '3/6 Raja Road Vankala, Mannar', 0769678453),
-    ('tg_2019_492', 'Sunil', 'Vadivel', 'sunil@example.com', '997024986V', '39A Boundary Road, Kalmunai', 0760725590),
-    ('tg_2018_317', 'Jane', 'Jeyan', 'jane@example.com', '9876543213V', 'Elme Street, Colombo', 0756958721),
-    ('tg_2019_509', 'Hammil', 'Rajanikanth', 'hammil@example.com', '200052104409', 'Pointpettro Road Kodikamam, Jaffna', 0766831044),
-    ('tg_2020_841', 'Krishanth', 'Veluraj', 'krishanth@example.com', '200065432164', 'PTK Road Pandiruppu, Batticalo', 0719832164);
+    ('TG/2019/492', 'Sunil', 'Vadivel', 'sunil@example.com', '997024986V', '39A Boundary Road, Kalmunai', 0760725590),
+    ('TG/2019/508', 'Reyanson', 'Sosai', 'reyanson@example.com', '990910703V', '3/6 Raja Road Vankala, Mannar', 0769678453),
+    ('TG/2018/317', 'Jane', 'Jeyan', 'jane@example.com', '9876543213V', 'Elme Street, Colombo', 0756958721),
+    ('TG/2019/509', 'Hammil', 'Rajanikanth', 'hammil@example.com', '200052104409', 'Pointpettro Road Kodikamam, Jaffna', 0766831044),
+    ('TG/2020/841', 'Krishanth', 'Veluraj', 'krishanth@example.com', '200065432164', 'PTK Road Pandiruppu, Batticalo', 0719832164);
 
 
 
@@ -212,21 +212,25 @@ INSERT INTO `repair` (`repair_id`, `asset_id`, `room_no`, `date`) VALUES
 
 
 CREATE TABLE `room` (
-  `room_no` int(3) NOT NULL,
-  `floor` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  room_id int auto_increment primary key,
+  room_no int(3) NOT NULL,
+  floor varchar(10) NOT NULL,
+  reg_no varchar(15),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
 
 
 
 INSERT INTO `room` (`room_no`, `floor`, `reg_no`) VALUES
-(101, 'L1', 'tg_2022_1062'),
-(128, 'L1', 'tg_2022_800'),
-(201, 'L2', 'tg_2021_760'),
-(225, 'L2', 'tg_2021_780'),
-(301, 'L3', 'tg_2020_490'),
-(328, 'L3', 'tg_2021_423'),
-(401, 'L4', 'tg_2019_101'),
-(428, 'L4', 'tg_2019_256');
+(101, 'L1', 'TG/2022/1062'),
+(128, 'L1', 'TG/2022/800'),
+(201, 'L2', 'TG/2021/760'),
+(225, 'L2', 'TG/2021/780'),
+(301, 'L3', 'TG/2020/490'),
+(328, 'L3', 'TG/2021/423'),
+(401, 'L4', 'TG/2019/508'),
+(428, 'L4', 'TG/2019/492');
 
 
 CREATE TABLE `room_asset` (

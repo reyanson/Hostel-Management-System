@@ -3,6 +3,8 @@ package com.hostel_manage.controllers;
 import com.hostel_manage.models.Student;
 import com.hostel_manage.repository.ExcelService;
 import com.hostel_manage.services.StudentService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +20,8 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
-
+    @Autowired
+    private EntityManager entityManager;
     @Autowired
     private ExcelService excelService;
 
@@ -38,5 +41,36 @@ public class StudentController {
     public String getStudentRegNo(@RequestParam String num){
         return studentService.getStudentRegNo(num);
     }
+
+
+    @GetMapping("/viewall")
+    public List<Student> getAllStudents() {
+        StoredProcedureQuery storedProcedure = entityManager.createNamedStoredProcedureQuery("get_all_students");
+        storedProcedure.execute();
+        List<Student> students = storedProcedure.getResultList();
+        return students;
+    }
+
+
+//    @PutMapping("/update/{regno}")
+//    User updateStudent(@RequestBody Student newStudent,@PathVariable String regno){
+//        return studentRepository.findById(regno)
+//                .map(student -> {
+//                    student.setFirstname(newUser.getFirstname());
+//                    student.setEmail(newUser.getEmail());
+//                    student.setAddress(newUser.getAddress());
+//                    return  studentRepository.uploadStudent(student);
+//                }).orElseThrow(()->new UserNotFoundException(regno));
+//    }
+//
+//    @DeleteMapping("/delete/{regno}")
+//    String deleteStudent(@PathVariable String regno){
+//        if(!userRepository.existsById(regno)){
+//            throw new UserNotFoundException(regno);
+//        }
+//        userRepository.deleteById(regno);
+//        return "Student with id "+regno+" has been deleted success.";
+//    }
+
 }
 
