@@ -1,6 +1,8 @@
 
+import {Box} from "@mui/material";
 import Topbar from '../global/Topbar';
 import Sidebar from '../global/Sidebar';
+import Header from '../../Components/Header';
 // import Team from '../global/team';
 // import Invoices from '../global/invoices';
 // import Contacts from '../global/contacts';
@@ -9,14 +11,16 @@ import Sidebar from '../global/Sidebar';
 
 function Dashboard() {
     return (
-        <div> 
-            <Topbar /> 
+        <Box display="flex">
             <Sidebar />
-        
-        
-        </div>
-
-    )
+            <Box flex="1">
+                <Topbar />
+                <Box p={2}>
+                    <Header title="DASHBOARD" subtitle="Welcome to your dashboard" />
+                </Box>
+            </Box>
+        </Box>
+    );
 
 }
     
