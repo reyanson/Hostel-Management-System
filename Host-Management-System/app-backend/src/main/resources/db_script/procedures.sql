@@ -28,6 +28,7 @@ DELIMITER ;
 
 /* ---------------------------------------Notice table procedures-------------------------------------------------------------- */
 /* START insert notice  procedure for insert notice */
+
 DELIMITER //
 CREATE PROCEDURE InsertNotice(
     IN p_content MEDIUMTEXT,
@@ -40,7 +41,23 @@ END//
 DELIMITER ;
 /*END insert notice  procedure for insert notice */
 
+
+    /* Student Table */
+
+/* To get all student details */
+DELIMITER //
+CREATE PROCEDURE get_all_students()
+BEGIN
+	SELECT *FROM student;
+END //
+
+DELIMITER ;   
+
+
+   /* complain table */
+
 /* ---------------------------------------Complain table procedures-------------------------------------------------------------- */
+
 
 /* START store data store in complain table*/
 DELIMITER //
