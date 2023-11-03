@@ -144,7 +144,7 @@ INSERT INTO `bathroom` (`bathroom_id`, `floor`) VALUES
 CREATE TABLE complain (
 c_id INT AUTO_INCREMENT PRIMARY KEY,
 reg_no VARCHAR(20),
-category VARCHAR(50),
+asset_code VARCHAR(50) not null ,
 subject VARCHAR(50),
 description VARCHAR(50),
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -196,17 +196,19 @@ INSERT INTO `notice` (`notice_id`, `date`, `content`, `subject`) VALUES
 
 
 CREATE TABLE `repair` (
-  `repair_id` varchar(11) NOT NULL,
+  `repair_id` int auto_increment primary key NOT NULL,
   `asset_id` varchar(11) NOT NULL,
-  `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `room_no` int(3) NOT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ;
 
 
-INSERT INTO `repair` (`repair_id`, `asset_id`, `room_no`, `date`) VALUES
-('r1', 'ass_c1', 101, '2023-09-13'),
-('r2', 'ass_b1', 201, '2023-10-03'),
-('r3', 'ass_m1', 328, '2023-10-18'),
-('r4', 'ass_c2', 428, '2023-10-25');
+INSERT INTO `repair` ( `asset_id`, `room_no`) VALUES
+( 'ass_c1', 101),
+( 'ass_b1', 101),
+( 'ass_m1', 301),
+( 'ass_c2', 301);
 
 
 
@@ -237,36 +239,63 @@ CREATE TABLE `room_asset` (
   `asset_id` varchar(11) NOT NULL,
   `name` varchar(10) NOT NULL,
   `room_no` int(3) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
 
 
 INSERT INTO `room_asset` (`asset_id`, `name`, `room_no`) VALUES
-('ass_b1', 'blub', 101),
-('ass_b2', 'bulb', 101),
-('ass_bed1', 'bed', 101),
-('ass_bed2', 'bed', 101),
-('ass_c1', 'cupboard', 101),
-('ass_c2', 'cupboard', 101),
-('ass_chair1', 'chair', 101),
-('ass_chair2', 'chair', 101),
-('ass_chair3', 'chair', 101),
-('ass_chair4', 'chair', 101),
-('ass_m1', 'mattress', 101),
-('ass_m2', 'mattress', 101),
-('ass_m3', 'mattress', 101),
-('ass_m4', 'mattress', 101),
-('ass_t1', 'table', 101),
-('ass_t2', 'table', 101),
-('ass_t3', 'table', 101),
-('ass_t4', 'table', 101);
+('ass_b1', 'Bulb1', 101),
+('ass_b2', 'Bulb2', 101),
+('ass_b3', 'Bulb3', 101),
+('ass_b4', 'Bulb4', 101),
+('ass_bed1', 'Bed1', 101),
+('ass_bed2', 'Bed2', 101),
+('ass_c1', 'Cupboard1', 101),
+('ass_c2', 'Cupboard2', 101),
+('ass_chair1', 'Chair1', 101),
+('ass_chair2', 'Chair2', 101),
+('ass_chair3', 'Chair3', 101),
+('ass_chair4', 'Chair4', 101),
+('ass_m1', 'Mattress1', 101),
+('ass_m2', 'Mattress2', 101),
+('ass_m3', 'Mattress3', 101),
+('ass_m4', 'Mattress4', 101),
+('ass_t1', 'Table1', 101),
+('ass_t2', 'Table2', 101),
+('ass_t3', 'Table3', 101),
+('ass_t4', 'Table4', 101),
+('ass_r1', 'Rack1', 101),
+('ass_r2', 'Rack2', 101),
+('ass_b1', 'Bulb1', 301),
+('ass_b2', 'Bulb2', 301),
+('ass_b3', 'Bulb3', 301),
+('ass_b4', 'Bulb4', 301),
+('ass_bed1', 'Bed1', 301),
+('ass_bed2', 'Bed1', 301),
+('ass_c1', 'Cupboard1', 301),
+('ass_c2', 'Cupboard2', 301),
+('ass_chair1', 'Chair1', 301),
+('ass_chair2', 'Chair2', 301),
+('ass_chair3', 'Chair3', 301),
+('ass_chair4', 'Chair4', 301),
+('ass_m1', 'Mattress1', 301),
+('ass_m2', 'Mattress2', 301),
+('ass_m3', 'Mattress3', 301),
+('ass_m4', 'Mattress4', 301),
+('ass_t1', 'Table1', 301),
+('ass_t2', 'Table2', 301),
+('ass_t3', 'Table3', 301),
+('ass_t4', 'Table4', 301),
+('ass_r1', 'Rack1', 301),
+('ass_r2', 'Rack2', 301)
+;
 
 
 
 
 CREATE TABLE `toilet` (
-  `toilet_id` varchar(11) NOT NULL,
+  `toilet_id` varchar(11) primary key NOT NULL,
   `floor` varchar(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+);
 
 
 
@@ -276,25 +305,25 @@ INSERT INTO `toilet` (`toilet_id`, `floor`) VALUES
 ('l1_l_t3', 'L1'),
 ('l1_l_t4', 'L1'),
 ('l1_l_t5', 'L1'),
-('l1_l_t6', 'L1'),
+
 ('l1_r_t1', 'L1'),
 ('l1_r_t2', 'L1'),
 ('l1_r_t3', 'L1'),
 ('l1_r_t4', 'L1'),
 ('l1_r_t5', 'L1'),
-('l1_r_t6', 'L1'),
-('l2_l_t1', 'L2'),
-('l2_l_t2', 'L2'),
-('l2_l_t3', 'L2'),
-('l2_l_t4', 'L2'),
-('l2_l_t5', 'L2'),
-('l2_l_t6', 'L2'),
-('l2_r_t1', 'L2'),
-('l2_r_t2', 'L2'),
-('l2_r_t3', 'L2'),
-('l2_r_t4', 'L2'),
-('l2_r_t5', 'L2'),
-('l2_r_t6', 'L2');
+
+('l2_l_t1', 'L3'),
+('l2_l_t2', 'L3'),
+('l2_l_t3', 'L3'),
+('l2_l_t4', 'L3'),
+('l2_l_t5', 'L3'),
+
+('l2_r_t1', 'L3'),
+('l2_r_t2', 'L3'),
+('l2_r_t3', 'L3'),
+('l2_r_t4', 'L3'),
+('l2_r_t5', 'L3')
+;
 
 
 ALTER TABLE `bathroom`

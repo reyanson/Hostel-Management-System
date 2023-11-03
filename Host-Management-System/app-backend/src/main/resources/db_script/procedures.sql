@@ -63,13 +63,13 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE InsertComplain(
     IN p_reg_no VARCHAR(20),
-    IN p_category VARCHAR(50),
+    IN p_asset_code VARCHAR(50),
     IN p_subject VARCHAR(50),
     IN p_description VARCHAR(50)
 )
 BEGIN
-INSERT INTO complain (reg_no, category,subject, description)
-VALUES (p_reg_no, p_category, p_subject, p_description);
+INSERT INTO complain (reg_no, asset_code,subject, description)
+VALUES (p_reg_no, p_asset_code, p_subject, p_description);
 
 SELECT 'Success' AS Message;
 END//
@@ -83,7 +83,7 @@ CALL InsertComplain('TG508', 'Service', 'Excellent service', 'Feedback');
 DELIMITER //
 CREATE PROCEDURE updateComplaint(
     IN complaint_id INT,
-    IN new_category VARCHAR(255),
+    IN new_asset_code VARCHAR(255),
     IN new_subject VARCHAR(255),
     IN new_description TEXT,
     OUT result_message VARCHAR(255)
@@ -93,7 +93,7 @@ BEGIN
     SELECT COUNT(*) INTO rows_affected FROM complain WHERE c_id = complaint_id;
     IF rows_affected > 0 THEN
         UPDATE complain
-        SET category = new_category,
+        SET asset_code = new_asset_code,
             subject = new_subject,
             description = new_description
         WHERE c_id = complaint_id;
@@ -113,6 +113,16 @@ SELECT * FROM complain WHERE c_id = p_c_id;
 END //
 DELIMITER ;
 /* END find complaint details by id */
+
+/* ---------------------------------------Room Asset table procedures-------------------------------------------------------------- */
+
+    /* START generate asset code by room no */
+DELIMITER //
+CREATE PROCEDURE GenerateAssetCode(IN roomNo INT)
+BEGIN
+    SELECT CONCAT(asset_id,"/",name) AS "Asset Code" FROM room_asset WHERE room_no=roomNo;
+END //
+DELIMITER ;
 
 
 
