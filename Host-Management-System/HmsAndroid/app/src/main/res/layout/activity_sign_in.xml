@@ -24,7 +24,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="Sign In"
+        android:text="Log In"
+        android:textAlignment="center"
 
         android:textSize="30sp"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
@@ -46,7 +47,7 @@
             android:layout_marginTop="10dp"
 
             android:layout_height="55dp"
-            android:hint="Email"/>
+            android:hint="Username"/>
 
         <EditText
             android:id="@+id/password"
@@ -54,6 +55,8 @@
             android:layout_height="55dp"
             android:layout_marginTop="7dp"
             android:paddingLeft="10dp"
+            android:ems="10"
+            android:inputType="textPassword"
 
             android:hint="Password"/>
 
@@ -83,22 +86,6 @@
     </LinearLayout>
 
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:onClick="goToHome"
-        android:padding="10dp"
-        android:text="Back To Home"
-
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.165" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

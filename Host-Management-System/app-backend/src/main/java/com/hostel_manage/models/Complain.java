@@ -7,6 +7,12 @@ import java.util.Date;
 
 
 @Entity
+@NamedStoredProcedureQuery(
+        name = "get_all_complaints",
+        procedureName = "get_all_complaints",
+        resultClasses = Complain.class
+)
+
 @Table(name = "complain")
 @NamedStoredProcedureQuery(
         name = "insertComplain",
