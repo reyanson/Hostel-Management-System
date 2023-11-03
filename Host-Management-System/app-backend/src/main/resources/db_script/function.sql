@@ -135,22 +135,45 @@ END //
 DELIMITER ;
 /* END Toggle room status */
 
-/*dean*/
-/*dean registration */
+----------------------------------User Table-----------------------------------------------
+/*Users registration */
 DELIMITER //
-CREATE FUNCTION InsertDean(
-  firstname VARCHAR(50),
-  lastname VARCHAR(50),
-  email VARCHAR(50),
-  nic VARCHAR(12),
-  address VARCHAR(100),
-  personalnum INT(10),
-  officenum INT(10)
-) RETURNS VARCHAR(255)
+CREATE FUNCTION InsertUserData(
+p_first_Name VARCHAR(255), 
+p_last_Name VARCHAR(255), 
+p_Email VARCHAR(255), 
+p_nic VARCHAR(255), 
+p_address VARCHAR(255), 
+p_personal_no VARCHAR(255), 
+p_office_no VARCHAR(255), 
+p_position VARCHAR(255))
+RETURNS VARCHAR(255)
 DETERMINISTIC
 BEGIN
-  INSERT INTO dean (firstname, lastname, email, nic, address, personalnum, officenum)
-  VALUES (firstname, lastname, email, nic, address, personalnum, officenum);
-  RETURN NULL;
+  DECLARE msg VARCHAR(255); 	
+  CASE p_position
+    WHEN 'Dean' THEN
+      INSERT INTO dean (first_Name, last_Name, Email, nic, address, personal_no, office_no)
+		    VALUES (p_first_Name, p_last_Name, p_Email, p_nic, p_address, p_personal_no, p_office_no);
+      SET msg = "Success to Register the user as dean";
+    WHEN 'Warden' THEN
+      INSERT INTO warden (first_Name, last_Name, Email, nic, address, personal_no, office_no)
+          	   VALUES (p_first_Name, p_last_Name, p_Email, p_nic, p_address, p_personal_no, p_office_no); 
+      SET msg = "Success to Register the user as warden";
+    WHEN 'Subwarden' THEN
+      INSERT INTO subwarden (first_Name, last_Name, Email, nic, address, personal_no, office_no)
+          	   VALUES (p_first_Name, p_last_Name, p_Email, p_nic, p_address, p_personal_no, p_office_no); 
+      SET msg = "Success to Register the user as subwarden";
+    WHEN 'Security' THEN
+      INSERT INTO security (first_Name, last_Name, Email, nic, address, personal_no, office_no)
+          	   VALUES (p_first_Name, p_last_Name, p_Email, p_nic, p_address, p_personal_no, p_office_no); 
+      SET msg = "Success to Register the user as security";
+    ELSE
+      SET msg = 'Invalid position';
+  END CASE;
+
+  RETURN msg;
 END //
 DELIMITER ;
+
+------------------------------end user function-----------------------------------------
