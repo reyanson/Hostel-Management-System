@@ -3,9 +3,12 @@ package com.hostel_manage.controllers;
 import com.hostel_manage.models.Complain;
 import com.hostel_manage.models.Login;
 import com.hostel_manage.models.LoginResponse;
+import com.hostel_manage.models.Student;
 import com.hostel_manage.services.ComplainService;
 import com.hostel_manage.services.LoginService;
 import com.hostel_manage.services.StudentService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +19,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/complains")
+@CrossOrigin("http://localhost:3000")
 public class ComplainController {
 
     private final ComplainService complainService;
+
+    @Autowired
+    private EntityManager entityManager;
 
     @Autowired
     public ComplainController(ComplainService complainService) {
@@ -30,6 +37,14 @@ public class ComplainController {
     public ResponseEntity<String> addComplain(@RequestBody Complain complain) {
         String result = complainService.saveComplain(complain);
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/viewall")
+    public List<Complain> getAllComplaints() {
+        StoredProcedureQuery storedProcedure = entityManager.createNamedStoredProcedureQuery("get_all_complaints");
+        storedProcedure.execute();
+        List<Complain> complainList = storedProcedure.getResultList();
+        return complainList;
     }
 
     //method for update the complaint

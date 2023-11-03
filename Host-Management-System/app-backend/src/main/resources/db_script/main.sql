@@ -1,3 +1,5 @@
+-----------------------tg492-------------------------
+
 CREATE DATABASE user_manage;
 
 USE user_manage;
@@ -111,7 +113,6 @@ CREATE TABLE `bathroom` (
 );
 
 
-
 INSERT INTO `bathroom` (`bathroom_id`, `floor`) VALUES
 ('l1_l_b1', 'L1'),
 ('l1_l_b2', 'L1'),
@@ -140,7 +141,6 @@ INSERT INTO `bathroom` (`bathroom_id`, `floor`) VALUES
 
 
 
-
 CREATE TABLE complain (
 c_id INT AUTO_INCREMENT PRIMARY KEY,
 reg_no VARCHAR(20),
@@ -154,8 +154,6 @@ remark VARCHAR(50) default null
 );
 
 ALTER TABLE complain MODIFY COLUMN action INT(2) AFTER updated_at;
-
-
 
 
 INSERT INTO `complain` (`c_id`, `reg_no`, `date`, `category`, `action`, `remark`, `subject`, `description`) VALUES
@@ -187,12 +185,10 @@ CREATE TABLE `notice` (
 ALTER TABLE complain MODIFY COLUMN action INT(2) AFTER updated_at;
 
 
-
 INSERT INTO `notice` (`notice_id`, `date`, `content`, `subject`) VALUES
 ('n1', '2023-10-20', 'Please respect quiet hours, maintain cleanliness, and report damages. Visitors must register, and security is crucial. Follow Covid-19 guidelines, and treat fellow residents with respect. Non-compliance may result in disciplinary action. Thank you for contributing to a safe and pleasant hostel environment.', 'NOTICE FOR THE STUDENTS USING HOSTEL FACILITIES'),
 ('n2', '2023-10-22', 'Dear students,\r\nStudents who are currently under the industrial training can download the attached application to request hostels for next year.  Please post the filled application and the relevant documents to the Assistant Registrar, Faculty of Technology, University of Ruhuna, Karagoda Uyangoda, Kamburupitiya before the 2023-11-01.\r\n', 'Hostel Registration Form for level 3 student'),
 ('n3', '2023-10-27', 'Dear student,\r\nStudents who are in the level 1 now can apply for the hostel facilities before the 2023-11-10.\r\n', 'Hostel Application for freshers');
-
 
 
 CREATE TABLE `repair` (
@@ -209,8 +205,6 @@ INSERT INTO `repair` (`repair_id`, `asset_id`, `room_no`, `date`) VALUES
 ('r4', 'ass_c2', 428, '2023-10-25');
 
 
-
-
 CREATE TABLE `room` (
   room_id int auto_increment primary key,
   room_no int(3) NOT NULL,
@@ -219,7 +213,6 @@ CREATE TABLE `room` (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
-
 
 
 INSERT INTO `room` (`room_no`, `floor`, `reg_no`) VALUES
@@ -262,12 +255,10 @@ INSERT INTO `room_asset` (`asset_id`, `name`, `room_no`) VALUES
 
 
 
-
 CREATE TABLE `toilet` (
   `toilet_id` varchar(11) NOT NULL,
   `floor` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 
 
 INSERT INTO `toilet` (`toilet_id`, `floor`) VALUES

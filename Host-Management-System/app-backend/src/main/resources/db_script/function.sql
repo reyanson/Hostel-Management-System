@@ -80,6 +80,22 @@ END //
 DELIMITER ;
 /* END delete complain data using id */
 
+/* for delete student data using regNo */
+DELIMITER //
+    CREATE FUNCTION deleteStudent(inregno VARCHAR(15))
+        RETURNS VARCHAR(255)
+        BEGIN
+            DECLARE result VARCHAR(255);
+            IF EXISTS (SELECT * FROM student WHERE reg_no  = inregno) THEN
+                DELETE FROM student WHERE reg_no  = inregno;
+                SET result = 'Success';
+            ELSE
+                SET result = 'Student not found';
+            END IF;
+
+        RETURN result;
+        END //
+DELIMITER ;
 
 /*room*/
 /* START Toggle room status */

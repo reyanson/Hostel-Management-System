@@ -79,6 +79,16 @@ CALL InsertComplain('TG508', 'Service', 'Excellent service', 'Feedback');
 /* END store data store in complain table*/
 
 
+/* To get all complaint details */
+DELIMITER //
+CREATE PROCEDURE get_all_complaints()
+BEGIN
+SELECT *FROM complain;
+END //
+
+DELIMITER ;
+
+
 /* START update the complain data using c_id */
 DELIMITER //
 CREATE PROCEDURE updateComplaint(

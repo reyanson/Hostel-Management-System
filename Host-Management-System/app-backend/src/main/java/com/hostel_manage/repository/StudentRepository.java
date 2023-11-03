@@ -3,11 +3,15 @@ package com.hostel_manage.repository;
 import com.hostel_manage.models.Student;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 public interface StudentRepository extends JpaRepository<Student, String> {
 
     @Query(value = "SELECT getRegNo(?1)",nativeQuery = true)
     public String getStudentRegNo(String num);
+
+    @Query(value = "SELECT deleteStudent(:regNo)", nativeQuery = true)
+    String deleteStudent(@Param("regNo") String regNo);
 
 
 //    DELIMITER //

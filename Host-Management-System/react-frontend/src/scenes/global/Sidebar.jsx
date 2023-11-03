@@ -108,15 +108,15 @@ const Sidebar = () => {
               </Box>
               <Box textAlign="center">
                 <Typography
-                  variant="h2"
+                  variant="h3"
                   color={colors.gray[100]}
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Ajanthan
+                  Vadivel Ajanthan
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Sub Warden Admin
+                  Sub Warden 
                 </Typography>
               </Box>
             </Box>
