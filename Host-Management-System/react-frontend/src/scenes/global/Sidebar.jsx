@@ -125,7 +125,7 @@ const Sidebar = () => {
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
               title="Dashboard"
-              to="/"
+              to="/home"
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -147,28 +147,36 @@ const Sidebar = () => {
             />
             <Item
               title="Manage Rooms"
-              to="/invoices"
+              to="/roomdatas"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Manage Complaints"
-              to="/invoices"
+              to="/complaintable"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
+              title="Manage Notice"
+              to="/noticetable"
+              icon={<ReceiptOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+
+            <Item
               title="Manage Assets"
-              to="/invoices"
+              to="/assetstable"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Manage Damages"
-              to="/invoices"
+              to="/damagelist"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -182,15 +190,43 @@ const Sidebar = () => {
               Pages
             </Typography>
             <Item
+              title="Dean Registration"
+              to="/registration"
+              icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Warden Registration"
+              to="/registration"
+              icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Sub Warden Registration"
+              to="/registration"
+              icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Student Registration"
-              to="/form"
+              to="/importRegistration"
+              icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Security Registration"
+              to="/registration"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Create Notice"
-              to="/form"
+              to="/notice"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
