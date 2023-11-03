@@ -16,6 +16,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/complains")
+@CrossOrigin("http://localhost:3000")
 public class ComplainController {
 
     private final ComplainService complainService;
