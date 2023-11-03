@@ -154,7 +154,7 @@ const Sidebar = () => {
             />
             <Item
               title="Manage Complaints"
-              to="/complainlist"
+              to="/complaintable"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

@@ -11,12 +11,8 @@ import Dashboard from './scenes/dashboard';
 
 import Notice from './Components/Notice';
 import Noticetable from './scenes/notice/Noticetable';
-
 import Studentlist from './scenes/students';
-
-
-//import Topbar from './scenes/global/Topbar';
-//import Sidebar from './scenes/global/Sidebar';
+import ComplainTable from './scenes/complain';
 
 
 function App() {
@@ -38,19 +34,16 @@ function App() {
                 <Route path="/registration" element={<Registration />} />
                 <Route path="/importRegistration" element={<Import />} />
 
-                <Route path="/notice" element={<Notice />} />
-                <Route path="/noticetable" element={<Noticetable />} />
-
-                {/* <Route path="/topbar" element={<Topbar />} /> */}
-                {/* <Route path="/sidebar" element={<Sidebar />} /> */}
 
                 <Route path="/studentlist" element={<Studentlist />} />
+                <Route path="/notice" element={<Notice />} />
+                <Route path="/noticetable" element={<Noticetable />} />
+                <Route path="/complaintable" element={<ComplainTable />} />
 
               </Routes>
             </BrowserRouter>
           </div>
       </ThemeProvider>
-
     </ColorModeContext.Provider>
 
     </>
