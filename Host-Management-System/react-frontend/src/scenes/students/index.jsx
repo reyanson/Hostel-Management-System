@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Header from '../../Components/Header';
 import axios from 'axios';
-import { useTheme } from '@emotion/react';
-import {tokens} from "../../theme";
+//import { useTheme } from '@emotion/react';
+//import {tokens} from "../../theme";
 import swal from 'sweetalert';
 import Topbar from '../global/Topbar';
 import Sidebar from '../global/Sidebar';
 
 export default function Students() {
 
-    const theme = useTheme();
+    //const theme = useTheme();
     //const colors = tokens(theme.palette.mode);
 
     const [students, setStudents] = useState([]);
@@ -29,8 +29,8 @@ export default function Students() {
         }
     };
 
-    const deleteStudent = async (id)=>{
-        await axios.delete(`http://localhost:3000/student/delete/${id}`)
+    const deleteStudent = async (regNo)=>{
+        await axios.delete(`http://localhost:8080/student/delete/${regNo}`)
         loadStudents();
     }
 
@@ -87,14 +87,14 @@ export default function Students() {
                                                                 className='btn btn-danger mx-2'
                                                                 onClick={() => {
                                                                     swal({
-                                                                    title: "Are you sure? you want to delete this member?",
+                                                                    title: "Are you sure? you want to delete this Student?",
                                                                     icon: "warning",
                                                                     buttons: true,
                                                                     dangerMode: true,
                                                                     }).then((willDelete) => {
                                                                     if (willDelete) {
-                                                                        // Call the deleteUser function here when user confirms
-                                                                        deleteStudent(student.userId);
+                                                                        // Call the deleteStudent function here when user confirms
+                                                                        deleteStudent(student.regNo);
                                                                         swal(student.firstname+" has been deleted!", {
                                                                         icon: "success",
                                                                         });

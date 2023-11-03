@@ -23,6 +23,10 @@ public class StudentService {
         return studentRepository.getStudentRegNo(num);
     }
 
+    //method for delete student using regNo
+    public String deleteStudent(String regNo) {
+        return studentRepository.deleteStudent(regNo);
+    }
 
 }
 

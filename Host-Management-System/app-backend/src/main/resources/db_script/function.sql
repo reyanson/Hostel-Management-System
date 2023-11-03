@@ -80,6 +80,22 @@ END //
 DELIMITER ;
 /* END delete complain data using id */
 
+/* for delete student data using regNo */
+DELIMITER //
+    CREATE FUNCTION deleteStudent(inregno VARCHAR(15))
+        RETURNS VARCHAR(255)
+        BEGIN
+            DECLARE result VARCHAR(255);
+            IF EXISTS (SELECT * FROM student WHERE reg_no  = inregno) THEN
+                DELETE FROM student WHERE reg_no  = inregno;
+                SET result = 'Success';
+            ELSE
+                SET result = 'Student not found';
+            END IF;
+
+        RETURN result;
+        END //
+DELIMITER ;
 
 /*room*/
 /* START Toggle room status */
@@ -118,3 +134,46 @@ RETURN result_message;
 END //
 DELIMITER ;
 /* END Toggle room status */
+
+----------------------------------User Table-----------------------------------------------
+/*Users registration */
+DELIMITER //
+CREATE FUNCTION InsertUserData(
+p_first_Name VARCHAR(255), 
+p_last_Name VARCHAR(255), 
+p_Email VARCHAR(255), 
+p_nic VARCHAR(255), 
+p_address VARCHAR(255), 
+p_personal_no VARCHAR(255), 
+p_office_no VARCHAR(255), 
+p_position VARCHAR(255))
+RETURNS VARCHAR(255)
+DETERMINISTIC
+BEGIN
+  DECLARE msg VARCHAR(255); 	
+  CASE p_position
+    WHEN 'Dean' THEN
+      INSERT INTO dean (first_Name, last_Name, Email, nic, address, personal_no, office_no)
+		    VALUES (p_first_Name, p_last_Name, p_Email, p_nic, p_address, p_personal_no, p_office_no);
+      SET msg = "Success to Register the user as dean";
+    WHEN 'Warden' THEN
+      INSERT INTO warden (first_Name, last_Name, Email, nic, address, personal_no, office_no)
+          	   VALUES (p_first_Name, p_last_Name, p_Email, p_nic, p_address, p_personal_no, p_office_no); 
+      SET msg = "Success to Register the user as warden";
+    WHEN 'Subwarden' THEN
+      INSERT INTO subwarden (first_Name, last_Name, Email, nic, address, personal_no, office_no)
+          	   VALUES (p_first_Name, p_last_Name, p_Email, p_nic, p_address, p_personal_no, p_office_no); 
+      SET msg = "Success to Register the user as subwarden";
+    WHEN 'Security' THEN
+      INSERT INTO security (first_Name, last_Name, Email, nic, address, personal_no, office_no)
+          	   VALUES (p_first_Name, p_last_Name, p_Email, p_nic, p_address, p_personal_no, p_office_no); 
+      SET msg = "Success to Register the user as security";
+    ELSE
+      SET msg = 'Invalid position';
+  END CASE;
+
+  RETURN msg;
+END //
+DELIMITER ;
+
+------------------------------end user function-----------------------------------------

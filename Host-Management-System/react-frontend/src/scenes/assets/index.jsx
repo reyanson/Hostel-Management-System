@@ -17,7 +17,7 @@ export default function ComplainTable() {
 
     const loadComplaints = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/complaints/viewall"); 
+            const response = await axios.get("http://localhost:8080/complains/viewall"); 
             setComplaints(response.data);
         } catch (error) {
             console.error('Error fetching complaint data:', error);
@@ -26,7 +26,7 @@ export default function ComplainTable() {
 
     const deleteComplaint = async (cId) => {
         try {
-            await axios.delete(`http://localhost:8080/complaints/delete/${cId}`);
+            await axios.delete(`http://localhost:8080/complains/delete/{complainId}`);
             loadComplaints();
         } catch (error) {
             console.error('Error deleting complaint:', error);

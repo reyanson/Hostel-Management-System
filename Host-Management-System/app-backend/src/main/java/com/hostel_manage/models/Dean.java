@@ -3,42 +3,28 @@ package com.hostel_manage.models;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "subwarden")
-public class Subwarden {
+@Table(
+        name = "dean"
+)
+public class Dean {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int swarden_id;
-
+    private int dean_id;
     private String first_Name;
     private String last_Name;
+
     private String Email;
     private String nic;
     private String address;
     private int personal_no;
     private int office_no;
 
-
-    // Constructors, getters, and setters
-
-    public Subwarden() {
+    public int getDean_id() {
+        return dean_id;
     }
 
-    public Subwarden(String first_Name, String last_Name, String Email, String nic, String address, int personal_no, int office_no) {
-        this.first_Name = first_Name;
-        this.last_Name = last_Name;
-        this.Email = Email;
-        this.nic = nic;
-        this.address = address;
-        this.personal_no = personal_no;
-        this.office_no = office_no;
-    }
-
-    public int getSwarden_id() {
-        return swarden_id;
-    }
-
-    public void setSwarden_id(int swarden_id) {
-        this.swarden_id = swarden_id;
+    public void setDean_id(int dean_id) {
+        this.dean_id = dean_id;
     }
 
     public String getFirst_Name() {

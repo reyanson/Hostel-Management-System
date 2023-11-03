@@ -17,7 +17,7 @@ export default function AssetTable() {
 
     const loadComplaints = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/complaints/viewall"); 
+            const response = await axios.get("http://localhost:8080/complains/viewall"); 
             setComplaints(response.data);
         } catch (error) {
             console.error('Error fetching complaint data:', error);
@@ -26,7 +26,7 @@ export default function AssetTable() {
 
     const deleteComplaint = async (cId) => {
         try {
-            await axios.delete(`http://localhost:8080/complaints/delete/${cId}`);
+            await axios.delete(`http://localhost:8080/complains/delete/{complainId}`);
             loadComplaints();
         } catch (error) {
             console.error('Error deleting complaint:', error);
@@ -53,45 +53,45 @@ export default function AssetTable() {
                                 <table className="table border shadow">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Complaint ID</th>
+                                            {/* <th scope="col">Complaint ID</th> */}
                                             <th scope="col">Registration Number</th>
                                             <th scope="col">Category</th>
                                             <th scope="col">Subject</th>
                                             <th scope="col">Description</th>
                                             <th scope="col">Created At</th>
-                                            <th scope="col">Updated At</th>
+                                           
                                             <th scope="col">Actions</th>
-                                            <th scope="col">Remark</th>
-                                            <th scope="col">Options</th>
+     
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {complaints.map((complaint, index) => (
+                                        {complaints.map((complains, index) => (
                                             <tr key={index}>
-                                                <td>{complaint.cId}</td>
-                                                <td>{complaint.regNo}</td>
-                                                <td>{complaint.category}</td>
-                                                <td>{complaint.subject}</td>
-                                                <td>{complaint.description}</td>
-                                                <td>{complaint.createdAt}</td>
-                                                <td>{complaint.updatedAt}</td>
-                                                <td>{complaint.action}</td>
-                                                <td>{complaint.remark}</td>
+                                                {/* <td>{complains.cId}</td> */}
+                                                <td>{complains.regNo}</td>
+                                                <td>{complains.category}</td>
+                                                <td>{complains.subject}</td>
+                                                <td>{complains.description}</td>
+                                                <td>{complains.createdAt}</td>
+                                               
+                                            
 
                                                 <td>
-                                                    <Link to={`/complaint/${complaint.cId}`} className="btn btn-info btn-sm mx-2">
+                                                    <Link to={`/complains/${complains.cId}`} className="btn btn-info btn-sm mx-2">
                                                         View
                                                     </Link>
                                                     <button
                                                         onClick={() => {
                                                             if (window.confirm('Are you sure you want to delete this complaint?')) {
-                                                                deleteComplaint(complaint.cId);
+                                                                deleteComplaint(complains.cId);
                                                             }
                                                         }}
                                                         className="btn btn-danger btn-sm mx-2"
                                                     >
                                                         Delete
                                                     </button>
+
+                                                    
                                                 </td>
                                             </tr>
                                         ))}

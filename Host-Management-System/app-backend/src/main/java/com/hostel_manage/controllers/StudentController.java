@@ -63,14 +63,11 @@ public class StudentController {
 //                }).orElseThrow(()->new UserNotFoundException(regno));
 //    }
 //
-//    @DeleteMapping("/delete/{regno}")
-//    String deleteStudent(@PathVariable String regno){
-//        if(!userRepository.existsById(regno)){
-//            throw new UserNotFoundException(regno);
-//        }
-//        userRepository.deleteById(regno);
-//        return "Student with id "+regno+" has been deleted success.";
-//    }
+
+    @DeleteMapping("/delete/{regNo}")
+    public String deleteStudent(@PathVariable String regNo) {
+        return studentService.deleteStudent(regNo);
+    }
 
 }
 

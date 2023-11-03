@@ -2,6 +2,7 @@ package com.hostel_manage.services;
 
 import com.hostel_manage.models.Complain;
 import com.hostel_manage.models.Notice;
+import com.hostel_manage.models.Student;
 import com.hostel_manage.repository.ComplainRepository;
 import com.hostel_manage.repository.LoginRepository;
 import jakarta.persistence.EntityManager;
@@ -47,12 +48,15 @@ public class ComplainService {
         return result;
     }
 
-    //method for delete complain using id
+    //method for view all complaints
+    public List<Complain> getAllComplaints() {
+        return complainRepository.findAll();
+    }
+
+    //method for delete complaint using id
     public String deleteComplaint(int complainId) {
         return complainRepository.deleteComplain(complainId);
     }
-
-
 
     public String updateComplaint(Complain complain) {
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("updateComplaint");
