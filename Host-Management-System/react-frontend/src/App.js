@@ -10,9 +10,12 @@ import Import from './Components/ImportRegistration';
 import Dashboard from './scenes/dashboard';
 
 import Notice from './Components/Notice';
-import Noticetable from './scenes/notice/Noticetable';
+import Noticetable from './scenes/notice';
 import Studentlist from './scenes/students';
 import ComplainTable from './scenes/complain';
+import DamageTable from './scenes/damage';
+import RoomTable from './scenes/room';
+import AssetTable from './scenes/assets';
 
 
 function App() {
@@ -39,6 +42,9 @@ function App() {
                 <Route path="/notice" element={<Notice />} />
                 <Route path="/noticetable" element={<Noticetable />} />
                 <Route path="/complaintable" element={<ComplainTable />} />
+                <Route path="/damagelist" element={<DamageTable />} />
+                <Route path="/roomdatas" element={<RoomTable />} />
+                <Route path="/assetstable" element={<AssetTable />} />
 
               </Routes>
             </BrowserRouter>

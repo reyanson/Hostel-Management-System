@@ -3,13 +3,11 @@ import { Link } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import Header from '../../Components/Header';
 import axios from 'axios';
-//import { useTheme } from '@emotion/react';
 import Topbar from '../global/Topbar';
 import Sidebar from '../global/Sidebar';
 
-export default function ComplainTable() {
+export default function AssetTable() {
 
-    //const theme = useTheme();
 
     const [complaints, setComplaints] = useState([]);
 

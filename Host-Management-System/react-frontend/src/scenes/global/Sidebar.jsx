@@ -147,7 +147,7 @@ const Sidebar = () => {
             />
             <Item
               title="Manage Rooms"
-              to="/roomlist"
+              to="/roomdatas"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -169,14 +169,14 @@ const Sidebar = () => {
 
             <Item
               title="Manage Assets"
-              to="/assetslist"
+              to="/assetstable"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Manage Damages"
-              to="/damagetable"
+              to="/damagelist"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -190,8 +190,36 @@ const Sidebar = () => {
               Pages
             </Typography>
             <Item
+              title="Dean Registration"
+              to="/registration"
+              icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Warden Registration"
+              to="/registration"
+              icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Sub Warden Registration"
+              to="/registration"
+              icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Student Registration"
               to="/importRegistration"
+              icon={<PersonOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Security Registration"
+              to="/registration"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
