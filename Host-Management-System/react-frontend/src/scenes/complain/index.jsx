@@ -54,13 +54,12 @@ export default function AssetTable() {
                                     <thead>
                                         <tr>
                                             {/* <th scope="col">Complaint ID</th> */}
-                                            <th scope="col">Registration Number</th>
-                                            <th scope="col">Category</th>
-                                            <th scope="col">Subject</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Created At</th>
-                                           
-                                            <th scope="col">Actions</th>
+                                            <th scope="col" class="text-center">Registration Number</th>
+                                            <th scope="col" class="text-center">Category</th>
+                                            <th scope="col" class="text-center">Subject</th>
+                                            <th scope="col" class="text-center">Description</th>
+                                            <th scope="col" class="text-center">Created At</th>                                         
+                                            <th scope="col" colspan="2" class="text-center">Actions</th>
      
                                         </tr>
                                     </thead>
@@ -74,11 +73,12 @@ export default function AssetTable() {
                                                 <td>{complains.description}</td>
                                                 <td>{complains.createdAt}</td>
                                                
-                                            
-
                                                 <td>
                                                     <Link to={`/complains/${complains.cId}`} className="btn btn-info btn-sm mx-2">
                                                         View
+                                                    </Link>
+                                                    <Link to={`/complains/${complains.cId}`} className="btn btn-info btn-sm mx-2">
+                                                        Edit
                                                     </Link>
                                                     <button
                                                         onClick={() => {
