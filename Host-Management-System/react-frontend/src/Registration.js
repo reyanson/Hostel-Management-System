@@ -3,23 +3,28 @@ import axios from "axios";
 
 export default function Registration(){
 
-  const [firstname,setFirstname] = useState("");
-  const [lastname,setLastname] = useState("");
-  const [email,setEmail] = useState("");
+  const [first_Name,setFirstname] = useState("");
+  const [last_Name,setLastname] = useState("");
+  const [Email,setEmail] = useState("");
   const [nic,setNic] = useState("");
-  const [personalnum,setPersonalnum] = useState("");
-  const [officenum,setOfficenum] = useState("");
+  const [address, setAddress] = useState("");
+  const [personal_no,setPersonalnum] = useState("");
+  const [office_no,setOfficenum] = useState("");
+  const [position, setPosition] = useState("");
 
   async function save (event){
     event.preventDefault();
     try{
-      await axios.post("http://localhost:8080/api/v1/", {
-      firstname : firstname,
-      lastname : lastname,
-      email : email,
+      await axios.post(`http://localhost:8080/api/user/insert/${position}`, {
+      first_Name : first_Name,
+      last_Name : last_Name,
+      email : Email,
       nic : nic,
-      personalnum : personalnum,
-      officenum :officenum,
+      address: address,
+      personal_no : personal_no,
+      office_no :office_no,
+      
+      
     });
     alert("User Registation Successfully");
       }catch(err){
@@ -35,7 +40,7 @@ export default function Registration(){
               <div className="mb-3">
                 <label className="form-label">First Name</label>
                 <input type="text" className="form-control" id="firstname" 
-                placeholder="Enter First Name" value={firstname}
+                placeholder="Enter First Name" value={first_Name}
                 onChange={(event)=> {setFirstname(event.target.value);
                 } } 
                 />
@@ -43,7 +48,7 @@ export default function Registration(){
               <div className="mb-3">
                 <label className="form-label">Last Name</label>
                 <input type="text" className="form-control" id="lastname" 
-                placeholder="Enter Last Name" value={lastname}
+                placeholder="Enter Last Name" value={last_Name}
                 onChange={(event)=> {setLastname(event.target.value);
                 } } 
                 />
@@ -51,7 +56,7 @@ export default function Registration(){
               <div className="mb-3">
                 <label className="form-label">Email</label>
                 <input type="text" className="form-control" id="email" 
-                placeholder="Enter email" value={email}
+                placeholder="Enter email" value={Email}
                 onChange={(event)=> {setEmail(event.target.value);
                 } } 
                 />
@@ -65,9 +70,33 @@ export default function Registration(){
                 />
               </div>
               <div className="mb-3">
+                <label className="form-label">Address</label>
+                <input type="text" className="form-control" id="address" 
+                placeholder="Enter address" value={address}
+                onChange={(event)=> {setAddress(event.target.value);
+                } } 
+                />
+              </div>
+              <div className="mb-3">
+              <label className="form-label">Position</label>
+              <select
+                className="form-control" id="position"
+                value={position}
+                onChange={(event) => {
+                  setPosition(event.target.value);
+                }}
+              >
+                <option value="">Select a position</option>
+                <option value="Dean">Dean</option>
+                <option value="Warden">Warden</option>
+                <option value="Subwarden">Subwarden</option>
+                <option value="Security">Security</option>
+              </select>
+            </div>
+              <div className="mb-3">
                 <label className="form-label">Personal Number</label>
                 <input type="text" className="form-control" id="personalnum" 
-                placeholder="Enter personalnum" value={personalnum}
+                placeholder="Enter personalnum" value={personal_no}
                 onChange={(event)=> {setPersonalnum(event.target.value);
                 } } 
                 />
@@ -75,7 +104,7 @@ export default function Registration(){
               <div className="mb-3">
                 <label className="form-label">Office Number</label>
                 <input type="text" className="form-control" id="officenum" 
-                placeholder="Enter officenum" value={officenum}
+                placeholder="Enter officenum" value={office_no}
                 onChange={(event)=> {setOfficenum(event.target.value);
                 } } 
                 />

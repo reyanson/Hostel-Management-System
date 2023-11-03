@@ -116,3 +116,23 @@ RETURN result_message;
 END //
 DELIMITER ;
 /* END Toggle room status */
+
+/*dean*/
+/*dean registration */
+DELIMITER //
+CREATE FUNCTION InsertDean(
+  firstname VARCHAR(50),
+  lastname VARCHAR(50),
+  email VARCHAR(50),
+  nic VARCHAR(12),
+  address VARCHAR(100),
+  personalnum INT(10),
+  officenum INT(10)
+) RETURNS VARCHAR(255)
+DETERMINISTIC
+BEGIN
+  INSERT INTO dean (firstname, lastname, email, nic, address, personalnum, officenum)
+  VALUES (firstname, lastname, email, nic, address, personalnum, officenum);
+  RETURN NULL;
+END //
+DELIMITER ;
