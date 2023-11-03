@@ -24,7 +24,7 @@ function Notice() {
   const onSubmit = async (e) => {
     e.preventDefault();
     await axios.post("http://localhost:8080/notices/add", notice);
-    navigate("/notice_alert");
+    navigate("/noticetable");
   };
 
   return (
@@ -43,18 +43,6 @@ function Notice() {
                     <div className="col-md-12 border rounded p-4 mt-2 shadow" style={{ width: '600px', height: '400px' }}>
                       {/* <form onSubmit={(e) => onSubmit(e)} style={{ padding: '20px' }}> */}
                       <form onSubmit={(e) => onSubmit(e)} className="custom-form">
-                        <div className="mb-3">
-                          <label htmlFor="Content" className="form-label">
-                            Notice Content
-                          </label>
-                          <textarea
-                            className="form-control custom-textarea" 
-                            name="content"
-                            value={content}
-                            required
-                            onChange={(e) => onInputChange(e)}
-                          ></textarea>
-                        </div>
 
                         <div className="mb-3">
                           <label htmlFor="Content" className="form-label">
@@ -69,11 +57,25 @@ function Notice() {
                             onChange={(e) => onInputChange(e)}
                           />
                         </div>
+
+                        <div className="mb-3">
+                          <label htmlFor="Content" className="form-label">
+                            Notice Content
+                          </label>
+                          <textarea
+                            className="form-control custom-textarea" 
+                            name="content"
+                            value={content}
+                            required
+                            onChange={(e) => onInputChange(e)}
+                          ></textarea>
+                        </div>
+                        
                         <Box sx={{mb:-10}}>
                           <button type="submit" className="btn btn-outline-primary">
                                 Upload
                               </button>
-                              <Link className="btn btn-outline-danger mx-2" to="/notice_table">
+                              <Link className="btn btn-outline-danger mx-2" to="/noticetable">
                                 Cancel
                               </Link>
                         </Box>
