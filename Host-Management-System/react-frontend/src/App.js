@@ -22,6 +22,7 @@ import QRCodeGenerator from './QRCodeGenerator';
 function App() {
   const [theme, colorMode] = useMode();
 
+
   return (
     <>
     <ColorModeContext.Provider value = {colorMode}>

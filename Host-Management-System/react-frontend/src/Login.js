@@ -28,6 +28,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [loggedInUsername, setLoggedInUsername] = useState('');
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
@@ -47,7 +48,7 @@ export default function SignIn() {
       });
 
       if (response.status === 200) {
-        // Login was successful, navigate to the dashboard
+        sessionStorage.setItem('loggedInUsername', response.data.username);
         navigate('/home');
       } else {
 
