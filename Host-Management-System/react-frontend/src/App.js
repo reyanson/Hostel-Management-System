@@ -16,6 +16,7 @@ import ComplainTable from './scenes/complain';
 import DamageTable from './scenes/damage';
 import RoomTable from './scenes/room';
 import AssetTable from './scenes/assets';
+//import NoticeUpdate from './Components/NoticeUpdate';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
                 <Route path="/studentlist" element={<Studentlist />} />
                 <Route path="/notice" element={<Notice />} />
                 <Route path="/noticetable" element={<Noticetable />} />
+                {/* <Route path="/noticeupdate" element={<NoticeUpdate />} /> */}
                 <Route path="/complaintable" element={<ComplainTable />} />
                 <Route path="/damagelist" element={<DamageTable />} />
                 <Route path="/roomdatas" element={<RoomTable />} />

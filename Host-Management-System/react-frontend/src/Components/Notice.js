@@ -43,7 +43,6 @@ function Notice() {
                     <div className="col-md-12 border rounded p-4 mt-2 shadow" style={{ width: '600px', height: '400px' }}>
                       {/* <form onSubmit={(e) => onSubmit(e)} style={{ padding: '20px' }}> */}
                       <form onSubmit={(e) => onSubmit(e)} className="custom-form">
-
                         <div className="mb-3">
                           <label htmlFor="Content" className="form-label">
                             Subject
