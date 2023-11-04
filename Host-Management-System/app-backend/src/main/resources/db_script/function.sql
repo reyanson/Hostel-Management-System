@@ -80,6 +80,7 @@ END //
 DELIMITER ;
 /* END delete complain data using id */
 
+------------------------------------------------STUDENT TABLE FUNCTION--------------------------------------------
 /* for delete student data using regNo */
 DELIMITER //
     CREATE FUNCTION deleteStudent(inregno VARCHAR(15))
@@ -176,4 +177,22 @@ BEGIN
 END //
 DELIMITER ;
 
-------------------------------end user function-----------------------------------------
+------------------------------ROOM Table Function-----------------------------------------------------
+
+/* Delete room student data */
+DELIMITER //
+CREATE FUNCTION deleteRoomStudentData(
+    in_reg_no VARCHAR(15))
+    RETURNS VARCHAR(255)
+BEGIN
+    DECLARE result VARCHAR(255);
+    IF EXISTS (SELECT reg_no FROM room r, student s WHERE reg_no = in_reg_no AND s.reg_no = r.reg_no) THEN
+        DELETE r FROM room r WHERE r.reg_no = in_reg_no;
+        SET result = 'Success';
+ELSE
+        SET result = 'Student data not found';
+END IF;
+RETURN result;
+END //
+DELIMITER ;
+

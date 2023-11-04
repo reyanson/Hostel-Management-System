@@ -101,10 +101,6 @@ VALUES
     ('TG/2020/841', 'Krishanth', 'Veluraj', 'krishanth@example.com', '200065432164', 'PTK Road Pandiruppu, Batticalo', 0719832164);
 
 
-
-
-
-
 ---------------------tg509------------------------------
 
 CREATE TABLE `bathroom` (

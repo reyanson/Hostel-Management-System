@@ -17,7 +17,8 @@ import DamageTable from './scenes/damage';
 import Room from './Components/Room';
 import RoomTable from './scenes/room';
 import AssetTable from './scenes/assets';
-import QRCodeGenerator from './QRCodeGenerator';
+//import NoticeUpdate from './Components/NoticeUpdate';
+//import QRCodeGenerator from './QRCodeGenerator';
 
 
 function App() {
@@ -44,13 +45,14 @@ function App() {
                 <Route path="/studentlist" element={<Studentlist />} />
                 <Route path="/notice" element={<Notice />} />
                 <Route path="/noticetable" element={<Noticetable />} />
+                {/* <Route path="/noticeupdate" element={<NoticeUpdate />} /> */}
                 <Route path="/complaintable" element={<ComplainTable />} />
                 <Route path="/damagelist" element={<DamageTable />} />
                 <Route path="/room" element={<Room />} />
                 <Route path="/roomdatas" element={<RoomTable />} />
                 <Route path="/assetstable" element={<AssetTable />} />
 
-                <Route path='/qr' element={<QRCodeGenerator />} />
+                {/* <Route path='/qr' element={<QRCodeGenerator />} /> */}
 
               </Routes>
             </BrowserRouter>
