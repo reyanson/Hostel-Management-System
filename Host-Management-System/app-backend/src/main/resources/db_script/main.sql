@@ -213,12 +213,7 @@ CREATE TABLE `room` (
 ALTER TABLE room ADD FOREIGN KEY(reg_no) REFERENCES student(reg_no);
 
 INSERT INTO `room` (`room_no`, `floor`, `reg_no`) VALUES
-(101, 'L1', 'TG/2022/1062'),
-(128, 'L1', 'TG/2022/800'),
-(201, 'L2', 'TG/2021/760'),
-(225, 'L2', 'TG/2021/780'),
-(301, 'L3', 'TG/2020/490'),
-(328, 'L3', 'TG/2021/423'),
+(201, 'L3', 'TG/2020/841'),
 (401, 'L4', 'TG/2019/508'),
 (428, 'L4', 'TG/2019/492');
 
