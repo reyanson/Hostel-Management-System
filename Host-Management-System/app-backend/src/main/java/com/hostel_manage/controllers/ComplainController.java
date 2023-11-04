@@ -1,12 +1,7 @@
 package com.hostel_manage.controllers;
 
 import com.hostel_manage.models.Complain;
-import com.hostel_manage.models.Login;
-import com.hostel_manage.models.LoginResponse;
-import com.hostel_manage.models.Student;
 import com.hostel_manage.services.ComplainService;
-import com.hostel_manage.services.LoginService;
-import com.hostel_manage.services.StudentService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/complains")

@@ -135,6 +135,33 @@ END //
 DELIMITER ;
 
 
+/*------------------------------------------------Room table procedures----------------------------------------------------------------*/
+
+/* START store data store in room table*/
+DELIMITER //
+CREATE PROCEDURE InsertRoom(
+    IN d_room_no int,
+    IN d_floor varchar(10),
+    IN d_reg_no varchar(15))
+BEGIN
+INSERT INTO room (room_no, floor, reg_no)
+VALUES (d_room_no, d_floor, d_reg_no);
+
+SELECT 'Success' AS Message;
+END//
+
+DELIMITER ;
+CALL InsertRoom(228, 'L2', 'TG/2021/785');
+
+
+/* To get all room details */
+DELIMITER //
+CREATE PROCEDURE get_all_rooms_details()
+BEGIN
+SELECT *FROM room;
+END //
+
+DELIMITER ;
 
 
 

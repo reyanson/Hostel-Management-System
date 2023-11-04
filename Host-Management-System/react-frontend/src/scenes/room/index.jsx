@@ -9,27 +9,27 @@ import Sidebar from '../global/Sidebar';
 export default function RoomTable() {
 
 
-    const [complaints, setComplaints] = useState([]);
+    const [rooms, setRooms] = useState([]);
 
     useEffect(() => {
-        loadComplaints();
+        loadRooms();
     }, []);
 
-    const loadComplaints = async () => {
+    const loadRooms = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/complaints/viewall"); 
-            setComplaints(response.data);
+            const response = await axios.get("http://localhost:8080/rooms/viewall"); 
+            setRooms(response.data);
         } catch (error) {
-            console.error('Error fetching complaint data:', error);
+            console.error('Error fetching Room data:', error);
         }
     };
 
-    const deleteComplaint = async (cId) => {
+    const deleteRooms = async (roomId) => {
         try {
-            await axios.delete(`http://localhost:8080/complaints/delete/${cId}`);
-            loadComplaints();
+            await axios.delete(`http://localhost:8080/rooms/delete/${roomId}`);
+            loadRooms();
         } catch (error) {
-            console.error('Error deleting complaint:', error);
+            console.error('Error deleting Room Record:', error);
         }
     };
 
@@ -53,39 +53,35 @@ export default function RoomTable() {
                                 <table className="table border shadow">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Complaint ID</th>
-                                            <th scope="col">Registration Number</th>
-                                            <th scope="col">Category</th>
-                                            <th scope="col">Subject</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Created At</th>
-                                            <th scope="col">Updated At</th>
-                                            <th scope="col">Actions</th>
-                                            <th scope="col">Remark</th>
-                                            <th scope="col">Options</th>
+                                            <th scope="col" class="text-center">Room Number</th>
+                                            <th scope="col" class="text-center">Floor</th>
+                                            <th scope="col" class="text-center">Registration Number</th>
+                                            <th scope="col" class="text-center">Created At</th>
+                                            <th scope="col" class="text-center">Updated At</th>
+                                            <th scope="col" colspan="2" class="text-center">Actions</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {complaints.map((complaint, index) => (
+                                        {rooms.map((room, index) => (
                                             <tr key={index}>
-                                                <td>{complaint.cId}</td>
-                                                <td>{complaint.regNo}</td>
-                                                <td>{complaint.category}</td>
-                                                <td>{complaint.subject}</td>
-                                                <td>{complaint.description}</td>
-                                                <td>{complaint.createdAt}</td>
-                                                <td>{complaint.updatedAt}</td>
-                                                <td>{complaint.action}</td>
-                                                <td>{complaint.remark}</td>
-
+                                                <td>{room.roomNum}</td>
+                                                <td>{room.floor}</td>
+                                                <td>{room.regNo}</td>                                             
+                                                <td>{room.createdAt}</td>
+                                                <td>{room.updatedAt}</td>
+                                                <td>{room.action}</td>
                                                 <td>
-                                                    <Link to={`/complaint/${complaint.cId}`} className="btn btn-info btn-sm mx-2">
+                                                    <Link to={`/room/${room.roomId}`} className="btn btn-info btn-sm mx-2">
                                                         View
+                                                    </Link>
+                                                    <Link to={`/room/${room.roomId}`} className="btn btn-info btn-sm mx-2">
+                                                        Edit
                                                     </Link>
                                                     <button
                                                         onClick={() => {
-                                                            if (window.confirm('Are you sure you want to delete this complaint?')) {
-                                                                deleteComplaint(complaint.cId);
+                                                            if (window.confirm('Are you sure you want to delete this Room Datas?')) {
+                                                                deleteRooms(room.roomId);
                                                             }
                                                         }}
                                                         className="btn btn-danger btn-sm mx-2"

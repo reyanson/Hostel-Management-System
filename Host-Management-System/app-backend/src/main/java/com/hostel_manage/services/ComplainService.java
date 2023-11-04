@@ -1,20 +1,15 @@
 package com.hostel_manage.services;
 
 import com.hostel_manage.models.Complain;
-import com.hostel_manage.models.Notice;
-import com.hostel_manage.models.Student;
 import com.hostel_manage.repository.ComplainRepository;
-import com.hostel_manage.repository.LoginRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
-import jakarta.persistence.StoredProcedureParameter;
 import jakarta.persistence.StoredProcedureQuery;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ComplainService {
@@ -30,15 +25,12 @@ public class ComplainService {
         this.entityManager = entityManager;
     }
 
-
     public String saveComplain(Complain complain) {
         StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery("insertComplain");
         query.setParameter("p_reg_no",complain.getRegNo());
         query.setParameter("p_category",complain.getCategory());
         query.setParameter("p_subject",complain.getSubject());
         query.setParameter("p_description",complain.getDescription());
-
-
 
         // Execute the stored procedure
         query.execute();

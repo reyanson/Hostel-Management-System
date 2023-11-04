@@ -1,0 +1,195 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import qr from 'qrcode';
+
+const RoomAssetList = () => {
+  const [roomAssets, setRoomAssets] = useState([]);
+  const [roomNo, setRoomNo] = useState(0);
+  const [selectedAsset, setSelectedAsset] = useState(null);
+  const [qrCode, setQRCode] = useState('');
+
+  const fetchRoomAssets = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/room-assets/viewall/${roomNo}`);
+      setRoomAssets(response.data);
+    } catch (error) {
+      console.error('Error fetching room assets:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRoomAssets();
+  }, [roomNo]);
+
+  const displayAssetDetails = async (asset) => {
+    setSelectedAsset(asset);
+
+    // Generate a QR code for the combination of asset code and room number
+    const assetCode = asset.split('/')[0];
+    const qrCodeData = `${assetCode}/${roomNo}`;
+    const generatedQRCode = await generateQRCode(qrCodeData);
+    setQRCode(generatedQRCode);
+  };
+
+  const generateQRCode = async (data) => {
+    try {
+      const qrCode = await qr.toDataURL(data);
+      return qrCode;
+    } catch (error) {
+      console.error('Error generating QR code:', error);
+      return '';
+    }
+  };
+
+  return (
+    <div>
+      <h2>Room Assets</h2>
+      <input
+        type="number"
+        placeholder="Enter Room No"
+        value={roomNo}
+        onChange={(e) => setRoomNo(e.target.value)}
+      />
+      <button onClick={fetchRoomAssets}>Fetch Room Assets</button>
+
+      <ul>
+        {roomAssets.map((asset, index) => (
+          <li key={index}>
+            Asset Code: {asset.split('/')[0]}, Asset Name: {asset.split('/')[1]}
+            <button onClick={() => displayAssetDetails(asset)}>Show Details</button>
+          </li>
+        ))}
+      </ul>
+
+      {selectedAsset && (
+        <div>
+          <h3>Selected Asset Details</h3>
+          <p>Asset Code: {selectedAsset.split('/')[0]}</p>
+          <p>Asset Name: {selectedAsset.split('/')[1]}</p>
+          {qrCode && <img src={qrCode} alt="QR Code" />}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default RoomAssetList;
+
+
+
+
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import qr from 'qrcode';
+
+const RoomAssetList = () => {
+  const [roomAssets, setRoomAssets] = useState([]);
+  const [roomNo, setRoomNo] = useState(0);
+  const [selectedAsset, setSelectedAsset] = useState(null);
+  const [qrCodes, setQRCodes] = useState([]);
+  const [assetName, setAssetName] = useState('');
+
+  const fetchRoomAssets = async () => {
+    try {
+      const response = await axios.get(`http://localhost:8080/room-assets/viewall/${roomNo}`);
+      setRoomAssets(response.data);
+    } catch (error) {
+      console.error('Error fetching room assets:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchRoomAssets();
+  }, [roomNo]);
+
+  const displayAllQRCodes = async () => {
+    const qrCodeResults = await Promise.all(
+      roomAssets.map(async (asset) => {
+        const assetCode = asset.split('/')[0];
+        const qrCodeData = `${assetCode}/${roomNo}`;
+        const qrCode = await generateQRCode(qrCodeData);
+        const assetName = asset.split('/')[1];
+        return { assetCode, assetName, qrCode };
+      })
+    );
+
+    setQRCodes(qrCodeResults);
+  };
+
+  const generateQRCode = async (data) => {
+    try {
+      const qrCode = await qr.toDataURL(data);
+      return qrCode;
+    } catch (error) {
+      console.error('Error generating QR code:', error);
+      return '';
+    }
+  };
+
+  return (
+    <div>
+      <h2>Room Assets</h2>
+      <input
+        type="number"
+        placeholder="Enter Room No"
+        value={roomNo}
+        onChange={(e) => setRoomNo(e.target.value)}
+      />
+      <button onClick={fetchRoomAssets}>Fetch Room Assets</button>
+      <button onClick={displayAllQRCodes}>Show All QR Codes</button>
+
+      {/* <ul>
+        {roomAssets.map((asset, index) => (
+          <li key={index}>
+            Asset Code: {asset.split('/')[0]}, Asset Name: {asset.split('/')[1]}
+            <button
+              onClick={() => {
+                setSelectedAsset(asset);
+                setAssetName(asset.split('/')[1]);
+              }}
+            >
+              Show Details
+            </button>
+          </li>
+        ))}
+      </ul> */}
+
+      {selectedAsset && (
+        <div>
+          <h3>Selected Asset Details</h3>
+          <p>Asset Code: {selectedAsset.split('/')[0]}</p>
+          <p>Asset Name: {assetName}</p>
+        </div>
+      )}
+
+      {qrCodes.length > 0 && (
+        <div>
+          <h3>All QR Codes</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Room Number</th>
+                <th>Asset Name</th>
+                <th>QR Code</th>
+              </tr>
+            </thead>
+            <tbody>
+              {qrCodes.map((qrCodeData, index) => (
+                <tr key={index}>
+                  <td>{roomNo}</td>
+                  <td>{qrCodeData.assetName}</td>
+                  <td>
+                    <img src={qrCodeData.qrCode} alt={`QR Code ${index}`} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default RoomAssetList;
+
