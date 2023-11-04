@@ -49,6 +49,8 @@ public class LoginApiController {
             session = studentService.getStudentRegNo(username);
         } else if (occasion.equals("security")) {
             session = username;
+        }else if(occasion.equals("dean")){
+            session = username;
         }
         LoginResponse loginResponse = new LoginResponse();
         loginResponse.setUsername(session);

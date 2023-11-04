@@ -14,9 +14,13 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Logo from "../../logo1.png";
 
 
+
+
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  
+
   return (
     <MenuItem
       active={selected === title}
@@ -106,7 +110,7 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Vadivel Ajanthan
+                  
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   Sub Warden 
