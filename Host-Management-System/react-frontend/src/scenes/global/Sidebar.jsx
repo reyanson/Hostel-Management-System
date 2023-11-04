@@ -12,14 +12,14 @@ import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Logo from "../../logo1.png";
-import { useState } from 'react';
+
 
 
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const loggedInUsername = sessionStorage.getItem('loggedInUsername');
+  
 
   return (
     <MenuItem
@@ -110,7 +110,7 @@ const Sidebar = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  {loggedInUsername}
+                  
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   Sub Warden 
