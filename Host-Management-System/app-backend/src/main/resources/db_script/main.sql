@@ -101,10 +101,6 @@ VALUES
     ('TG/2020/841', 'Krishanth', 'Veluraj', 'krishanth@example.com', '200065432164', 'PTK Road Pandiruppu, Batticalo', 0719832164);
 
 
-
-
-
-
 ---------------------tg509------------------------------
 
 CREATE TABLE `bathroom` (
@@ -138,7 +134,6 @@ INSERT INTO `bathroom` (`bathroom_id`, `floor`) VALUES
 ('l2_r_b4', 'L2'),
 ('l2_r_b5', 'L2'),
 ('l2_r_b6', 'L2');
-
 
 
 CREATE TABLE complain (
@@ -215,14 +210,10 @@ CREATE TABLE `room` (
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
+ALTER TABLE room ADD FOREIGN KEY(reg_no) REFERENCES student(reg_no);
 
 INSERT INTO `room` (`room_no`, `floor`, `reg_no`) VALUES
-(101, 'L1', 'TG/2022/1062'),
-(128, 'L1', 'TG/2022/800'),
-(201, 'L2', 'TG/2021/760'),
-(225, 'L2', 'TG/2021/780'),
-(301, 'L3', 'TG/2020/490'),
-(328, 'L3', 'TG/2021/423'),
+(201, 'L3', 'TG/2020/841'),
 (401, 'L4', 'TG/2019/508'),
 (428, 'L4', 'TG/2019/492');
 
@@ -282,7 +273,6 @@ INSERT INTO `room_asset` (`asset_id`, `name`, `room_no`) VALUES
 ;
 
 
-
 CREATE TABLE `toilet` (
   `toilet_id` varchar(11) primary key NOT NULL,
   `floor` varchar(10) NOT NULL
@@ -319,46 +309,33 @@ INSERT INTO `toilet` (`toilet_id`, `floor`) VALUES
 ALTER TABLE `bathroom`
   ADD PRIMARY KEY (`bathroom_id`);
 
-
 ALTER TABLE `complain`
   ADD PRIMARY KEY (`c_id`);
 
-
-  ALTER TABLE `damage`
+ALTER TABLE `damage`
   ADD PRIMARY KEY (`damage_id`);
 
-
-  ALTER TABLE `notice`
+ALTER TABLE `notice`
   ADD PRIMARY KEY (`notice_id`);
 
-
-  ALTER TABLE `repair`
+ALTER TABLE `repair`
   ADD PRIMARY KEY (`repair_id`);
 
-
-ALTER TABLE `room`
-  ADD PRIMARY KEY (`room_no`);
-
-
-  ALTER TABLE `room_asset`
+ALTER TABLE `room_asset`
   ADD PRIMARY KEY (`asset_id`,`room_no`);
 
-
-  ALTER TABLE `toilet`
+ALTER TABLE `toilet`
   ADD PRIMARY KEY (`toilet_id`);
 
-
-  ALTER TABLE `damage`
+ALTER TABLE `damage`
   ADD CONSTRAINT `damage_ibfk_1` FOREIGN KEY (`room_no`) REFERENCES `room` (`room_no`),
   ADD CONSTRAINT `damage_ibfk_2` FOREIGN KEY (`asset_id`) REFERENCES `room_asset` (`asset_id`);
-
 
 ALTER TABLE `repair`
   ADD CONSTRAINT `repair_ibfk_1` FOREIGN KEY (`room_no`) REFERENCES `room` (`room_no`),
   ADD CONSTRAINT `repair_ibfk_2` FOREIGN KEY (`asset_id`) REFERENCES `room_asset` (`asset_id`);
 
-
-  ALTER TABLE complain
+ALTER TABLE complain
 ADD FOREIGN KEY (reg_no) REFERENCES student(reg_no);
 
 

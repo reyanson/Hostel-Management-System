@@ -24,9 +24,9 @@ export default function RoomTable() {
         }
     };
 
-    const deleteRooms = async (roomId) => {
+    const deleteRooms = async (regNo) => {
         try {
-            await axios.delete(`http://localhost:8080/rooms/delete/${roomId}`);
+            await axios.delete(`http://localhost:8080/rooms/delete/${regNo}`);
             loadRooms();
         } catch (error) {
             console.error('Error deleting Room Record:', error);
@@ -80,8 +80,8 @@ export default function RoomTable() {
                                                     </Link>
                                                     <button
                                                         onClick={() => {
-                                                            if (window.confirm('Are you sure you want to delete this Room Datas?')) {
-                                                                deleteRooms(room.roomId);
+                                                            if (window.confirm('Are you sure you want to delete this Student Data?')) {
+                                                                deleteRooms(room.regNo);
                                                             }
                                                         }}
                                                         className="btn btn-danger btn-sm mx-2"

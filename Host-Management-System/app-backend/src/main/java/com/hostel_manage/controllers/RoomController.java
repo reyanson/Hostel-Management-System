@@ -1,13 +1,11 @@
 package com.hostel_manage.controllers;
 
 
-import com.hostel_manage.models.Complain;
 import com.hostel_manage.models.Room;
 import com.hostel_manage.services.RoomService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,10 +51,12 @@ public class RoomController {
 //            return new ResponseEntity(result, HttpStatus.UNAUTHORIZED);
 //        }
 //    }
-//
-//    @DeleteMapping("/delete/{complainId}")
-//    public String deleteComplaint(@PathVariable int complainId) {
-//        return complainService.deleteComplaint(complainId);
-//    }
+
+    @DeleteMapping("/delete/{regNo}")
+    public String deleteRoomStudent(@PathVariable String regNo) {
+
+        return roomService.deleteRoomStudent(regNo);
+    }
+
 
 }

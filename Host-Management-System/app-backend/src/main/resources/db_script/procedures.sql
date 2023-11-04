@@ -174,6 +174,31 @@ END //
 
 DELIMITER ;
 
+/* To update room details */
+DELIMITER //
+CREATE PROCEDURE updateRoom(
+    IN rm_id INT,
+    IN new_room_num INT,
+    IN new_floor VARCHAR(3),
+    IN new_reg_no VARCHAR(20),
+    OUT result_message VARCHAR(255)
+)
+BEGIN
+    DECLARE rows_affected INT;
+    SELECT COUNT(*) INTO rows_affected FROM room WHERE room_id = rm_id;
+    IF rows_affected > 0 THEN
+    UPDATE room
+    SET room_num = new_room_num,
+        floor = new_floor,
+        reg_no = new_reg_no
+    WHERE room_id = rm_id;
+    SET result_message = 'Success';
+    ELSE
+            SET result_message = 'Room Datas not found or not updated.';
+    END IF;
+END //
+DELIMITER ;   //room not have foreign key
+
 
 
 

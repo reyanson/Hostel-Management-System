@@ -37,11 +37,38 @@ public class RoomService {
         return result;
     }
 
+    //To get all room datas
     public List<Room> getAllRoomDetails() {
         StoredProcedureQuery storedProcedure = entityManager.createNamedStoredProcedureQuery("get_all_rooms_details");
         storedProcedure.execute();
         List<Room> roomList = storedProcedure.getResultList();
         return roomList;
     }
+
+    //To delete room student data by using regNo
+    public String deleteRoomStudent(String regNo) {
+        return roomRepository.deleteRoomStudent(regNo);
+    }
+
+    //To update room datas
+//    public String updateRoom(Room room) {
+//        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("updateComplaint");
+//        query.registerStoredProcedureParameter("complaint_id", Integer.class, ParameterMode.IN);
+//        query.registerStoredProcedureParameter("new_category", String.class, ParameterMode.IN);
+//        query.registerStoredProcedureParameter("new_subject", String.class, ParameterMode.IN);
+//        query.registerStoredProcedureParameter("new_description", String.class, ParameterMode.IN);
+//        query.registerStoredProcedureParameter("result_message", String.class, ParameterMode.OUT);
+//
+//        query.setParameter("complaint_id",complain.getcId());
+//        query.setParameter("new_category",complain.getCategory());
+//        query.setParameter("new_subject",complain.getSubject());
+//        query.setParameter("new_description",complain.getDescription());
+//
+//        query.execute();
+//
+//        String resultMessage = (String) query.getOutputParameterValue("result_message");
+//        System.out.println("Result: " + resultMessage);
+//        return resultMessage;
+//    }
 
 }

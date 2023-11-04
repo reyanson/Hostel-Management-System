@@ -4,6 +4,7 @@ package com.hostel_manage.models;
 import jakarta.persistence.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @NamedStoredProcedureQuery(
