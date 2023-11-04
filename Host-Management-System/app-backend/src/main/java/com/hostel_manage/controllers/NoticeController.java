@@ -1,5 +1,6 @@
 package com.hostel_manage.controllers;
 
+import com.hostel_manage.models.Complain;
 import com.hostel_manage.models.Notice;
 import com.hostel_manage.repository.NoticeRepository;
 import com.hostel_manage.services.NoticeService;
@@ -28,7 +29,7 @@ public class NoticeController {
     }
 
 
-    @PutMapping("/{noticeId}")
+    @PutMapping("/update/{noticeId}")
     public ResponseEntity<String> updateNotice(@PathVariable int noticeId, @RequestBody Notice updatedNotice) {
         Notice existingNotice = noticeRepository.findById(noticeId).orElse(null);
 
@@ -57,6 +58,10 @@ public class NoticeController {
         return ResponseEntity.ok(notices);
     }
 
+    @GetMapping("/view/{noticeId}")
+    public List<Notice> getNoticeDetails(@PathVariable Integer noticeId) {
+        return noticeService.getNoticeDetails(noticeId);
+    }
 
 }
 
