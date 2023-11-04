@@ -186,27 +186,15 @@ const Sidebar = () => {
             >
               Pages
             </Typography>
+
             <Item
-              title="Dean Registration"
+              title="User Registration"
               to="/registration"
               icon={<PersonOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Warden Registration"
-              to="/registration"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Sub Warden Registration"
-              to="/registration"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+
             <Item
               title="Student Registration"
               to="/importRegistration"
@@ -214,13 +202,7 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Security Registration"
-              to="/registration"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            
             <Item
               title="Create Notice"
               to="/notice"

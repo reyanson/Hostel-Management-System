@@ -45,7 +45,7 @@ public class RoomService {
         return roomList;
     }
 
-    //To delete room datas by using room id
+    //To delete room student data by using regNo
     public String deleteRoomStudent(String regNo) {
         return roomRepository.deleteRoomStudent(regNo);
     }

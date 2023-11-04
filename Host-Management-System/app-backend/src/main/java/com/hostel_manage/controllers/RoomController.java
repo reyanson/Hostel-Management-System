@@ -54,6 +54,7 @@ public class RoomController {
 
     @DeleteMapping("/delete/{regNo}")
     public String deleteRoomStudent(@PathVariable String regNo) {
+
         return roomService.deleteRoomStudent(regNo);
     }
 

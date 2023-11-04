@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 public interface RoomRepository extends JpaRepository<Room, Integer> {
 
     // Delete room stored function
-    @Query(value = "SELECT DeleteRoomDatas(:regNo)", nativeQuery = true)
+    @Query(value = "SELECT deleteRoomStudentData(:regNo)", nativeQuery = true)
     String deleteRoomStudent(@Param("regNo") String regNo);
 
 }

@@ -87,7 +87,6 @@ export default function Registration(){
                 }}
               >
                 <option value="">Select a position</option>
-                <option value="Dean">Dean</option>
                 <option value="Warden">Warden</option>
                 <option value="Subwarden">Subwarden</option>
                 <option value="Security">Security</option>

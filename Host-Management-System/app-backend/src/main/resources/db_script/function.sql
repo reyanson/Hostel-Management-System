@@ -83,22 +83,42 @@ DELIMITER ;
 ------------------------------------------------STUDENT TABLE FUNCTION--------------------------------------------
 /* for delete student data using regNo */
 DELIMITER //
-    CREATE FUNCTION deleteStudent(inregno VARCHAR(15))
-        RETURNS VARCHAR(255)
-        BEGIN
-            DECLARE result VARCHAR(255);
-            IF EXISTS (SELECT * FROM student WHERE reg_no  = inregno) THEN
-                DELETE FROM student WHERE reg_no  = inregno;
+CREATE FUNCTION deleteStudent(inregno VARCHAR(15))
+    RETURNS VARCHAR(255)
+    BEGIN
+        DECLARE result VARCHAR(255);
+        IF EXISTS (SELECT * FROM student WHERE substring(reg_no,9) = substring(inregno,3)) THEN
+            DELETE FROM student WHERE substring(reg_no,9) = substring(inregno,3);
+            UPDATE room SET reg_no = 'Empty' WHERE substring(reg_no,9) = substring(inregno,3);
                 SET result = 'Success';
-            ELSE
-                SET result = 'Student not found';
-            END IF;
+        ELSE
+            SET result = 'Student not found';
+        END IF;
 
-        RETURN result;
-        END //
+RETURN result;
+END //
 DELIMITER ;
 
-/*room*/
+
+----------------------------------------------ROOM TABLE FUNCTION-------------------------------------------------
+/* Delete room student data */
+DELIMITER //
+CREATE FUNCTION deleteRoomStudentData(
+    in_reg_no VARCHAR(15))
+    RETURNS VARCHAR(255)
+BEGIN
+    DECLARE result VARCHAR(255);
+    IF EXISTS (SELECT room_no FROM room WHERE substring(reg_no,9) = substring(in_reg_no,3)) THEN
+    UPDATE room SET reg_no = 'empty' WHERE substring(reg_no,9) = substring(in_reg_no,3);
+        SET result = 'Success';
+    ELSE
+        SET result = 'Student data not found';
+END IF;
+RETURN result;
+END //
+DELIMITER ;
+
+
 /* START Toggle room status */
 DELIMITER //
 CREATE FUNCTION ToggleRoomStatus(
@@ -136,7 +156,7 @@ END //
 DELIMITER ;
 /* END Toggle room status */
 
-----------------------------------User Table-----------------------------------------------
+------------------------------------------------User Table-----------------------------------------------
 /*Users registration */
 DELIMITER //
 CREATE FUNCTION InsertUserData(
@@ -177,22 +197,24 @@ BEGIN
 END //
 DELIMITER ;
 
-------------------------------ROOM Table Function-----------------------------------------------------
 
-/* Delete room student data */
-DELIMITER //
-CREATE FUNCTION deleteRoomStudentData(
-    in_reg_no VARCHAR(15))
-    RETURNS VARCHAR(255)
-BEGIN
-    DECLARE result VARCHAR(255);
-    IF EXISTS (SELECT reg_no FROM room r, student s WHERE reg_no = in_reg_no AND s.reg_no = r.reg_no) THEN
-        DELETE r FROM room r WHERE r.reg_no = in_reg_no;
-        SET result = 'Success';
-ELSE
-        SET result = 'Student data not found';
-END IF;
-RETURN result;
-END //
-DELIMITER ;
+
+--------------------------------------------ROOM Table Function-----------------------------------------------------
+
+-- DELIMITER //
+-- CREATE FUNCTION deleteRoomStudentData(
+--     in_reg_no VARCHAR(15))
+--     RETURNS VARCHAR(255)
+-- BEGIN
+--     DECLARE result VARCHAR(255);
+--     IF EXISTS (SELECT reg_no FROM room r, student s WHERE reg_no = in_reg_no AND s.reg_no = r.reg_no) THEN
+--         DELETE FROM room  WHERE reg_no = in_reg_no;
+--         UPDATE room SET reg_no="empty";
+--         SET result = 'Success';
+-- ELSE
+--         SET result = 'Student data not found';
+-- END IF;
+-- RETURN result;
+-- END //
+-- DELIMITER ;
 

@@ -1,5 +1,5 @@
 
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import Avatar from '@mui/material/Avatar';
@@ -16,7 +16,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LinkMui from '@mui/material/Link';
 import Logo from "./logo1.png";
-import { IconButton, InputAdornment, FormControl } from '@mui/material';
+import { IconButton, InputAdornment } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const theme = createTheme();
@@ -28,7 +28,7 @@ export default function SignIn() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [loggedInUsername, setLoggedInUsername] = useState('');
+  //const [loggedInUsername, setLoggedInUsername] = useState('');
 
   const handleClickShowPassword = () => {
     setShowPassword(!showPassword);
