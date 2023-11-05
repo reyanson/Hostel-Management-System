@@ -1,6 +1,8 @@
 package com.hostel_manage.repository;
 
 import com.hostel_manage.models.Complain;
+import com.hostel_manage.models.Subwarden;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.jpa.repository.query.Procedure;
@@ -20,6 +22,8 @@ public interface ComplainRepository extends JpaRepository<Complain, Integer> {
 
     @Procedure("GetComplaintDetails")
     List<Complain> getComplaintDetails(Integer p_c_id);
+
+
 
 
 }

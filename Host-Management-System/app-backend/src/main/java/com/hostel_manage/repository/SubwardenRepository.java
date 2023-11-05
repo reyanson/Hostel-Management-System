@@ -3,8 +3,11 @@ package com.hostel_manage.repository;
 import com.hostel_manage.models.Subwarden;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface SubwardenRepository  extends JpaRepository<Subwarden,Integer> {
@@ -18,4 +21,8 @@ public interface SubwardenRepository  extends JpaRepository<Subwarden,Integer> {
                                    @Param("new_personal_no") int new_personal_no,
                                    @Param("new_office_no") int new_office_no
                                    );
+
+    //for find subwarden details by id
+    @Procedure("FindSubwardenDetailsById")
+    List<Subwarden> findSubwardenDetailsById(Integer id);
 }
