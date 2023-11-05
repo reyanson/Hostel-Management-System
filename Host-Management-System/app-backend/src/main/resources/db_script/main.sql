@@ -158,20 +158,20 @@ INSERT INTO `complain` (`c_id`, `reg_no`, `date`, `category`, `action`, `remark`
 
 CREATE TABLE `damage` (
   `damage_id` varchar(11) NOT NULL PRIMARY KEY ,
-  `asset_id` varchar(11) NOT NULL,
+  `asset_id` varchar(11) NULL,
   `room_no` INT,
   `floor` varchar(11),
   `description` mediumtext NOT NULL
-)
+);
 
 
 INSERT INTO `damage` (`damage_id`, `asset_id`, `room_no`, `floor`,`description`) VALUES
-('d1', 'ass_t1', 101, '', 'table is broken.'),
-('d2', 'ass_c1', 101, '', 'lock missing'),
-('d3', 'ass_t1', 301, '', 'table is broken'),
-('d4', 'ass_c2', 428, '', 'lock missing'),
-('d4', 'l2_l_t3', NULL, 'L2', 'lock missing'),
-('d4', 'l3_r_b5', NULL, 'L2', 'bathroom door is broken');
+('d1', 'ass_t1', 101, 'NULL', 'table is broken.'),
+('d2', 'ass_c1', 101, 'NULL', 'lock missing'),
+('d3', 'ass_t1', 301, 'NULL', 'table is broken'),
+('d4', 'ass_c2', 428, 'NULL', 'lock missing'),
+('d5', 'l2_l_t3', NULL, 'L2', 'toilet bucket is broken'),
+('d6', 'l3_r_b5', NULL, 'L3', 'bathroom door is broken');
 
 
 CREATE TABLE `notice` (
