@@ -141,7 +141,9 @@ INSERT INTO `repair` ( `asset_id`, `room_no`) VALUES
 
 CREATE TABLE wardencomplaintcheck(cId INT INT PRIMARY KEY );
 
-------------------------------------------event to send complaint after 4 days to Warden---------------------------------
+--------------------------------------------------------EVENT-----------------------------------------------------
+
+/*event to send complaint after 4 days to Warden */
 
 CREATE TABLE wardencomplaintcheck(cId INT INT PRIMARY KEY );
 
@@ -189,7 +191,7 @@ END //
 DELIMITER ;
 
 ------------------------------------------------PROCEDURES----------------------------------------------------------------
-/* START display complaint to warden */
+/* Procedure start display complaint to warden */
 DELIMITER //
 CREATE PROCEDURE displayWardenComplaint()
 BEGIN
@@ -199,7 +201,7 @@ WHERE c.c_id = w.cId;
 END //
 DELIMITER ;
 
-/* START insert notice  procedure for insert notice */
+/* Procedure start insert notice  procedure for insert notice */
 
 DELIMITER //
 CREATE PROCEDURE InsertNotice(
@@ -214,7 +216,7 @@ DELIMITER ;
 /*END insert notice  procedure for insert notice */
 
 
-/* START find notice details by id */
+/* Procedure start find notice details by id */
 DELIMITER //
 CREATE PROCEDURE GetNoticeDetails(IN p_notice_id INT)
 BEGIN
@@ -223,7 +225,7 @@ END //
 DELIMITER ;
 /* END find notice details by id */
 
-/* START generate asset code by room no */
+/* Procedure start generate asset code by room no */
 DELIMITER //
 CREATE PROCEDURE GenerateAssetCode(IN roomNo INT)
 BEGIN
@@ -232,7 +234,7 @@ END //
 DELIMITER ;
 
 
-/*start get asset_name, room_no code from room_asset */
+/*Procedure start get asset_name, room_no code from room_asset */
 DELIMITER //
 CREATE PROCEDURE GetAllAssetInfo()
 BEGIN
@@ -242,8 +244,19 @@ END;
 //
 DELIMITER ;
 
+
+/*Procedure start get all details of asset by asset_id code from room_asset */
+DELIMITER //
+CREATE PROCEDURE GetAssetDetails(IN assetId varchar(11), IN roomNumber int(3))
+BEGIN
+    SELECT *
+    FROM room_asset
+    WHERE asset_id = assetId AND room_no = roomNumber;
+END //
+DELIMITER ;
+
 ------------------------------------------------FUNCTIONS----------------------------------------------------------------
-/*Users registration */
+/* Function Users registration */
 DELIMITER //
 CREATE FUNCTION InsertUserData(
     p_first_Name VARCHAR(255),

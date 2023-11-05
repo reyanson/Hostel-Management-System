@@ -65,4 +65,10 @@ public class RoomAssetController {
     }
 
 
+    @GetMapping("/{assetId}/{roomNo}")
+    public List<RoomAsset> getAssetDetails(
+            @PathVariable String assetId,
+            @PathVariable int roomNo) {
+        return roomAssetService.getAssetDetails(assetId, roomNo);
+    }
 }
