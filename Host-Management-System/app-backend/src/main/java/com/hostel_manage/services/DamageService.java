@@ -5,6 +5,7 @@ import com.hostel_manage.models.Damage;
 import com.hostel_manage.repository.DamageRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.StoredProcedureQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +32,15 @@ public class DamageService {
         List<Damage> damageList = storedProcedure.getResultList();
         return damageList;
     }
+
+    @Transactional
+    public List<Damage> getDamageDetails(String damage_id) {
+        return damageRepository.getDamageDetails(damage_id);
+    }
+
+    public String deleteDamage(String damageId) {
+        return damageRepository.deleteDamage(damageId);
+    }
+
 
 }

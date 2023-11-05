@@ -6,6 +6,7 @@ import com.hostel_manage.services.RoomService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,17 +41,16 @@ public class RoomController {
         return roomList;
     }
 
-//    @PutMapping("/update")
-//    public ResponseEntity<String> updateComplaint(@RequestBody Complain complain) {
-//        String result;
-//        result = complainService.updateComplaint(complain);
-//
-//        if (result.equals("Success")){
-//            return new ResponseEntity(complain, HttpStatus.OK);
-//        } else {//else http status is unauthorized
-//            return new ResponseEntity(result, HttpStatus.UNAUTHORIZED);
-//        }
-//    }
+    @PutMapping("/update/{roomId}")
+    public ResponseEntity<String> updateRoomDetails(@PathVariable int roomId, @RequestParam int newRoomNum, @RequestParam String newFloor, @RequestParam String newRegNo) {
+        String result = roomService.updateRoom(roomId, newRoomNum, newFloor, newRegNo);
+
+        if ("Success".equals(result)) {
+            return ResponseEntity.ok(result);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result);
+        }
+    }
 
     @DeleteMapping("/delete/{regNo}")
     public String deleteRoomStudent(@PathVariable String regNo) {

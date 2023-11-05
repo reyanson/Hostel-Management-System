@@ -176,7 +176,7 @@ END IF;
 END //
 DELIMITER ;
 
-/* After Dean take Action the complaintId deleted from dean complaintcheck */
+/* Trigger After Dean take Action the complaintId deleted from dean complaintcheck */
 DELIMITER //
 CREATE TRIGGER after_update_action_on_complainTable
     AFTER UPDATE ON complain FOR EACH ROW

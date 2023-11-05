@@ -1,6 +1,5 @@
 package com.hostel_manage.controllers;
 
-
 import com.hostel_manage.models.Damage;
 import com.hostel_manage.services.DamageService;
 import jakarta.persistence.EntityManager;
@@ -33,5 +32,15 @@ public class DamageController {
         return damageList;
     }
 
+    @GetMapping("/{damage_id}")
+    public List<Damage> getDamageDetails(@PathVariable String damage_id) {
+        return damageService.getDamageDetails(damage_id);
+    }
+
+    @DeleteMapping("/delete/{damageId}")
+    public String deleteDamage(@PathVariable String damageId) {
+
+        return damageService.deleteDamage(damageId);
+    }
 
 }
