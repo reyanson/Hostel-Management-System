@@ -111,10 +111,22 @@ create event showMsg
 on schedule every 10 second
 starts current_timestamp + interval 1 minute
 ends current_timestamp + interval 2 minute
+
 do
 BEGIN
 
 END //
+DELIMITER ;
+
+
+DELIMITER //
+CREATE EVENT monthlyReportGenerate
+ON SCHEDULE EVERY 2 Minute
+STARTS CURRENT_TIMESTAMP + INTERVAL 1 MINUTE
+ends current_timestamp + interval 4 minute
+DO
+CALL monthlyReportGenerate();
+
 DELIMITER ;
 
 
