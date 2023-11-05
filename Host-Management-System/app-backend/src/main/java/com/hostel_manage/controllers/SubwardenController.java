@@ -21,7 +21,6 @@ public class SubwardenController {
 
     @PutMapping("/update")
     public ResponseEntity<String> updateSubwardenDaetails(@RequestParam int swardenId,
-                                                          @RequestParam String occation,
                                                           @RequestParam String new_first_name,
                                                           @RequestParam String new_last_name,
                                                           @RequestParam String new_email,

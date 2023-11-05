@@ -221,6 +221,17 @@ END IF;
 END //
 DELIMITER ;
 
+/* START Procedure for find subwarden by id*/
+DELIMITER //
+CREATE PROCEDURE FindSubwardenDetailsById(
+    IN swardenId INT
+)
+BEGIN
+SELECT * FROM subwarden WHERE swarden_id = swardenId;
+END //
+DELIMITER ;
+/* END Procedure for find subwarden by id*/
+
 
 
 ------------------------------------------------FUNCTIONS----------------------------------------------------------------
@@ -338,15 +349,13 @@ CREATE FUNCTION UpdateSubwarden(
     new_nic VARCHAR(12),
     new_address VARCHAR(100),
     new_personal_no INT,
-    new_office_no INT
-)
+    new_office_no INT)
     RETURNS VARCHAR(255)
     DETERMINISTIC
 BEGIN
     DECLARE result VARCHAR(255);
     DECLARE rows_affected INT;
 SELECT COUNT(*) INTO rows_affected FROM subwarden WHERE swarden_id =swarden_id;
-
 IF rows_affected > 0 THEN
 UPDATE subwarden
 SET
@@ -358,17 +367,13 @@ SET
     personal_no = new_personal_no,
     office_no = new_office_no
 WHERE swarden_id = swardenId;
-
 SET result = "Success";
 ELSE
     SET result = " Not fount or Not updated";
 END IF;
-
 RETURN result;
 END //
-
 DELIMITER ;
-
 /* END Function for update subwarden details  */
 
 
