@@ -233,6 +233,27 @@ DELIMITER ;
 /* END Procedure for find subwarden by id*/
 
 
+/* START Procedure for find warden by id*/
+DELIMITER //
+CREATE PROCEDURE FindWardenDetailsById(
+    IN wardenId INT
+)
+BEGIN
+SELECT * FROM warden WHERE warden_id = wardenId;
+END //
+DELIMITER ;
+/* END Procedure for find warden by id*/
+
+/* START Procedure for find dean by id*/
+DELIMITER //
+CREATE PROCEDURE FindWardenDetailsById(
+    IN wardenId INT
+)
+BEGIN
+SELECT * FROM warden WHERE warden_id = wardenId;
+END //
+DELIMITER ;
+/* END Procedure for find dean by id*/
 
 ------------------------------------------------FUNCTIONS----------------------------------------------------------------
 
@@ -379,7 +400,7 @@ DELIMITER ;
 
 /* START Function for update warden details  */
 DELIMITER //
-CREATE FUNCTION UpdateSubwarden(
+CREATE FUNCTION UpdateWarden(
     wardenId INT,
     new_first_name VARCHAR(50),
     new_last_name VARCHAR(50),
@@ -393,9 +414,9 @@ CREATE FUNCTION UpdateSubwarden(
 BEGIN
     DECLARE result VARCHAR(255);
     DECLARE rows_affected INT;
-SELECT COUNT(*) INTO rows_affected FROM subwarden WHERE warden_id =swarden_id;
+SELECT COUNT(*) INTO rows_affected FROM warden WHERE warden_id =wardenId;
 IF rows_affected > 0 THEN
-UPDATE subwarden
+UPDATE warden
 SET
     first_Name = new_first_name,
     last_Name = new_last_name,
@@ -404,7 +425,7 @@ SET
     address = new_address,
     personal_no = new_personal_no,
     office_no = new_office_no
-WHERE swarden_id = swardenId;
+WHERE warden_id = wardenId;
 SET result = "Success";
 ELSE
     SET result = " Not fount or Not updated";
@@ -413,6 +434,43 @@ RETURN result;
 END //
 DELIMITER ;
 /* END Function for update warden details  */
+
+/* START Function for update dean details  */
+DELIMITER //
+CREATE FUNCTION UpdateDean(
+    deanId INT,
+    new_first_name VARCHAR(50),
+    new_last_name VARCHAR(50),
+    new_email VARCHAR(50),
+    new_nic VARCHAR(12),
+    new_address VARCHAR(100),
+    new_personal_no INT,
+    new_office_no INT)
+    RETURNS VARCHAR(255)
+    DETERMINISTIC
+BEGIN
+    DECLARE result VARCHAR(255);
+    DECLARE rows_affected INT;
+SELECT COUNT(*) INTO rows_affected FROM dean WHERE dean_id =deanId;
+IF rows_affected > 0 THEN
+UPDATE dean
+SET
+    first_Name = new_first_name,
+    last_Name = new_last_name,
+    Email = new_email,
+    nic = new_nic,
+    address = new_address,
+    personal_no = new_personal_no,
+    office_no = new_office_no
+WHERE dean_id =deanId;
+SET result = "Success";
+ELSE
+    SET result = " Not fount or Not updated";
+END IF;
+RETURN result;
+END //
+DELIMITER ;
+/* END Function for update dean details  */
 
 
 
