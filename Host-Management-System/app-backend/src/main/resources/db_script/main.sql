@@ -357,6 +357,23 @@ INSERT INTO `complain` VALUES
 
 
 
+CREATE TABLE `student` (
+`reg_no` varchar(255) NOT NULL,
+`address` varchar(255) DEFAULT NULL,
+`email` varchar(255) DEFAULT NULL,
+`first_name` varchar(255) DEFAULT NULL,
+`last_name` varchar(255) DEFAULT NULL,
+`nic` varchar(255) DEFAULT NULL,
+`phone_no` int(11) DEFAULT NULL,
+PRIMARY KEY (`reg_no`)
+);
+
+INSERT INTO `student` VALUES
+('TG/2019/490','39A Boundary Road, Kalmunai','sunil@example.com','Kumar','Murukeshan','997024986V',760725590),
+('TG/2019/491','39A Boundary Road, Kalmunai','sunil@example.com','Kamal','Hassan','997024986V',760725590),
+('TG/2019/492','39A Boundary Road, Kalmunai','sunil@example.com','Sunil','Vadivel','997024986V',760725590),
+('TG/2019/494','ward no:01,Vankalai,Mannar','reya@gmail.com','Reyanson','Sosai','990910804V',763787940);
+
 
 
 
