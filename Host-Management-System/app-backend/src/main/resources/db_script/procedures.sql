@@ -52,9 +52,7 @@ DELIMITER ;
 /* END find notice details by id */
 
 
-
-    /* Student Table */
-
+-------------------------------------------------------/* Student Table */---------------------------------------------------------------------------
 /* To get all student details */
 DELIMITER //
 CREATE PROCEDURE get_all_students()
@@ -74,13 +72,14 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE InsertComplain(
     IN p_reg_no VARCHAR(20),
+    IN p_type VARCHAR(20),
     IN p_asset_code VARCHAR(50),
     IN p_subject VARCHAR(50),
     IN p_description VARCHAR(50)
 )
 BEGIN
-INSERT INTO complain (reg_no, asset_code,subject, description)
-VALUES (p_reg_no, p_asset_code, p_subject, p_description);
+INSERT INTO complain (reg_no, type,asset_code,subject, description)
+VALUES (p_reg_no, p_type,p_asset_code, p_subject, p_description);
 
 SELECT 'Success' AS Message;
 END//
@@ -169,7 +168,7 @@ CALL InsertRoom(228, 'L2', 'TG/2021/785');
 DELIMITER //
 CREATE PROCEDURE get_all_rooms_details()
 BEGIN
-SELECT *FROM room;
+SELECT room_no,floor,reg_no,date(created_at) as created_at ,date(updated_at)as updated_at FROM room;
 END //
 
 DELIMITER ;

@@ -28,7 +28,8 @@ public class ComplainService {
     public String saveComplain(Complain complain) {
         StoredProcedureQuery query = entityManager.createNamedStoredProcedureQuery("insertComplain");
         query.setParameter("p_reg_no",complain.getRegNo());
-        query.setParameter("p_category",complain.getCategory());
+        query.setParameter("p_type",complain.getType());
+        query.setParameter("p_asset_code",complain.getAsset_code());
         query.setParameter("p_subject",complain.getSubject());
         query.setParameter("p_description",complain.getDescription());
 
@@ -53,13 +54,15 @@ public class ComplainService {
     public String updateComplaint(Complain complain) {
         StoredProcedureQuery query = entityManager.createStoredProcedureQuery("updateComplaint");
         query.registerStoredProcedureParameter("complaint_id", Integer.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter("new_category", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("new_type", String.class, ParameterMode.IN);
+        query.registerStoredProcedureParameter("new_asset_code", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("new_subject", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("new_description", String.class, ParameterMode.IN);
         query.registerStoredProcedureParameter("result_message", String.class, ParameterMode.OUT);
 
         query.setParameter("complaint_id",complain.getcId());
-        query.setParameter("new_category",complain.getCategory());
+        query.setParameter("new_type",complain.getType());
+        query.setParameter("new_asset_code",complain.getAsset_code());
         query.setParameter("new_subject",complain.getSubject());
         query.setParameter("new_description",complain.getDescription());
 
