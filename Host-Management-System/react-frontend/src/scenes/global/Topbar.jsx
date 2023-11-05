@@ -50,7 +50,6 @@ const Topbar = () => {
                 </IconButton>
                 <IconButton>
                     <LogoutOutlinedIcon onClick={handleLogout}/>
-                    {/* <Link to='/' style={{ color: 'black', textDecoration: 'none' }}><MenuItem onClick={handleLogout}>Logout</MenuItem></Link> */}
                 </IconButton>
             </Box>
         </Box>
