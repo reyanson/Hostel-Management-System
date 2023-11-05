@@ -219,7 +219,7 @@ DELIMITER //
 CREATE PROCEDURE showingComplaintsDetails()
 BEGIN
 DECLARE viewName varchar (30);
-SET viewNAme = CONCAT(MONTHNAME(CURRENT_TIMESTAMP),"_ComplainReport");
+SET viewName = CONCAT(MONTHNAME(CURRENT_TIMESTAMP),"_ComplainReport");
 CREATE VIEW viewName AS
 SELECT CONCAT(s.first_name," ",s.last_name) AS name, c.type, rs.name AS asset_name,r.room_no,c.subject,c.description,
     DATE(c.created_at) AS created_date,
