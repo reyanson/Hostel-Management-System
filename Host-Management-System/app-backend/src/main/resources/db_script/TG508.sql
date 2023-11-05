@@ -106,7 +106,7 @@ END //
 DELIMITER ;
 
 ------------------------------------------------PROCEDURES----------------------------------------------------------------
- /*START checkLogin procedure for check login credential*/
+ /* Procedure start checkLogin procedure for check login credential*/
 DELIMITER //
 CREATE PROCEDURE CheckLogin(IN in_username VARCHAR(255), IN in_password VARCHAR(32))
 BEGIN
@@ -130,7 +130,7 @@ END IF;
 END //
 DELIMITER ;
 
-/* START update the complain data using c_id */
+/* Procedure start update the complain data using c_id */
 DELIMITER //
 CREATE PROCEDURE updateComplaint(
     IN complaint_id INT,
@@ -155,7 +155,7 @@ END IF;
 END //
 DELIMITER ;
 
-/* START find complaint details by id */
+/* Procedure start find complaint details by id */
 DELIMITER //
 CREATE PROCEDURE GetComplaintDetails(IN p_c_id INT)
 BEGIN
@@ -163,7 +163,7 @@ SELECT * FROM complain WHERE c_id = p_c_id;
 END //
 DELIMITER ;
 
-/* To update room details */
+/*Procedure start To update room details */
 DELIMITER //
 CREATE PROCEDURE updateRoom(
     IN rm_id INT,
@@ -192,7 +192,7 @@ DELIMITER ;
 
 ------------------------------------------------FUNCTIONS----------------------------------------------------------------
 
-/* START Find student reg_no with "TG___"*/
+/* function start Find student reg_no with "TG___"*/
 DELIMITER //
 CREATE FUNCTION getRegNo(IN num VARCHAR(50))
 RETURNS VARCHAR(50)
@@ -205,7 +205,7 @@ END//
 DELIMITER ;
 
 
-/*START FIND THE LEVEL */
+/*function start FIND THE LEVEL */
 DELIMITER //
 CREATE FUNCTION getLevelOfStudent(IN num VARCHAR(50))
 RETURNS INT(1)
@@ -218,7 +218,7 @@ END//
 DELIMITER ;
 
 
-/*START find user occasion*/
+/*function start find user occasion*/
 DELIMITER //
 CREATE FUNCTION findUserOccasion(IN username VARCHAR(60))
 RETURNS VARCHAR(10)
@@ -243,7 +243,7 @@ END //
 DELIMITER ;
 
 
-/* START Toggle room status */
+/* function start room status */
 DELIMITER //
 CREATE FUNCTION ToggleRoomStatus(p_reg_no VARCHAR(15))
 RETURNS VARCHAR(255)
