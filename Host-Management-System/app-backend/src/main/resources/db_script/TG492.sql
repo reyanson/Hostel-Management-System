@@ -222,7 +222,7 @@ END //
 DELIMITER ;
 
 ------------------------------------------------PROCEDURES----------------------------------------------------------------
-/* START display complaint to Dean */
+/* Procedure START display complaint to Dean */
 DELIMITER //
 CREATE PROCEDURE displayDeanComplaint()
 BEGIN
@@ -232,7 +232,7 @@ WHERE c.c_id = d.cId;
 END //
 DELIMITER ;
 
-/* To get all student details */
+/* Procedure To get all student details */
 DELIMITER //
 CREATE PROCEDURE get_all_students()
 BEGIN
@@ -240,7 +240,7 @@ SELECT *FROM student;
 END //
 DELIMITER ;
 
-/* START store data in complain table */
+/* Procedure START store data in complain table */
 DELIMITER //
 CREATE PROCEDURE InsertComplain(
     IN p_reg_no VARCHAR(20),
@@ -258,7 +258,7 @@ DELIMITER ;
 
 CALL InsertComplain('TG/2018/492', 'Service', 'Excellent service', 'Feedback');
 
-/* To get all complaint details */
+/* Procedure To get all complaint details */
 DELIMITER //
 CREATE PROCEDURE get_all_complaints()
 BEGIN
@@ -279,7 +279,7 @@ BEGIN
 END //
 DELIMITER ;
 
-/* START store data store in room table*/
+/* Procedure Start store data store in room table*/
 DELIMITER //
 CREATE PROCEDURE InsertRoom(
 IN d_room_no int,
@@ -295,7 +295,7 @@ DELIMITER ;
 CALL InsertRoom(228, 'L2', 'TG/2021/785');
 
 
-/* To get all room details */
+/* Procedure To get all room details */
 DELIMITER //
 CREATE PROCEDURE get_all_rooms_details()
 BEGIN
@@ -306,7 +306,7 @@ DELIMITER ;
 
 ------------------------------------------------FUNCTIONS----------------------------------------------------------------
 
-/* for delete student data using regNo */
+/* Function for delete student data using regNo */
 DELIMITER //
 CREATE FUNCTION deleteStudent(inregno VARCHAR(15))
 RETURNS VARCHAR(255)
@@ -323,7 +323,7 @@ BEGIN
 END //
 DELIMITER ;
 
-/* START delete complain data using id */
+/* Function Start delete complain data using id */
 DELIMITER //
 CREATE FUNCTION deleteComplain(p_complain_id INT)
 RETURNS VARCHAR(255)
@@ -339,7 +339,7 @@ BEGIN
 END //
 DELIMITER ;
 
-/* Delete room student data */
+/* Function Delete room student data */
 DELIMITER //
 CREATE FUNCTION deleteRoomStudentData(in_reg_no VARCHAR(15))
 RETURNS VARCHAR(255)
