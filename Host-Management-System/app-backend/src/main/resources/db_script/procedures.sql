@@ -199,7 +199,16 @@ BEGIN
 END //
 DELIMITER ;   //room not have foreign key
 
+-------------------------------------------------DAMAGE Table------------------------------------------------------
+/* To get all damages details*/
 
+DELIMITER //
+CREATE PROCEDURE get_all_damage_details()
+BEGIN
+SELECT *FROM damage;
+END //
+
+DELIMITER ;
 
 
 

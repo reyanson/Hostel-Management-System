@@ -8,13 +8,13 @@ import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+//import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Logo from "../../logo1.png";
 import HotelOutlinedIcon from "@mui/icons-material/HotelOutlined";
 import WarningOutlinedIcon from "@mui/icons-material/WarningOutlined";
-import DevicesOutlinedIcon from "@mui/icons-material/DevicesOutlined";
+//import DevicesOutlinedIcon from "@mui/icons-material/DevicesOutlined";
 import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
 import AnnouncementOutlinedIcon from "@mui/icons-material/AnnouncementOutlined";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
@@ -168,14 +168,14 @@ const Sidebar = () => {
               selected={selected}
               setSelected={setSelected}
             />
-
+{/* 
             <Item
               title="Manage Assets"
               to="/assetstable"
               icon={<DevicesOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="Manage Damages"
               to="/damagelist"

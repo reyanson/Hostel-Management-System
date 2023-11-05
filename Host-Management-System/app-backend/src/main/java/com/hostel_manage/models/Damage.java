@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 
 @Entity
 @NamedStoredProcedureQuery(
-        name = "get_all_damages_details",
-        procedureName = "get_all_damages_details",
+        name = "get_all_damage_details",
+        procedureName = "get_all_damage_details",
         resultClasses = Damage.class
 )
 
@@ -16,7 +16,6 @@ public class Damage {
     @Column(name = "damage_id")
     private String damageId;
 
-    @Id
     @Column(name = "asset_id")
     private String assetId;
 

@@ -1,7 +1,7 @@
 package com.hostel_manage.services;
 
 
-import com.hostel_manage.models.Room;
+import com.hostel_manage.models.Damage;
 import com.hostel_manage.repository.DamageRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.StoredProcedureQuery;
@@ -24,12 +24,12 @@ public class DamageService {
         this.entityManager = entityManager;
     }
 
-    //To get all room datas
-//    public List<Room> getAllRoomDetails() {
-//        StoredProcedureQuery storedProcedure = entityManager.createNamedStoredProcedureQuery("get_all_rooms_details");
-//        storedProcedure.execute();
-//        List<Room> roomList = storedProcedure.getResultList();
-//        return roomList;
-//    }
+    //To get all damage details
+    public List<Damage> getAllDamageDetails() {
+        StoredProcedureQuery storedProcedure = entityManager.createNamedStoredProcedureQuery("get_all_damage_details");
+        storedProcedure.execute();
+        List<Damage> damageList = storedProcedure.getResultList();
+        return damageList;
+    }
 
 }
