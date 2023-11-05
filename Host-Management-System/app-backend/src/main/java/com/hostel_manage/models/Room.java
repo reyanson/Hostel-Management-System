@@ -34,6 +34,9 @@ public class Room {
     @Column(name = "room_no")
     private int roomNum;
 
+    @Column(name = "status")
+    private int status;
+
     @Column(name = "floor")
     private String floor;
 
@@ -47,6 +50,8 @@ public class Room {
     @Column(name = "updated_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
+
+
 
     public int getRoomId() {
         return roomId;
@@ -95,4 +100,14 @@ public class Room {
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
 }
