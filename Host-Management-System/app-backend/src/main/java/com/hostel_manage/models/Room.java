@@ -51,8 +51,6 @@ public class Room {
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
-
-
     public int getRoomId() {
         return roomId;
     }
