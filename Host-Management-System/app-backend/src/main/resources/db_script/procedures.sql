@@ -215,6 +215,53 @@ DELIMITER ;   //room not have foreign key
 
 
 
+/* for showing complain details in table*/
+DELIMITER //
+CREATE PROCEDURE showingComplaintsDetails()
+BEGIN
+select  concat(s.first_name," ",s.last_name) as name, c.type, rs.name as asset_name,r.room_no,c.subject,c.description,
+    date(c.created_at) AS created_date,
+    date(c.updated_at) AS updated_date,
+    CASE
+    WHEN c.action = 0 THEN 'Not Accepted'
+    WHEN c.action = 1 THEN 'Accepted'
+    ELSE 'Unknown'
+END AS action_status,
+       c.remark as accepted_by
+from student s,complain c,room_asset rs, room r
+where substring(c.reg_no,3)=substring(s.reg_no,9) AND
+    SUBSTRING_INDEX(c.asset_code, '/', 1) = rs.asset_id AND
+    r.reg_no= s.reg_no and
+    r.room_no = rs.room_no and
+    month(c.created_at) = month(current_timestamp)
+    ;
+
+END//
+DELIMITER ;
+
+
+
+update complain set asset_code ="ass_b1/101" where c_id=1;
+update complain set asset_code ="ass_bed1/101" where c_id=4;
+update complain set asset_code ="ass_m1/101" where c_id=5;
+
+update student set first_name="Kamal",last_name="Hassan" where reg_no="TG/2019/491";
+update student set reg_no="TG/2019/490" where reg_no="TG_2019_490";
+
+
+
+-------------------------------------------------DAMAGE Table------------------------------------------------------
+/* To get all damages details*/
+
+DELIMITER //
+CREATE PROCEDURE get_all_damage_details()
+BEGIN
+SELECT *FROM damage;
+END //
+
+DELIMITER ;
+
+
 
 
 
