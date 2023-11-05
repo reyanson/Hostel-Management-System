@@ -21,8 +21,15 @@ WHERE SUBSTRING(c.reg_no,3)=SUBSTRING(s.reg_no,9) AND
     r.room_no = rs.room_no AND
     MONTH(c.created_at) = MONTH(CURRENT_TIMESTAMP)
     ;
-END;
-
-//
+END//
 
 DELIMITER ;
+
+
+create event showMsg
+on schedule every 10 second
+starts current_timestamp + interval 1 minute
+ends current_timestamp + interval 2 minute
+do
+select ("Hello Dude");
+

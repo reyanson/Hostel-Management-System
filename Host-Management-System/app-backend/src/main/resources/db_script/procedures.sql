@@ -218,24 +218,26 @@ DELIMITER ;   //room not have foreign key
 DELIMITER //
 CREATE PROCEDURE showingComplaintsDetails()
 BEGIN
-select  concat(s.first_name," ",s.last_name) as name, c.type, rs.name as asset_name,r.room_no,c.subject,c.description,
-    date(c.created_at) AS created_date,
-    date(c.updated_at) AS updated_date,
+DECLARE viewName varchar (30);
+SET viewNAme = CONCAT(MONTHNAME(CURRENT_TIMESTAMP),"_ComplainReport");
+CREATE VIEW viewName AS
+SELECT CONCAT(s.first_name," ",s.last_name) AS name, c.type, rs.name AS asset_name,r.room_no,c.subject,c.description,
+    DATE(c.created_at) AS created_date,
+    DATE(c.updated_at) AS updated_date,
     CASE
     WHEN c.action = 0 THEN 'Not Accepted'
     WHEN c.action = 1 THEN 'Accepted'
     ELSE 'Unknown'
 END AS action_status,
-       c.remark as accepted_by
-from student s,complain c,room_asset rs, room r
-where substring(c.reg_no,3)=substring(s.reg_no,9) AND
+       c.remark AS accepted_by
+FROM student s,complain c,room_asset rs, room r
+WHERE SUBSTRING(c.reg_no,3)=SUBSTRING(s.reg_no,9) AND
     SUBSTRING_INDEX(c.asset_code, '/', 1) = rs.asset_id AND
-    r.reg_no= s.reg_no and
-    r.room_no = rs.room_no and
-    month(c.created_at) = month(current_timestamp)
+    r.reg_no= s.reg_no AND
+    r.room_no = rs.room_no AND
+    MONTH(c.created_at) = MONTH(CURRENT_TIMESTAMP)
     ;
-
-END//
+END //
 DELIMITER ;
 
 
