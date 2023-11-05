@@ -716,19 +716,5 @@ UNLOCK TABLES;
 
 -- Dump completed on 2023-11-05 13:09:40
 
-DELIMITER //
-CREATE FUNCTION complainAccept(cId int,occation varchar(20))
-RETURNS VARCHAR(20)
-BEGIN
-DECLARE result VARCHAR(20);
-IF EXISTS (SELECT * FROM complain where c_id=cId) THEN
-  UPDATE complain SET action=1 ,remark=occation WHERE c_id=cId;
-  SET result = 'Accepted Success';
-ELSE
-    SET result = 'Accepted not success';
-END IF;
-RETURN result;
 
-END//
-DELIMITER ;
 
