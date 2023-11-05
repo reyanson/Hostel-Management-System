@@ -17,7 +17,8 @@ export default function RoomTable() {
 
     const loadRooms = async () => {
         try {
-            const response = await axios.get("http://192.168.8.101:8080/rooms/viewall"); 
+            const response = await axios.get("http://localhost:8080/rooms/viewall"); 
+            
             setRooms(response.data);
         } catch (error) {
             console.error('Error fetching Room data:', error);
@@ -26,7 +27,8 @@ export default function RoomTable() {
 
     const deleteRooms = async (regNo) => {
         try {
-            await axios.delete(`http://192.168.8.101:8080/rooms/delete/${regNo}`);
+           
+            await axios.delete(`http://localhost:8080/rooms/delete/${regNo}`);
             loadRooms();
         } catch (error) {
             console.error('Error deleting Room Record:', error);
@@ -58,6 +60,7 @@ export default function RoomTable() {
                                             <th scope="col" class="text-center">Registration Number</th>
                                             <th scope="col" class="text-center">Created At</th>
                                             <th scope="col" class="text-center">Updated At</th>
+                                            <th scope="col" class="text-center"> Status</th>
                                             <th scope="col" colspan="2" class="text-center">Actions</th>
 
                                         </tr>
@@ -70,6 +73,7 @@ export default function RoomTable() {
                                                 <td>{room.regNo}</td>                                             
                                                 <td>{room.createdAt}</td>
                                                 <td>{room.updatedAt}</td>
+                                                <td>{room.status}</td>
                                                 <td>{room.action}</td>
                                                 <td>
                                                     <Link to={`/room/${room.roomId}`} className="btn btn-info btn-sm mx-2">

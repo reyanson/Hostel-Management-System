@@ -49,6 +49,12 @@ public class ComplainService {
     //method for delete complaint using id
     public String deleteComplaint(int complainId) {
         return complainRepository.deleteComplain(complainId);
+
+    }
+
+    //method for complain action and accept change
+    public String complainAccept(int cId, String occation) {
+        return complainRepository.complainAccept(cId, occation);
     }
 
     public String updateComplaint(Complain complain) {

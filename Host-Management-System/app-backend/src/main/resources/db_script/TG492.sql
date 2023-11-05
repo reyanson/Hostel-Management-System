@@ -299,7 +299,7 @@ CALL InsertRoom(228, 'L2', 'TG/2021/785');
 DELIMITER //
 CREATE PROCEDURE get_all_rooms_details()
 BEGIN
-    SELECT room_no,floor,reg_no,date(created_at) as created_at ,date(updated_at)as updated_at FROM room;
+    SELECT room_id,room_no,floor,reg_no,date(created_at) as created_at ,date(updated_at)as updated_at ,status FROM room;
 END //
 DELIMITER ;
 
