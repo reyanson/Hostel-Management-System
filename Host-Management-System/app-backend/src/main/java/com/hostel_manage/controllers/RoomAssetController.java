@@ -3,6 +3,7 @@ package com.hostel_manage.controllers;
 import com.hostel_manage.models.Notice;
 import com.hostel_manage.models.RoomAsset;
 import com.hostel_manage.models.Student;
+import com.hostel_manage.services.RoomAssetService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureQuery;
@@ -49,6 +50,18 @@ public class RoomAssetController {
         }
 
 
+    }
+
+    private final RoomAssetService roomAssetService;
+
+    @Autowired
+    public RoomAssetController(RoomAssetService roomAssetService) {
+        this.roomAssetService = roomAssetService;
+    }
+
+    @GetMapping("/get-all-asset-info")
+    public List<Object[]> getAllAssetInfo() {
+        return roomAssetService.getAllAssetInfo();
     }
 
 

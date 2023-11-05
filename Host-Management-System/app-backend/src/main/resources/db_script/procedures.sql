@@ -145,6 +145,20 @@ END //
 DELIMITER ;
 
 
+/*start get asset_name, room_no code from room_asset */
+
+DELIMITER //
+CREATE PROCEDURE GetAllAssetInfo()
+BEGIN
+  SELECT name, room_no
+  FROM room_asset;
+END;
+//
+DELIMITER ;
+
+/*end get asset_name, room_no code from room_asset */
+
+
 /*------------------------------------------------Room table procedures----------------------------------------------------------------*/
 
 /* START store data store in room table*/

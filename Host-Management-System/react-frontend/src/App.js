@@ -17,7 +17,11 @@ import ComplainTable from './scenes/complain';
 import DamageTable from './scenes/damage';
 import Room from './Components/Room';
 import RoomTable from './scenes/room';
+
+// import AssetTable from './scenes/assets';
+
 //import AssetTable from './scenes/assets';
+
 // import NoticeUpdate from './NoticeUpdate';
 import QRCodeGenerator from './Components/QRCodeGenerator';
 
