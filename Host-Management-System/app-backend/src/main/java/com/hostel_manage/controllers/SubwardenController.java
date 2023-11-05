@@ -19,7 +19,7 @@ public class SubwardenController {
         this.subwardenService = subwardenService;
     }
 
-    @PutMapping("/update/{Id}")
+    @PutMapping("/update")
     public ResponseEntity<String> updateSubwardenDaetails(@RequestParam int swardenId,
                                                           @RequestParam String occation,
                                                           @RequestParam String new_first_name,
