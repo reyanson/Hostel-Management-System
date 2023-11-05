@@ -165,6 +165,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE updateComplaint(
     IN complaint_id INT,
+    IN new_type VARCHAR(10),
     IN new_asset_code VARCHAR(255),
     IN new_subject VARCHAR(255),
     IN new_description TEXT,
@@ -176,6 +177,7 @@ SELECT COUNT(*) INTO rows_affected FROM complain WHERE c_id = complaint_id;
 IF rows_affected > 0 THEN
 UPDATE complain
 SET asset_code = new_asset_code,
+    type = new_type,
     subject = new_subject,
     description = new_description
 WHERE c_id = complaint_id;
@@ -325,6 +327,50 @@ END//
 DELIMITER ;
 
 /* END function for update action and remark in complain table */
+
+/* START Function for update subwarden details  */
+DELIMITER //
+CREATE FUNCTION UpdateSubwarden(
+    swardenId INT,
+    new_first_name VARCHAR(50),
+    new_last_name VARCHAR(50),
+    new_email VARCHAR(50),
+    new_nic VARCHAR(12),
+    new_address VARCHAR(100),
+    new_personal_no INT,
+    new_office_no INT
+)
+    RETURNS VARCHAR(255)
+    DETERMINISTIC
+BEGIN
+    DECLARE result VARCHAR(255);
+    DECLARE rows_affected INT;
+SELECT COUNT(*) INTO rows_affected FROM subwarden WHERE swarden_id =swarden_id;
+
+IF rows_affected > 0 THEN
+UPDATE subwarden
+SET
+    first_Name = new_first_name,
+    last_Name = new_last_name,
+    Email = new_email,
+    nic = new_nic,
+    address = new_address,
+    personal_no = new_personal_no,
+    office_no = new_office_no
+WHERE swarden_id = swardenId;
+
+SET result = "Success";
+ELSE
+    SET result = " Not fount or Not updated";
+END IF;
+
+RETURN result;
+END //
+
+DELIMITER ;
+
+/* END Function for update subwarden details  */
+
 
 
 

@@ -66,4 +66,11 @@ public class ComplainController {
         return complainService.getComplaintDetails(c_id);
     }
 
+    //method for change the acction and remark
+    @PutMapping("/accept/{cId}")
+    public ResponseEntity<String> acceptComplain(@PathVariable int cId, @RequestParam String occation) {
+        String result = complainService.complainAccept(cId, occation);
+        return ResponseEntity.ok(result);
+    }
+
 }
