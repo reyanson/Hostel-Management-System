@@ -264,7 +264,7 @@ DELIMITER //
 CREATE PROCEDURE monthlyReportGenerate()
 BEGIN
     DECLARE viewName VARCHAR(30);
-    SET viewName = CONCAT(MONTHNAME(CURRENT_TIMESTAMP()), '_ComplainReport');
+    SET viewName = CONCAT(MONTHNAME(CURRENT_TIMESTAMP()), '_ComplainReport',YEAR(CURRENT_TIMESTAMP));
     SET @createViewSQL = CONCAT('CREATE VIEW ', viewName, ' AS ', '
         SELECT CONCAT(s.first_name," ",s.last_name) AS name, c.type, rs.name AS asset_name, r.room_no, c.subject, c.description,
             DATE(c.created_at) AS created_date, DATE(c.updated_at) AS updated_date,
