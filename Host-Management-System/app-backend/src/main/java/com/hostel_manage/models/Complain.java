@@ -19,7 +19,8 @@ import java.util.Date;
         procedureName = "InsertComplain",
         parameters = {
                 @StoredProcedureParameter(name = "p_reg_no",mode = ParameterMode.IN,type = String.class),
-                @StoredProcedureParameter(name = "p_category",mode = ParameterMode.IN,type = String.class),
+                @StoredProcedureParameter(name = "p_type",mode = ParameterMode.IN,type = String.class),
+                @StoredProcedureParameter(name = "p_asset_code",mode = ParameterMode.IN,type = String.class),
                 @StoredProcedureParameter(name = "p_subject",mode = ParameterMode.IN,type = String.class),
                 @StoredProcedureParameter(name = "p_description",mode = ParameterMode.IN,type = String.class)
         },
@@ -34,8 +35,11 @@ public class Complain {
     @Column(name = "reg_no")
     private String regNo;
 
-    @Column(name = "category")
-    private String category;
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "asset_code")
+    private String asset_code;
 
     @Column(name = "action")
     private Integer action;
@@ -75,12 +79,12 @@ public class Complain {
         this.regNo = regNo;
     }
 
-    public String getCategory() {
-        return category;
+    public String getAsset_code() {
+        return asset_code;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setAsset_code(String asset_code) {
+        this.asset_code = asset_code;
     }
 
     public Integer getAction() {
@@ -129,5 +133,13 @@ public class Complain {
 
     public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

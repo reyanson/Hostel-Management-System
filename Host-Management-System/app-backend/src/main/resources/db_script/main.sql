@@ -136,7 +136,8 @@ INSERT INTO `bathroom` (`bathroom_id`, `floor`, `name`) VALUES
 CREATE TABLE complain (
 c_id INT AUTO_INCREMENT PRIMARY KEY,
 reg_no VARCHAR(20),
-asset_code VARCHAR(50) not null ,
+type varchar(20),
+asset_code VARCHAR(50) ,
 subject VARCHAR(50),
 description VARCHAR(50),
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
