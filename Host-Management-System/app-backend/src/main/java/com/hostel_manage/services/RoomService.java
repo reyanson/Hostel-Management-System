@@ -5,10 +5,13 @@ import com.hostel_manage.repository.RoomRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.ParameterMode;
 import jakarta.persistence.StoredProcedureQuery;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class RoomService {
@@ -51,25 +54,21 @@ public class RoomService {
         return roomRepository.deleteRoomStudent(regNo);
     }
 
-    //To update room datas
-    public String updateRoom(Room room) {
-        StoredProcedureQuery query = entityManager.createStoredProcedureQuery("updateRoom");
-        query.registerStoredProcedureParameter("roomID", Integer.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter("new_roomNum", String.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter("new_floor", String.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter("new_regNo", String.class, ParameterMode.IN);
-        query.registerStoredProcedureParameter("result_message", String.class, ParameterMode.OUT);
+    @Transactional
+    public String updateRoom(int roomId, int newRoomNum, String newFloor, String newRegNo) {
+        Optional<Room> existingRoom = roomRepository.findById(roomId);
 
-        query.setParameter("roomID",room.getRoomId());
-        query.setParameter("new_roomNum",room.getRoomNum());
-        query.setParameter("new_floor",room.getFloor());
-        query.setParameter("new_regNo",room.getRegNo());
-
-        query.execute();
-
-        String resultMessage = (String) query.getOutputParameterValue("result_message");
-        System.out.println("Result: " + resultMessage);
-        return resultMessage;
+        if (existingRoom.isPresent()) {
+            Room room = existingRoom.get();
+            room.setRoomNum(newRoomNum);
+            room.setFloor(newFloor);
+            room.setRegNo(newRegNo);
+            room.setUpdatedAt(new Date());
+            roomRepository.save(room);
+            return "Success";
+        } else {
+            return "Room Data not found or not updated.";
+        }
     }
 
 }

@@ -118,13 +118,13 @@ VALUES
 
 CREATE TABLE `room`
 (
-    `room_id`    int(11) NOT NULL AUTO_INCREMENT,
-    `room_no`    int(3) NOT NULL,
-    `floor`      varchar(10) NOT NULL,
-    `reg_no`     varchar(15) DEFAULT NULL,
+    `room_id` int(11) NOT NULL AUTO_INCREMENT,
+    `room_no` int(3) NOT NULL,
+    `floor` varchar(10) NOT NULL,
+    `reg_no` varchar(15) DEFAULT NULL,
     `created_at` timestamp NULL DEFAULT current_timestamp (),
     `updated_at` timestamp NULL DEFAULT current_timestamp () ON UPDATE current_timestamp (),
-    `status`     int(1) DEFAULT 0,
+    `status` int(1) DEFAULT 0,
     PRIMARY KEY (`room_id`)
 );
 
@@ -141,7 +141,7 @@ INSERT INTO `room` VALUES
 -----------------------------------------------DAMAGE Table------------------------------------------
 
 CREATE TABLE `damage` (
-  `damage_id` varchar(11) NOT NULL PRIMARY KEY ,
+  `damage_id` varchar(5) NOT NULL PRIMARY KEY ,
   `asset_id` varchar(11) NULL,
   `room_no` INT,
   `floor` varchar(11),
@@ -240,6 +240,15 @@ SELECT *FROM student;
 END //
 DELIMITER ;
 
+/* Procedure To get student datas using TGXXX */
+DELIMITER //
+CREATE PROCEDURE getStudentDetails(IN in_reg_no VARCHAR(10))
+BEGIN
+    SELECT * FROM student WHERE SUBSTRING(reg_no, 9) = SUBSTRING(in_reg_no, 3);
+END //
+DELIMITER ;
+
+
 /* Procedure START store data in complain table */
 DELIMITER //
 CREATE PROCEDURE InsertComplain(
@@ -303,6 +312,14 @@ BEGIN
 END //
 DELIMITER ;
 
+/* Procedure start find damage details by damage_id */
+DELIMITER //
+CREATE PROCEDURE GetDamageDetails(IN d_id VARCHAR(15))
+BEGIN
+SELECT * FROM damage WHERE damage_id = d_id;
+END //
+DELIMITER ;
+
 
 ------------------------------------------------FUNCTIONS----------------------------------------------------------------
 
@@ -354,5 +371,26 @@ BEGIN
     RETURN result;
 END //
 DELIMITER ;
+
+/* Function Start delete damage data using id */
+DELIMITER //
+CREATE FUNCTION deleteDamage(d_id VARCHAR(15))
+RETURNS VARCHAR(255)
+BEGIN
+    DECLARE result VARCHAR(255);
+    IF EXISTS (SELECT * FROM damage WHERE damage_id = d_id) THEN
+        DELETE FROM damage WHERE damage_id = d_id;
+        SET result = 'Success';
+    ELSE
+        SET result = 'Damage not found';
+    END IF;
+    RETURN result;
+END //
+DELIMITER ;
+
+
+
+
+
 
 

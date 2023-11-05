@@ -183,7 +183,7 @@ SET room_num = new_room_num,
 WHERE room_id = rm_id;
 SET result_message = 'Success';
 ELSE
-            SET result_message = 'Room Datas not found or not updated.';
+    SET result_message = 'Room Datas not found or not updated.';
 END IF;
 END //
 DELIMITER ;

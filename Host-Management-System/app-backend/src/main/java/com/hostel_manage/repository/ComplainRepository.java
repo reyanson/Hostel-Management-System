@@ -18,5 +18,4 @@ public interface ComplainRepository extends JpaRepository<Complain, Integer> {
     List<Complain> getComplaintDetails(Integer p_c_id);
 
 
-
 }
