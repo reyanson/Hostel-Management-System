@@ -31,5 +31,5 @@ on schedule every 10 second
 starts current_timestamp + interval 1 minute
 ends current_timestamp + interval 2 minute
 do
-select ("Hello Dude");
+
 
