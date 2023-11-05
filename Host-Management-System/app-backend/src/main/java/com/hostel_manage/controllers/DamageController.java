@@ -6,10 +6,7 @@ import com.hostel_manage.services.DamageService;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.StoredProcedureQuery;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,4 +32,6 @@ public class DamageController {
         List<Damage> damageList = storedProcedure.getResultList();
         return damageList;
     }
+
+
 }
