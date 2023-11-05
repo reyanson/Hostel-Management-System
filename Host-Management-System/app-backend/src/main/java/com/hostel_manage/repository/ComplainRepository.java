@@ -14,6 +14,10 @@ public interface ComplainRepository extends JpaRepository<Complain, Integer> {
     @Query(value = "SELECT DeleteComplain(:complainId)", nativeQuery = true)
     String deleteComplain(@Param("complainId") int complainId);
 
+    @Query(value = "SELECT complainAccept(:complainId, :occation)", nativeQuery = true)
+    String complainAccept(@Param("complainId") int cId, @Param("occation") String occation);
+
+
     @Procedure("GetComplaintDetails")
     List<Complain> getComplaintDetails(Integer p_c_id);
 

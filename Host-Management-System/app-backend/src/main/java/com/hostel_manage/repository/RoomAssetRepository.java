@@ -14,5 +14,7 @@ public interface RoomAssetRepository extends JpaRepository<RoomAsset, RoomAssetI
 
     @Procedure(name = "GetAllAssetInfo")
     List<Object[]> getAllAssetInfo();
+
+    List<RoomAsset> findByAssetIdAndRoomNo(String assetId, int roomNo);
 }
 
