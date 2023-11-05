@@ -231,7 +231,6 @@ CREATE TABLE `room_asset` (
 ALTER TABLE `room_asset`
 ADD PRIMARY KEY (`asset_id`,`room_no`);
 
-
 INSERT INTO `room_asset` (`asset_id`, `name`, `room_no`) VALUES
 ('ass_b1', 'Bulb1', 101),
 ('ass_b2', 'Bulb2', 101),
