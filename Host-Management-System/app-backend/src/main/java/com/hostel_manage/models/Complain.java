@@ -19,7 +19,8 @@ import java.util.Date;
         procedureName = "InsertComplain",
         parameters = {
                 @StoredProcedureParameter(name = "p_reg_no",mode = ParameterMode.IN,type = String.class),
-                @StoredProcedureParameter(name = "p_category",mode = ParameterMode.IN,type = String.class),
+                @StoredProcedureParameter(name = "p_type",mode = ParameterMode.IN,type = String.class),
+                @StoredProcedureParameter(name = "p_asset_code",mode = ParameterMode.IN,type = String.class),
                 @StoredProcedureParameter(name = "p_subject",mode = ParameterMode.IN,type = String.class),
                 @StoredProcedureParameter(name = "p_description",mode = ParameterMode.IN,type = String.class)
         },

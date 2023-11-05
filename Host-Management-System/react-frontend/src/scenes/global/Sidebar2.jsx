@@ -8,15 +8,24 @@ import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
+//import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Logo from "../../logo1.png";
-
+import HotelOutlinedIcon from "@mui/icons-material/HotelOutlined";
+import WarningOutlinedIcon from "@mui/icons-material/WarningOutlined";
+//import DevicesOutlinedIcon from "@mui/icons-material/DevicesOutlined";
+import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
+import AnnouncementOutlinedIcon from "@mui/icons-material/AnnouncementOutlined";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
+import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  
+
   return (
     <MenuItem
       active={selected === title}
@@ -32,7 +41,7 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const Sidebar2 = () => {
+const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -106,7 +115,7 @@ const Sidebar2 = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Vadivel Ajanthan
+                  
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
                   Sub Warden 
@@ -141,36 +150,36 @@ const Sidebar2 = () => {
             <Item
               title="Manage Rooms"
               to="/roomdatas"
-              icon={<ReceiptOutlinedIcon />}
+              icon={<HotelOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Manage Complaints"
               to="/complaintable"
-              icon={<ReceiptOutlinedIcon />}
+              icon={<ReportProblemOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Manage Notice"
+              title="Manage Notices"
               to="/noticetable"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-
+{/* 
             <Item
               title="Manage Assets"
               to="/assetstable"
-              icon={<ReceiptOutlinedIcon />}
+              icon={<DevicesOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="Manage Damages"
               to="/damagelist"
-              icon={<ReceiptOutlinedIcon />}
+              icon={<WarningOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -182,45 +191,34 @@ const Sidebar2 = () => {
             >
               Pages
             </Typography>
+
             <Item
-              title="Dean Registration"
+              title="User Registration"
               to="/registration"
-              icon={<PersonOutlinedIcon />}
+              icon={<PersonAddOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Warden Registration"
-              to="/registration"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Sub Warden Registration"
-              to="/registration"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+
             <Item
               title="Student Registration"
               to="/importRegistration"
-              icon={<PersonOutlinedIcon />}
+              icon={<FileUploadOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Security Registration"
-              to="/registration"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
+            
             <Item
               title="Create Notice"
               to="/notice"
-              icon={<ReceiptOutlinedIcon />}
+              icon={<AnnouncementOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Create Room"
+              to="/room"
+              icon={<AddBoxOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -238,4 +236,4 @@ const Sidebar2 = () => {
   );
 };
 
-export default Sidebar2;
+export default Sidebar;

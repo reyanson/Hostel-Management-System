@@ -52,9 +52,7 @@ DELIMITER ;
 /* END find notice details by id */
 
 
-
-    /* Student Table */
-
+-------------------------------------------------------/* Student Table */---------------------------------------------------------------------------
 /* To get all student details */
 DELIMITER //
 CREATE PROCEDURE get_all_students()
@@ -74,13 +72,14 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE InsertComplain(
     IN p_reg_no VARCHAR(20),
+    IN p_type VARCHAR(20),
     IN p_asset_code VARCHAR(50),
     IN p_subject VARCHAR(50),
     IN p_description VARCHAR(50)
 )
 BEGIN
-INSERT INTO complain (reg_no, asset_code,subject, description)
-VALUES (p_reg_no, p_asset_code, p_subject, p_description);
+INSERT INTO complain (reg_no, type,asset_code,subject, description)
+VALUES (p_reg_no, p_type,p_asset_code, p_subject, p_description);
 
 SELECT 'Success' AS Message;
 END//
@@ -94,10 +93,26 @@ CALL InsertComplain('TG508', 'Service', 'Excellent service', 'Feedback');
 DELIMITER //
 CREATE PROCEDURE get_all_complaints()
 BEGIN
-SELECT *FROM complain;
+SELECT c.c_id, CONCAT(s.first_name," ",s.last_name) AS name, c.type, rs.name AS asset_name,r.room_no,c.subject,c.description,
+    DATE(c.created_at) AS created_date,
+    DATE(c.updated_at) AS updated_date,
+    CASE
+    WHEN c.action = 0 THEN 'Not Accepted'
+    WHEN c.action = 1 THEN 'Accepted'
+    ELSE 'Unknown'
+END AS action_status,
+       c.remark AS accepted_by
+FROM student s,complain c,room_asset rs, room r
+WHERE SUBSTRING(c.reg_no,3)=SUBSTRING(s.reg_no,9) AND
+    SUBSTRING_INDEX(c.asset_code, '/', 1) = rs.asset_id AND
+    r.reg_no= s.reg_no AND
+    r.room_no = rs.room_no
+    ;
 END //
-
 DELIMITER ;
+
+
+
 
 
 /* START update the complain data using c_id */
@@ -183,7 +198,7 @@ CALL InsertRoom(228, 'L2', 'TG/2021/785');
 DELIMITER //
 CREATE PROCEDURE get_all_rooms_details()
 BEGIN
-SELECT *FROM room;
+SELECT room_no,floor,reg_no,date(created_at) as created_at ,date(updated_at)as updated_at FROM room;
 END //
 
 DELIMITER ;
@@ -211,7 +226,7 @@ BEGIN
             SET result_message = 'Room Datas not found or not updated.';
     END IF;
 END //
-DELIMITER ;   //room not have foreign key
+DELIMITER ;
 
 
 
@@ -219,25 +234,61 @@ DELIMITER ;   //room not have foreign key
 DELIMITER //
 CREATE PROCEDURE showingComplaintsDetails()
 BEGIN
-select  concat(s.first_name," ",s.last_name) as name, c.type, rs.name as asset_name,r.room_no,c.subject,c.description,
-    date(c.created_at) AS created_date,
-    date(c.updated_at) AS updated_date,
+DECLARE viewName varchar (30);
+SET viewName = CONCAT(MONTHNAME(CURRENT_TIMESTAMP),"_ComplainReport");
+CREATE VIEW viewName AS
+SELECT CONCAT(s.first_name," ",s.last_name) AS name, c.type, rs.name AS asset_name,r.room_no,c.subject,c.description,
+    DATE(c.created_at) AS created_date,
+    DATE(c.updated_at) AS updated_date,
     CASE
     WHEN c.action = 0 THEN 'Not Accepted'
     WHEN c.action = 1 THEN 'Accepted'
     ELSE 'Unknown'
 END AS action_status,
-       c.remark as accepted_by
-from student s,complain c,room_asset rs, room r
-where substring(c.reg_no,3)=substring(s.reg_no,9) AND
+       c.remark AS accepted_by
+FROM student s,complain c,room_asset rs, room r
+WHERE SUBSTRING(c.reg_no,3)=SUBSTRING(s.reg_no,9) AND
     SUBSTRING_INDEX(c.asset_code, '/', 1) = rs.asset_id AND
-    r.reg_no= s.reg_no and
-    r.room_no = rs.room_no and
-    month(c.created_at) = month(current_timestamp)
+    r.reg_no= s.reg_no AND
+    r.room_no = rs.room_no AND
+    MONTH(c.created_at) = MONTH(CURRENT_TIMESTAMP)
     ;
-
-END//
+END //
 DELIMITER ;
+
+
+
+
+/*for report generate */
+DELIMITER //
+CREATE PROCEDURE monthlyReportGenerate()
+BEGIN
+    DECLARE viewName VARCHAR(30);
+    SET viewName = CONCAT(MONTHNAME(CURRENT_TIMESTAMP()), '_ComplainReport',YEAR(CURRENT_TIMESTAMP));
+    SET @createViewSQL = CONCAT('CREATE VIEW ', viewName, ' AS ', '
+        SELECT CONCAT(s.first_name," ",s.last_name) AS name, c.type, rs.name AS asset_name, r.room_no, c.subject, c.description,
+            DATE(c.created_at) AS created_date, DATE(c.updated_at) AS updated_date,
+            CASE
+                WHEN c.action = 0 THEN ''Not Accepted''
+                WHEN c.action = 1 THEN ''Accepted''
+                ELSE ''Unknown''
+            END AS action_status,
+            c.remark AS accepted_by
+        FROM student s, complain c, room_asset rs, room r
+        WHERE SUBSTRING(c.reg_no,3) = SUBSTRING(s.reg_no,9)
+        AND SUBSTRING_INDEX(c.asset_code, ''/'', 1) = rs.asset_id
+        AND r.reg_no = s.reg_no
+        AND r.room_no = rs.room_no
+        AND MONTH(c.created_at) = MONTH(CURRENT_TIMESTAMP())
+    ');
+
+PREPARE stmt FROM @createViewSQL;
+EXECUTE stmt;
+DEALLOCATE PREPARE stmt;
+END;
+//
+DELIMITER ;
+
 
 
 
@@ -265,7 +316,22 @@ DELIMITER ;
 
 
 
+DELIMITER //
+CREATE PROCEDURE storeDataToDeanComplaintCheck()
+BEGIN
+DECLARE viewName varchar (30);
+SET viewNAme = CONCAT(MONTHNAME(CURRENT_TIMESTAMP),"_ComplainReport");
+CREATE VIEW viewName AS
+SELECT c_id
+FROM complain c
+WHERE
+    (date(current_timestamp) - date(c.created_at)) > 7;
+    ;
+END //
+DELIMITER ;
 
+insert into deancomplaintcheck(cId)
+VALUES(SELECT c_id FROM complain c WHERE date(current_timestamp) - date(c.created_at) > 7);
 
 
 

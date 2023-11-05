@@ -9,27 +9,27 @@ import Sidebar from '../global/Sidebar';
 export default function DamageTable() {
 
 
-    const [complaints, setComplaints] = useState([]);
+    const [damages, setDamages] = useState([]);
 
     useEffect(() => {
-        loadComplaints();
+        loadDamages();
     }, []);
 
-    const loadComplaints = async () => {
+    const loadDamages = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/complaints/viewall"); 
-            setComplaints(response.data);
+            const response = await axios.get("http://localhost:8080/damages/viewall"); 
+            setDamages(response.data);
         } catch (error) {
-            console.error('Error fetching complaint data:', error);
+            console.error('Error fetching damage datas:', error);
         }
     };
 
-    const deleteComplaint = async (cId) => {
+    const deleteDamages = async (damageId) => {
         try {
-            await axios.delete(`http://localhost:8080/complaints/delete/${cId}`);
-            loadComplaints();
+            await axios.delete(`http://localhost:8080/damages/delete/${damageId}`);
+            loadDamages();
         } catch (error) {
-            console.error('Error deleting complaint:', error);
+            console.error('Error deleting damage:', error);
         }
     };
 
@@ -53,39 +53,31 @@ export default function DamageTable() {
                                 <table className="table border shadow">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Complaint ID</th>
-                                            <th scope="col">Registration Number</th>
-                                            <th scope="col">Category</th>
-                                            <th scope="col">Subject</th>
-                                            <th scope="col">Description</th>
-                                            <th scope="col">Created At</th>
-                                            <th scope="col">Updated At</th>
-                                            <th scope="col">Actions</th>
-                                            <th scope="col">Remark</th>
-                                            <th scope="col">Options</th>
+                                            <th scope="col" class="text-center">Damage ID</th>
+                                            <th scope="col" class="text-center">Asset ID </th>
+                                            <th scope="col" class="text-center">Room Number</th>
+                                            <th scope="col" class="text-center">Floor</th>
+                                            <th scope="col" class="text-center">Description</th>
+                                            <th scope="col" colspan="2" class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {complaints.map((complaint, index) => (
+                                        {damages.map((damage, index) => (
                                             <tr key={index}>
-                                                <td>{complaint.cId}</td>
-                                                <td>{complaint.regNo}</td>
-                                                <td>{complaint.category}</td>
-                                                <td>{complaint.subject}</td>
-                                                <td>{complaint.description}</td>
-                                                <td>{complaint.createdAt}</td>
-                                                <td>{complaint.updatedAt}</td>
-                                                <td>{complaint.action}</td>
-                                                <td>{complaint.remark}</td>
+                                                <td>{damage.damageId}</td>
+                                                <td>{damage.assetId}</td>
+                                                <td>{damage.roomNo}</td>
+                                                <td>{damage.floor}</td>
+                                                <td>{damage.description}</td>
 
                                                 <td>
-                                                    <Link to={`/complaint/${complaint.cId}`} className="btn btn-info btn-sm mx-2">
+                                                    <Link to={`/damage/${damage.damageId}`} className="btn btn-info btn-sm mx-2">
                                                         View
                                                     </Link>
                                                     <button
                                                         onClick={() => {
-                                                            if (window.confirm('Are you sure you want to delete this complaint?')) {
-                                                                deleteComplaint(complaint.cId);
+                                                            if (window.confirm('Are you sure you want to delete this damage?')) {
+                                                                deleteDamages(damage.damageId);
                                                             }
                                                         }}
                                                         className="btn btn-danger btn-sm mx-2"

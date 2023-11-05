@@ -126,7 +126,8 @@ INSERT INTO `bathroom` (`bathroom_id`, `floor`, `name`) VALUES
 CREATE TABLE complain (
 c_id INT AUTO_INCREMENT PRIMARY KEY,
 reg_no VARCHAR(20),
-asset_code VARCHAR(50) not null ,
+type varchar(20),
+asset_code VARCHAR(50) ,
 subject VARCHAR(50),
 description VARCHAR(50),
 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -219,7 +220,6 @@ CREATE TABLE `room_asset` (
 
 ALTER TABLE `room_asset`
 ADD PRIMARY KEY (`asset_id`,`room_no`);
-
 
 INSERT INTO `room_asset` (`asset_id`, `name`, `room_no`) VALUES
 ('ass_b1', 'Bulb1', 101),
@@ -325,6 +325,43 @@ INSERT INTO level VALUES
 (2019,3),
 (2022,1);
 
+CREATE TABLE `complain` (
+   `c_id` int(11) NOT NULL AUTO_INCREMENT,
+   `reg_no` varchar(20) DEFAULT NULL,
+   `type` varchar(20) DEFAULT NULL,
+   `asset_code` varchar(50) DEFAULT NULL,
+   `subject` varchar(50) DEFAULT NULL,
+   `description` varchar(50) DEFAULT NULL,
+   `created_at` timestamp NULL DEFAULT current_timestamp(),
+   `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+   `action` int(1) DEFAULT 0,
+   `remark` varchar(50) DEFAULT NULL,
+   PRIMARY KEY (`c_id`));
+
+INSERT INTO `complain` VALUES
+(1,'TG491',NULL,'ass_b1/101','sub','hello','2023-10-01 09:39:10','2023-11-05 04:04:18',0,NULL),
+(4,'TG490',NULL,'ass_bed1/101','sub','hello','2023-11-01 13:38:25','2023-11-05 03:00:59',0,NULL),
+(5,'TG494',NULL,'ass_m1/101','door broken','left side broken','2023-12-01 09:39:10','2023-11-05 04:04:10',0,NULL),
+(6,'TG494','Room','ass_b1/101','Door demage','Right side corner','2023-11-05 04:33:41','2023-11-05 04:33:41',0,NULL);
+
+
+
+CREATE TABLE `student` (
+`reg_no` varchar(255) NOT NULL,
+`address` varchar(255) DEFAULT NULL,
+`email` varchar(255) DEFAULT NULL,
+`first_name` varchar(255) DEFAULT NULL,
+`last_name` varchar(255) DEFAULT NULL,
+`nic` varchar(255) DEFAULT NULL,
+`phone_no` int(11) DEFAULT NULL,
+PRIMARY KEY (`reg_no`)
+);
+
+INSERT INTO `student` VALUES
+('TG/2019/490','39A Boundary Road, Kalmunai','sunil@example.com','Kumar','Murukeshan','997024986V',760725590),
+('TG/2019/491','39A Boundary Road, Kalmunai','sunil@example.com','Kamal','Hassan','997024986V',760725590),
+('TG/2019/492','39A Boundary Road, Kalmunai','sunil@example.com','Sunil','Vadivel','997024986V',760725590),
+('TG/2019/494','ward no:01,Vankalai,Mannar','reya@gmail.com','Reyanson','Sosai','990910804V',763787940);
 
 
 
