@@ -42,6 +42,17 @@ DELIMITER ;
 /*END insert notice  procedure for insert notice */
 
 
+/* START find notice details by id */
+DELIMITER //
+CREATE PROCEDURE GetNoticeDetails(IN p_notice_id INT)
+BEGIN
+SELECT * FROM notice WHERE notice_id = p_notice_id;
+END //
+DELIMITER ;
+/* END find notice details by id */
+
+
+
     /* Student Table */
 
 /* To get all student details */

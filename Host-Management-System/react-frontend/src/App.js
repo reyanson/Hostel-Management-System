@@ -3,6 +3,7 @@ import { ColorModeContext, useMode } from './theme';
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 import Registration from './Components/Registration';
 import Login from './Login';
 import Forgot from './Components/ForgotPage';
@@ -17,7 +18,7 @@ import DamageTable from './scenes/damage';
 import Room from './Components/Room';
 import RoomTable from './scenes/room';
 import AssetTable from './scenes/assets';
-//import NoticeUpdate from './Components/NoticeUpdate';
+// import NoticeUpdate from './NoticeUpdate';
 //import QRCodeGenerator from './QRCodeGenerator';
 
 

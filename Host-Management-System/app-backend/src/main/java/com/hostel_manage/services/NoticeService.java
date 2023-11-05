@@ -24,6 +24,7 @@ public class NoticeService {
 
 
 
+    @Transactional
     public void updateNotice(Notice updatedNotice) {
         entityManager.merge(updatedNotice);
 
@@ -66,6 +67,9 @@ public class NoticeService {
 
     }
 
-
+    @Transactional
+    public List<Notice> getNoticeDetails(Integer noticeId) {
+        return noticeRepository.getNoticeDetails(noticeId);
+    }
 
 }

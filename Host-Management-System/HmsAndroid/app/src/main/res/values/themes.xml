@@ -12,7 +12,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.HmsAndroid.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+<!--    <style name="Theme.HmsAndroid.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.NoActionBar" />-->
 
     <style name="Theme.HmsAndroid.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 </resources>
