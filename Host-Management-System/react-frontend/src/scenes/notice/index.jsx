@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
-import axios from 'axios';
 import Box from '@mui/material/Box';
 import Header from '../../Components/Header';
 import Topbar from '../global/Topbar';
 import Sidebar from '../global/Sidebar';
+import axios from 'axios';
 
 function Noticetable() {
   const [data, setData] = useState([]);
@@ -23,6 +23,14 @@ const loadNotices = async () => {
   }
 };
 
+const deleteNotice = async (noticeId)=>{
+  const confirmed = window.confirm('Are you sure you want to delete this notice?');
+      if (confirmed) {
+        await axios.delete(`http://localhost:8080/notices/${noticeId}`)
+        loadNotices();
+      }
+}
+
   // useEffect(() => {
   //   // Fetch data from your API or database
   //   axios.get("http://localhost:8080/notices/all")
@@ -34,13 +42,6 @@ const loadNotices = async () => {
   //     });
   // }, []);
 
-  const deleteNotice = async (noticeId)=>{
-    const confirmed = window.confirm('Are you sure you want to delete this notice?');
-        if (confirmed) {
-          await axios.delete(`http://localhost:8080/notices/${noticeId}`)
-          loadNotices();
-        }
-}
 
   return (
     <>

@@ -3,16 +3,6 @@ CREATE DATABASE user_manage;
 
 USE user_manage;
 
-CREATE TABLE users(
-    user_id int not null AUTO_INCREMENT,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    email VARCHAR(50) NOT NULL UNIQUE ,
-    password VARCHAR(255) NOT NULL ,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP,
-    PRIMARY KEY (user_id)
-);
 
 CREATE TABLE user(
     username VARCHAR(60) PRIMARY KEY, 
@@ -230,7 +220,6 @@ CREATE TABLE `room_asset` (
 
 ALTER TABLE `room_asset`
 ADD PRIMARY KEY (`asset_id`,`room_no`);
-
 
 INSERT INTO `room_asset` (`asset_id`, `name`, `room_no`) VALUES
 ('ass_b1', 'Bulb1', 101),
