@@ -1,4 +1,3 @@
------------------------tg492-------------------------
 
 CREATE DATABASE user_manage;
 
@@ -101,39 +100,37 @@ VALUES
     ('TG/2020/841', 'Krishanth', 'Veluraj', 'krishanth@example.com', '200065432164', 'PTK Road Pandiruppu, Batticalo', 0719832164);
 
 
----------------------tg509------------------------------
-
 CREATE TABLE `bathroom` (
-  `bathroom_id` varchar(10) NOT NULL,
-  `floor` varchar(2) NOT NULL
+  `bathroom_id` varchar(10) NOT NULL PRIMARY KEY ,
+  `floor` varchar(2),
+  `name` varchar(50) NOT NULL
 );
 
-
-INSERT INTO `bathroom` (`bathroom_id`, `floor`) VALUES
-('l1_l_b1', 'L1'),
-('l1_l_b2', 'L1'),
-('l1_l_b3', 'L1'),
-('l1_l_b4', 'L1'),
-('l1_l_b5', 'L1'),
-('l1_l_b6', 'L1'),
-('l1_r_b1', 'L1'),
-('l1_r_b2', 'L1'),
-('l1_r_b3', 'L1'),
-('l1_r_b4', 'L1'),
-('l1_r_b5', 'L1'),
-('l1_r_b6', 'L1'),
-('l2_l_b1', 'L2'),
-('l2_l_b2', 'L2'),
-('l2_l_b3', 'L2'),
-('l2_l_b4', 'L2'),
-('l2_l_b5', 'L2'),
-('l2_l_b6', 'L2'),
-('l2_r_b1', 'L2'),
-('l2_r_b2', 'L2'),
-('l2_r_b3', 'L2'),
-('l2_r_b4', 'L2'),
-('l2_r_b5', 'L2'),
-('l2_r_b6', 'L2');
+INSERT INTO `bathroom` (`bathroom_id`, `floor`, `name`) VALUES
+('l1_l_b1', 'L1', 'level1 left bathroom1'),
+('l1_l_b2', 'L1', 'level1 left bathroom2'),
+('l1_l_b3', 'L1', 'level1 left bathroom3'),
+('l1_l_b4', 'L1', 'level1 left bathroom4'),
+('l1_l_b5', 'L1', 'level1 left bathroom5'),
+('l1_l_b6', 'L1', 'level1 left bathroom6'),
+('l1_r_b1', 'L1', 'level1 right bathroom1'),
+('l1_r_b2', 'L1', 'level1 right bathroom2'),
+('l1_r_b3', 'L1', 'level1 right bathroom3'),
+('l1_r_b4', 'L1', 'level1 right bathroom4'),
+('l1_r_b5', 'L1', 'level1 right bathroom5'),
+('l1_r_b6', 'L1', 'level1 right bathroom6'),
+('l3_l_b1', 'L3', 'level3 left bathroom1'),
+('l3_l_b2', 'L3', 'level3 left bathroom2'),
+('l3_l_b3', 'L3', 'level3 left bathroom3'),
+('l3_l_b4', 'L3', 'level3 left bathroom4'),
+('l3_l_b5', 'L3', 'level3 left bathroom5'),
+('l3_l_b6', 'L3', 'level3 left bathroom6'),
+('l3_r_b1', 'L3', 'level3 right bathroom1'),
+('l3_r_b2', 'L3', 'level3 right bathroom2'),
+('l3_r_b3', 'L3', 'level3 right bathroom3'),
+('l3_r_b4', 'L3', 'level3 right bathroom4'),
+('l3_r_b5', 'L3', 'level3 right bathroom5'),
+('l3_r_b6', 'L3', 'level3 right bathroom6');
 
 
 CREATE TABLE complain (
@@ -150,6 +147,8 @@ remark VARCHAR(50) default null
 
 ALTER TABLE complain MODIFY COLUMN action INT(2) AFTER updated_at;
 
+ALTER TABLE complain
+ADD FOREIGN KEY (reg_no) REFERENCES student(reg_no);
 
 INSERT INTO `complain` (`c_id`, `reg_no`, `date`, `category`, `action`, `remark`, `subject`, `description`) VALUES
 ('c1', 'tg_2019_101', '2023-09-03', 'room issue', 0, 'warden not approve', 'chair is broken', NULL),
@@ -158,17 +157,21 @@ INSERT INTO `complain` (`c_id`, `reg_no`, `date`, `category`, `action`, `remark`
 ('c4', 'tg_2022_909', '2023-10-06', 'room issue', 0, 'warden not approve', 'door lock is broken', NULL);
 
 CREATE TABLE `damage` (
-  `damage_id` varchar(11) NOT NULL,
+  `damage_id` varchar(11) NOT NULL PRIMARY KEY ,
   `asset_id` varchar(11) NOT NULL,
+  `room_no` INT,
+  `floor` varchar(11),
   `description` mediumtext NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+)
 
 
-INSERT INTO `damage` (`damage_id`, `asset_id`, `room_no`, `description`) VALUES
-('d1', 'ass_t1', 101, 'table is broken.'),
-('d2', 'ass_c1', 101, 'lock missing'),
-('d3', 'ass_t1', 301, 'table is broken'),
-('d4', 'ass_c2', 428, 'lock missing');
+INSERT INTO `damage` (`damage_id`, `asset_id`, `room_no`, `floor`,`description`) VALUES
+('d1', 'ass_t1', 101, '', 'table is broken.'),
+('d2', 'ass_c1', 101, '', 'lock missing'),
+('d3', 'ass_t1', 301, '', 'table is broken'),
+('d4', 'ass_c2', 428, '', 'lock missing'),
+('d4', 'l2_l_t3', NULL, 'L2', 'lock missing'),
+('d4', 'l3_r_b5', NULL, 'L2', 'bathroom door is broken');
 
 
 CREATE TABLE `notice` (
@@ -177,7 +180,7 @@ CREATE TABLE `notice` (
   `content` mediumtext NOT NULL,
   `subject` varchar(255) NOT NULL
 );
-ALTER TABLE complain MODIFY COLUMN action INT(2) AFTER updated_at;
+
 
 INSERT INTO `notice` (`date`, `content`, `subject`) VALUES
 ('2023-10-20', 'Please respect quiet hours, maintain cleanliness, and report damages. Visitors must register, and security is crucial. Follow Covid-19 guidelines, and treat fellow residents with respect. Non-compliance may result in disciplinary action. Thank you for contributing to a safe and pleasant hostel environment.', 'NOTICE FOR THE STUDENTS USING HOSTEL FACILITIES'),
@@ -223,6 +226,9 @@ CREATE TABLE `room_asset` (
   `name` varchar(10) NOT NULL,
   `room_no` int(3) NOT NULL
 );
+
+ALTER TABLE `room_asset`
+ADD PRIMARY KEY (`asset_id`,`room_no`);
 
 
 INSERT INTO `room_asset` (`asset_id`, `name`, `room_no`) VALUES
@@ -274,46 +280,37 @@ INSERT INTO `room_asset` (`asset_id`, `name`, `room_no`) VALUES
 
 
 CREATE TABLE `toilet` (
-  `toilet_id` varchar(11) primary key NOT NULL,
-  `floor` varchar(10) NOT NULL
+  `toilet_id` varchar(11) NOT NULL PRIMARY KEY,
+  `floor` varchar(10),
+  `name` varchar(50) NOT NULL
 );
 
 
-INSERT INTO `toilet` (`toilet_id`, `floor`) VALUES
-('l1_l_t1', 'L1'),
-('l1_l_t2', 'L1'),
-('l1_l_t3', 'L1'),
-('l1_l_t4', 'L1'),
-('l1_l_t5', 'L1'),
+INSERT INTO `toilet` (`toilet_id`, `floor`, `name`) VALUES
+('l1_l_t1', 'L1', 'Level1 left toilet1'),
+('l1_l_t2', 'L1', 'Level1 left toilet2'),
+('l1_l_t3', 'L1', 'Level1 left toilet3'),
+('l1_l_t4', 'L1', 'Level1 left toilet4'),
+('l1_l_t5', 'L1', 'Level1 left toilet5'),
+('l1_r_t1', 'L1', 'Level1 right toilet1'),
+('l1_r_t2', 'L1', 'Level1 right toilet2'),
+('l1_r_t3', 'L1', 'Level1 right toilet3'),
+('l1_r_t4', 'L1', 'Level1 right toilet4'),
+('l1_r_t5', 'L1', 'Level1 right toilet5'),
+('l3_l_t1', 'L3', 'Level3 left toilet1'),
+('l3_l_t2', 'L3', 'Level3 left toilet2'),
+('l3_l_t3', 'L3', 'Level3 left toilet3'),
+('l3_l_t4', 'L3', 'Level3 left toilet4'),
+('l3_l_t5', 'L3', 'Level3 left toilet5'),
+('l3_r_t1', 'L3', 'Level3 right toilet1'),
+('l3_r_t2', 'L3', 'Level3 right toilet2'),
+('l3_r_t3', 'L3', 'Level3 right toilet3'),
+('l3_r_t4', 'L3', 'Level3 right toilet4'),
+('l3_r_t5', 'L3', 'Level3 right toilet5');
 
-('l1_r_t1', 'L1'),
-('l1_r_t2', 'L1'),
-('l1_r_t3', 'L1'),
-('l1_r_t4', 'L1'),
-('l1_r_t5', 'L1'),
-
-('l2_l_t1', 'L3'),
-('l2_l_t2', 'L3'),
-('l2_l_t3', 'L3'),
-('l2_l_t4', 'L3'),
-('l2_l_t5', 'L3'),
-
-('l2_r_t1', 'L3'),
-('l2_r_t2', 'L3'),
-('l2_r_t3', 'L3'),
-('l2_r_t4', 'L3'),
-('l2_r_t5', 'L3')
-;
-
-
-ALTER TABLE `bathroom`
-  ADD PRIMARY KEY (`bathroom_id`);
 
 ALTER TABLE `complain`
   ADD PRIMARY KEY (`c_id`);
-
-ALTER TABLE `damage`
-  ADD PRIMARY KEY (`damage_id`);
 
 ALTER TABLE `notice`
   ADD PRIMARY KEY (`notice_id`);
@@ -321,11 +318,6 @@ ALTER TABLE `notice`
 ALTER TABLE `repair`
   ADD PRIMARY KEY (`repair_id`);
 
-ALTER TABLE `room_asset`
-  ADD PRIMARY KEY (`asset_id`,`room_no`);
-
-ALTER TABLE `toilet`
-  ADD PRIMARY KEY (`toilet_id`);
 
 ALTER TABLE `damage`
   ADD CONSTRAINT `damage_ibfk_1` FOREIGN KEY (`room_no`) REFERENCES `room` (`room_no`),
@@ -334,9 +326,6 @@ ALTER TABLE `damage`
 ALTER TABLE `repair`
   ADD CONSTRAINT `repair_ibfk_1` FOREIGN KEY (`room_no`) REFERENCES `room` (`room_no`),
   ADD CONSTRAINT `repair_ibfk_2` FOREIGN KEY (`asset_id`) REFERENCES `room_asset` (`asset_id`);
-
-ALTER TABLE complain
-ADD FOREIGN KEY (reg_no) REFERENCES student(reg_no);
 
 
 ------------------------------------------------------------------TG508----------------------------------------------------------------------------------------

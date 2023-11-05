@@ -200,6 +200,7 @@ END //
 DELIMITER ;   //room not have foreign key
 
 
+
 /* for showing complain details in table*/
 DELIMITER //
 CREATE PROCEDURE showingComplaintsDetails()
@@ -233,6 +234,18 @@ update complain set asset_code ="ass_m1/101" where c_id=5;
 update student set first_name="Kamal",last_name="Hassan" where reg_no="TG/2019/491";
 update student set reg_no="TG/2019/490" where reg_no="TG_2019_490";
 
+
+
+-------------------------------------------------DAMAGE Table------------------------------------------------------
+/* To get all damages details*/
+
+DELIMITER //
+CREATE PROCEDURE get_all_damage_details()
+BEGIN
+SELECT *FROM damage;
+END //
+
+DELIMITER ;
 
 
 
