@@ -17,7 +17,7 @@ export default function RoomTable() {
 
     const loadRooms = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/rooms/viewall"); 
+            const response = await axios.get("http://192.168.8.101:8080/rooms/viewall"); 
             setRooms(response.data);
         } catch (error) {
             console.error('Error fetching Room data:', error);
@@ -26,7 +26,7 @@ export default function RoomTable() {
 
     const deleteRooms = async (regNo) => {
         try {
-            await axios.delete(`http://localhost:8080/rooms/delete/${regNo}`);
+            await axios.delete(`http://192.168.8.101:8080/rooms/delete/${regNo}`);
             loadRooms();
         } catch (error) {
             console.error('Error deleting Room Record:', error);

@@ -65,4 +65,5 @@ public class ComplainController {
     public List<Complain> getComplaintDetails(@PathVariable Integer c_id) {
         return complainService.getComplaintDetails(c_id);
     }
+
 }

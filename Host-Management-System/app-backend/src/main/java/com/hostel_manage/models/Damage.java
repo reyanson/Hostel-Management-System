@@ -22,8 +22,19 @@ public class Damage {
     @Column(name = "room_no")
     private Integer roomNo;
 
+    @Column(name= "floor")
+    private String floor;
+
     @Column(name = "description")
     private String description;
+
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
 
     public String getDamageId() {
         return damageId;
