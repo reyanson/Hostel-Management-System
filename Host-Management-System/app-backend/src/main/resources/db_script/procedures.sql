@@ -299,3 +299,25 @@ DELIMITER ;
 
 
 
+
+DELIMITER //
+CREATE PROCEDURE storeDataToDeanComplaintCheck()
+BEGIN
+DECLARE viewName varchar (30);
+SET viewNAme = CONCAT(MONTHNAME(CURRENT_TIMESTAMP),"_ComplainReport");
+CREATE VIEW viewName AS
+SELECT c_id
+FROM complain c
+WHERE
+    (date(current_timestamp) - date(c.created_at)) > 7;
+    ;
+END //
+DELIMITER ;
+
+insert into deancomplaintcheck(cId)
+VALUES(SELECT c_id FROM complain c WHERE date(current_timestamp) - date(c.created_at) > 7);
+
+
+
+
+

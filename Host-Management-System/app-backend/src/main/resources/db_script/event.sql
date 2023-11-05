@@ -22,8 +22,88 @@ WHERE SUBSTRING(c.reg_no,3)=SUBSTRING(s.reg_no,9) AND
     MONTH(c.created_at) = MONTH(CURRENT_TIMESTAMP)
     ;
 END//
-
 DELIMITER ;
+
+------------------------------------------event to send complaint after 7 days to Dean---------------------------------
+
+CREATE TABLE deancomplaintcheck(cId INT PRIMARY KEY );
+
+DELIMITER //
+CREATE EVENT checkActionNullValueForDean
+ON SCHEDULE EVERY 7 DAY
+STARTS CURRENT_TIMESTAMP + INTERVAL 1 MINUTE
+DO
+BEGIN
+INSERT INTO deancomplaintcheck (cId)
+SELECT c_id
+FROM complain c
+WHERE DATEDIFF(CURDATE(), c.created_at) > 7 AND
+        c.action = 0 AND c.remark IS NULL;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE displayDeanComplaint()
+BEGIN
+SELECT *
+FROM complain c, deancomplaintcheck d
+WHERE c.c_id = d.cId;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER after_update_action_on_complainTable
+    AFTER UPDATE ON complain FOR EACH ROW
+BEGIN
+    IF NEW.action =1 THEN
+    DELETE
+    FROM deancomplaintcheck
+    WHERE OLD.c_id = deancomplaintcheck.cId;
+
+END IF;
+END //
+DELIMITER ;
+
+------------------------------------------event to send complaint after 4 days to Warden---------------------------------
+
+CREATE TABLE wardencomplaintcheck(cId INT INT PRIMARY KEY );
+
+DELIMITER //
+CREATE EVENT checkActionNullValueForWarden
+ON SCHEDULE EVERY 4 DAY
+STARTS CURRENT_TIMESTAMP + INTERVAL 1 MINUTE
+DO
+BEGIN
+INSERT INTO wardencomplaintcheck (cId)
+SELECT c_id
+FROM complain c
+WHERE DATEDIFF(CURDATE(), c.created_at) > 7 AND
+        c.action = 0 AND c.remark IS NULL;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE displayWardenComplaint()
+BEGIN
+SELECT *
+FROM complain c, wardencomplaintcheck w
+WHERE c.c_id = w.cId;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER after_update_action_on_complainTable
+    AFTER UPDATE ON complain FOR EACH ROW
+BEGIN
+    IF NEW.action =1 THEN
+    DELETE
+    FROM deancomplaintcheck
+    WHERE OLD.c_id = wardencomplaintcheck.cId;
+
+END IF;
+END //
+DELIMITER ;
+----------------------------------------------------------------------------------------------------
 
 
 DELIMITER //
