@@ -246,11 +246,11 @@ DELIMITER ;
 
 /* START Procedure for find dean by id*/
 DELIMITER //
-CREATE PROCEDURE FindWardenDetailsById(
-    IN wardenId INT
+CREATE PROCEDURE FindDeanDetailsById(
+    IN deanId INT
 )
 BEGIN
-SELECT * FROM warden WHERE warden_id = wardenId;
+SELECT * FROM dean WHERE dean_id = deanId;
 END //
 DELIMITER ;
 /* END Procedure for find dean by id*/
