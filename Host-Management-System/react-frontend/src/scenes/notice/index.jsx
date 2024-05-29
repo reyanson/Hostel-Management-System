@@ -30,19 +30,6 @@ const deleteNotice = async (noticeId)=>{
         loadNotices();
       }
 }
-
-  // useEffect(() => {
-  //   // Fetch data from your API or database
-  //   axios.get("http://localhost:8080/notices/all")
-  //     .then(response => {
-  //       setData(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error fetching data:', error);
-  //     });
-  // }, []);
-
-
   return (
     <>
       <Box display="flex">
