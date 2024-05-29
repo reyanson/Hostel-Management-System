@@ -18,13 +18,11 @@ import WarningOutlinedIcon from "@mui/icons-material/WarningOutlined";
 import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
 import AnnouncementOutlinedIcon from "@mui/icons-material/AnnouncementOutlined";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
-import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
-import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
+import QrCodeOutlinedIcon from "@mui/icons-material/QrCodeOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
-  
+  const colors = tokens(theme.palette.mode); 
 
   return (
     <MenuItem
@@ -46,6 +44,7 @@ const Sidebar = () => {
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
+  const [occasion, setUser] = useState(localStorage.getItem('userRole'));
   //const navigator = useNavigate();
 
   return (
@@ -71,7 +70,6 @@ const Sidebar = () => {
     >
       <ProSidebar collapsed={isCollapsed}>
         <Menu iconShape="square">
-          {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
@@ -118,7 +116,7 @@ const Sidebar = () => {
                   
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Sub Warden 
+                {occasion}
                 </Typography>
               </Box>
             </Box>
@@ -162,13 +160,20 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
+              title="QR Code Generator"
+              to="/qr"
+              icon={<QrCodeOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Manage Notices"
               to="/noticetable"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-{/* 
+            {/* 
             <Item
               title="Manage Assets"
               to="/assetstable"
@@ -191,22 +196,6 @@ const Sidebar = () => {
             >
               Pages
             </Typography>
-
-            <Item
-              title="User Registration"
-              to="/registration"
-              icon={<PersonAddOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Item
-              title="Student Registration"
-              to="/importRegistration"
-              icon={<FileUploadOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
             
             <Item
               title="Create Notice"
@@ -216,7 +205,7 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Create Room"
+              title="Add Room"
               to="/room"
               icon={<AddBoxOutlinedIcon />}
               selected={selected}

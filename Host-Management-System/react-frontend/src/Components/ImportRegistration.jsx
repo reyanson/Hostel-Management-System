@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Header from './Header';
 import {Button,Paper,Table,TableContainer,TableHead,TableBody,TableRow,TableCell,Input} from '@mui/material';
 import Topbar from '../scenes/global/Topbar';
-import Sidebar from '../scenes/global/Sidebar';
+import DeanSidebar from '../scenes/global/DeanSidebar';
 import {tokens} from "../theme";
 import { useTheme } from '@emotion/react';
 
@@ -13,6 +13,8 @@ function StudentUpload() {
   const [file, setFile] = useState(null);
   const [excelData, setExcelData] = useState([]);
   const [showTable, setShowTable] = useState(false);
+
+  //let navigate = useNavigate();
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -46,13 +48,14 @@ function StudentUpload() {
       formData.append('file', file);
 
       try {
-        const response = await axios.post('http://localhost:8080/student/uploadStudent', formData, {
+        const response = await axios.post('http://192.168.8.115:8080/student/uploadStudent', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
-        });
-
+          
+        });       
         console.log('Response from the server:', response.data);
+        // navigate("/studentlist");
       } catch (error) {
         console.error('Error uploading file:', error);
       }
@@ -82,7 +85,7 @@ function StudentUpload() {
       }}
     >
     <Box display="flex">
-    <Sidebar />
+    <DeanSidebar />
     <Box flex="1">
     <Topbar />
 
@@ -125,7 +128,7 @@ function StudentUpload() {
                             </TableBody>
                           </Table>
                         </TableContainer>
-                        <Button variant="contained" color="primary" onClick={handleUpload}>
+                        <Button variant="contained" color="primary" onClick={handleUpload}  >
                           Import
                         </Button>
                       </div>

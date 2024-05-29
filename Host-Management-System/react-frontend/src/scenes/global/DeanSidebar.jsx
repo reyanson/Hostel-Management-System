@@ -1,22 +1,34 @@
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Box } from "@mui/material";
+import axios from "axios";
 import { ProSidebar } from 'react-pro-sidebar';
 import { Menu, MenuItem } from "react-pro-sidebar";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
+import {IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import 'react-pro-sidebar/dist/css/styles.css';
 import { tokens } from "../../theme";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import ReceiptOutlinedIcon from "@mui/icons-material/ReceiptOutlined";
-import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 import CalendarTodayOutlinedIcon from "@mui/icons-material/CalendarTodayOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Logo from "../../logo1.png";
-
+import WarningOutlinedIcon from "@mui/icons-material/WarningOutlined";
+import ReportProblemOutlinedIcon from "@mui/icons-material/ReportProblemOutlined";
+import AnnouncementOutlinedIcon from "@mui/icons-material/AnnouncementOutlined";
+import PersonAddOutlinedIcon from "@mui/icons-material/PersonAddOutlined";
+import DescriptionOutlinedIcon from "@mui/icons-material/DescriptionOutlined";
+import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
+//import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+//import HotelOutlinedIcon from "@mui/icons-material/HotelOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+
+
+  
   return (
     <MenuItem
       active={selected === title}
@@ -32,12 +44,12 @@ const Item = ({ title, to, icon, selected, setSelected }) => {
   );
 };
 
-const Sidebar3 = () => {
+const DeanSidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Dashboard");
-  //const navigator = useNavigate();
+  const [occasion, setUser] = useState(localStorage.getItem('userRole'));
 
   return (
     <Box
@@ -62,7 +74,6 @@ const Sidebar3 = () => {
     >
       <ProSidebar collapsed={isCollapsed}>
         <Menu iconShape="square">
-          {/* LOGO AND MENU ICON */}
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
@@ -106,10 +117,11 @@ const Sidebar3 = () => {
                   fontWeight="bold"
                   sx={{ m: "10px 0 0 0" }}
                 >
-                  Vadivel Ajanthan
+                  
                 </Typography>
                 <Typography variant="h5" color={colors.greenAccent[500]}>
-                  Sub Warden 
+                  {/* <h4>Chandimal Gunaweera</h4>  */}
+                  {occasion}
                 </Typography>
               </Box>
             </Box>
@@ -139,30 +151,22 @@ const Sidebar3 = () => {
               setSelected={setSelected}
             />
             <Item
-              title="Manage Rooms"
-              to="/roomdatas"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
               title="Manage Complaints"
               to="/complaintable"
-              icon={<ReceiptOutlinedIcon />}
+              icon={<ReportProblemOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Manage Notice"
+              title="Report Generation"
+              to="/table"
+              icon={<DescriptionOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Manage Notices"
               to="/noticetable"
-              icon={<ReceiptOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-
-            <Item
-              title="Manage Assets"
-              to="/assetstable"
               icon={<ReceiptOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
@@ -170,10 +174,18 @@ const Sidebar3 = () => {
             <Item
               title="Manage Damages"
               to="/damagelist"
-              icon={<ReceiptOutlinedIcon />}
+              icon={<WarningOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
+
+            {/* <Item
+              title="Manage Rooms"
+              to="/roomdatas"
+              icon={<HotelOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            /> */}
 
             <Typography
               variant="h6"
@@ -182,45 +194,32 @@ const Sidebar3 = () => {
             >
               Pages
             </Typography>
+
             <Item
-              title="Dean Registration"
+              title="User Registration"
               to="/registration"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Warden Registration"
-              to="/registration"
-              icon={<PersonOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
-            <Item
-              title="Sub Warden Registration"
-              to="/registration"
-              icon={<PersonOutlinedIcon />}
+              icon={<PersonAddOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Student Registration"
               to="/importRegistration"
-              icon={<PersonOutlinedIcon />}
+              icon={<FileUploadOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Item
-              title="Security Registration"
-              to="/registration"
-              icon={<PersonOutlinedIcon />}
+            {/* <Item
+              title="Add Room"
+              to="/room"
+              icon={<AddBoxOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
-            />
+            /> */}
             <Item
               title="Create Notice"
               to="/notice"
-              icon={<ReceiptOutlinedIcon />}
+              icon={<AnnouncementOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -238,4 +237,4 @@ const Sidebar3 = () => {
   );
 };
 
-export default Sidebar3;
+export default DeanSidebar;

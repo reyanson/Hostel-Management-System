@@ -93,6 +93,11 @@ CREATE TABLE `subwarden`
     UNIQUE KEY `nic` (`nic`)
 );
 
+
+INSERT INTO subwarden (swarden_id, first_Name, last_Name, Email, nic, address, personal_no, office_no)
+VALUES
+    ('SW001', 'Jeyapala', 'Wardana', 'jayapala@example.com', '198756789V', '456 Park Street, Matara', 0716894375, 0234567236);
+
 ---------------------------------------------------WARDEN Table------------------------------------------------------
 
 CREATE TABLE `warden`

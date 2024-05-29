@@ -1,14 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import React, { useState } from "react";
 import { Box } from '@mui/material';
-import Header from './Header';
-import Topbar from '../scenes/global/Topbar';
-import Sidebar from '../scenes/global/Sidebar';
-import '../index.css';
+import Topbar from '../../scenes/global/Topbar';
+import Sidebar from '../../scenes/global/Sidebar';
+import '../../index.css';
 
-function Room() {
-  let navigate = useNavigate();
+function RoomUpdate() {
+  const navigate = useNavigate();
+
+  const { roomId } = useParams();
 
   const [room, setRoom] = useState({
     roomNum: "",
@@ -24,8 +25,27 @@ function Room() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://192.168.8.115:8080/rooms/add", room);
-    navigate("/roomdatas");
+
+    try {
+      const response = await axios.put(`http://192.168.8.115:8080/update/${roomId}`,
+        null,
+        {
+          params: {
+            newRoomNum: roomNum,
+            newFloor: floor,
+            newRegNo: regNo,
+          },
+        }
+      );
+
+      if (response.status === 200) {
+        navigate("/roomdatas");
+      } else {
+        console.log("Room update failed");
+      }
+    } catch (error) {
+      console.error("An error occurred while updating the room:", error);
+    }
   };
 
   return (
@@ -34,16 +54,15 @@ function Room() {
         <Sidebar />
         <Box flex="1">
           <Topbar />
-          <Box mt={-1} p={2} component="main" sx={{ flexGrow: 1 }}>
-            <Header title="Rooms" subtitle="Allocating Rooms for Students" />
-          </Box>
           <Box sx={{ display: 'flex' }}>
             <Box mt={-6} ml={10}>
               <div className='container mt-5'>
                 <div className='py-4'>
                   <div className="col-md-12 border rounded p-4 mt-2 shadow" style={{ width: '600px', height: '400px' }}>
                     <form onSubmit={(e) => onSubmit(e)} className="custom-form">
-
+                        <div>
+                            <h3 align="center">Update the Room Details</h3>
+                        </div>
                       <div className="mb-3">
                         <label htmlFor="roomNum" className="form-label">
                           Room Number
@@ -109,4 +128,4 @@ function Room() {
   );
 }
 
-export default Room;
+export default RoomUpdate;

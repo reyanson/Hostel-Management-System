@@ -17,7 +17,7 @@ export default function DamageTable() {
 
     const loadDamages = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/damages/viewall"); 
+            const response = await axios.get("http://192.168.8.115:8080/damages/viewall"); 
             setDamages(response.data);
         } catch (error) {
             console.error('Error fetching damage datas:', error);
@@ -26,7 +26,7 @@ export default function DamageTable() {
 
     const deleteDamages = async (damageId) => {
         try {
-            await axios.delete(`http://localhost:8080/damages/delete/${damageId}`);
+            await axios.delete(`http://192.168.8.115:8080/damages/delete/${damageId}`);
             loadDamages();
         } catch (error) {
             console.error('Error deleting damage:', error);

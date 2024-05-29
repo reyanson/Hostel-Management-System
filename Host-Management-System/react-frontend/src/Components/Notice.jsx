@@ -23,7 +23,7 @@ function Notice() {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    await axios.post("http://localhost:8080/notices/add", notice);
+    await axios.post("http://192.168.8.115:8080/notices/add", notice);
     navigate("/noticetable");
   };
 

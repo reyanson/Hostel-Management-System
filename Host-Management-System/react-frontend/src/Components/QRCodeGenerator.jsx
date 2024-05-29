@@ -15,6 +15,10 @@ import {
 } from '@mui/material';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { Box } from '@mui/material';
+import Header from './Header';
+import Topbar from '../scenes/global/Topbar';
+import Sidebar from '../scenes/global/Sidebar';
 
 const RoomAssetList = () => {
   const [roomAssets, setRoomAssets] = useState([]);
@@ -38,7 +42,7 @@ const RoomAssetList = () => {
     if (validateRoomNumber(roomNo)) {
       setError('');
       try {
-        const response = await axios.get(`http://localhost:8080/room-assets/viewall/${roomNo}`);
+        const response = await axios.get(`http://192.168.8.115:8080/room-assets/viewall/${roomNo}`);
         setRoomAssets(response.data);
       } catch (error) {
         console.error('Error fetching room assets:', error);
@@ -116,52 +120,70 @@ const RoomAssetList = () => {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
-      <Paper elevation={3} style={{ padding: '20px', margin: '20px', maxWidth: '800px' }}>
-        <Typography variant="h4" gutterBottom>
-        <center>Print the Room Asset QR code</center>
-        </Typography>
-        <TextField
-          type="number"
-          label="Enter Room No"
-          value={roomNo}
-          onChange={(e) => setRoomNo(e.target.value)}
-          fullWidth
-          margin="normal"
-        />
-        {error && <Typography variant="body2" color="error">{error}</Typography>}
-       
-        <Button variant="contained" color="primary" onClick={displayAllQRCodes} fullWidth>
-          Show All QR Codes
-        </Button>
-        
-        <Button variant="contained" color="primary" onClick={handlePrint} fullWidth>
-          Print
-        </Button>
+    <>
+      <Box display="flex">
+      <Sidebar />
+      <Box flex="1">
+      <Topbar />
 
-        <TableContainer component={Paper} style={{ marginTop: '20px' }}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Asset Name</TableCell>
-                <TableCell>QR Code</TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {qrCodes.map((qrCodeData, index) => (
-                <TableRow key={index}>
-                  <TableCell>{qrCodeData.assetName}</TableCell>
-                  <TableCell>
-                    <img src={qrCodeData.qrCode} alt={`QR Code ${index}`} style={{ width: '150px', height: 'auto' }} />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-    </div>
+          <Box m="20px" mt={-8} component="main" sx={{ flexGrow: 1, p: 3 }} /> 
+
+          <Box p={2}>
+              <Header title="QR Code Generation" subtitle="Creating room assets QR code" />
+          </Box>  
+
+          <Box sx={{ display: 'flex' }}> 
+          <Box mt={-15} ml={40}>          
+                      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh' }}>
+                        <Paper elevation={3} style={{ padding: '20px', margin: '20px', maxWidth: '800px' }}>
+                          <Typography variant="h4" gutterBottom>
+                          <center>Print the Room Asset QR code</center>
+                          </Typography>
+                          <TextField
+                            type="number"
+                            label="Enter Room No"
+                            value={roomNo}
+                            onChange={(e) => setRoomNo(e.target.value)}
+                            fullWidth
+                            margin="normal"
+                          />
+                          {error && <Typography variant="body2" color="error">{error}</Typography>}
+                          
+                          <Button variant="contained" color="primary" onClick={displayAllQRCodes} fullWidth>
+                            Show All QR Codes
+                          </Button>
+                          
+                          <Button variant="contained" color="primary" onClick={handlePrint} fullWidth>
+                            Print
+                          </Button>
+
+                          <TableContainer component={Paper} style={{ marginTop: '20px' }}>
+                            <Table>
+                              <TableHead>
+                                <TableRow>
+                                  <TableCell>Asset Name</TableCell>
+                                  <TableCell>QR Code</TableCell>
+                                </TableRow>
+                              </TableHead>
+                              <TableBody>
+                                {qrCodes.map((qrCodeData, index) => (
+                                  <TableRow key={index}>
+                                    <TableCell>{qrCodeData.assetName}</TableCell>
+                                    <TableCell>
+                                      <img src={qrCodeData.qrCode} alt={`QR Code ${index}`} style={{ width: '150px', height: 'auto' }} />
+                                    </TableCell>
+                                  </TableRow>
+                                ))}
+                              </TableBody>
+                            </Table>
+                          </TableContainer>
+                        </Paper>
+                      </div>  
+                      </Box>             
+              </Box>
+      </Box>
+      </Box>        
+    </>
   );
-};
-
+}
 export default RoomAssetList;

@@ -3,7 +3,7 @@ import axios from "axios";
 import Box from '@mui/material/Box';
 import Header from './Header';
 import Topbar from '../scenes/global/Topbar';
-import Sidebar from '../scenes/global/Sidebar';
+import DeanSidebar from '../scenes/global/DeanSidebar';
 
 export default function Registration(){
 
@@ -19,7 +19,7 @@ export default function Registration(){
   async function save (event){
     event.preventDefault();
     try{
-      await axios.post(`http://localhost:8080/api/user/insert/${position}`, {
+      await axios.post(`http://192.168.8.115:8080/dean/insertUser/${position}`, {
       first_Name : first_Name,
       last_Name : last_Name,
       email : Email,
@@ -37,7 +37,7 @@ export default function Registration(){
     return(
       <>
       <Box display="flex">
-      <Sidebar />
+      <DeanSidebar />
       <Box flex="1">
       <Topbar />
 

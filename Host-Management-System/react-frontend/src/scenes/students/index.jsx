@@ -22,7 +22,7 @@ export default function Students() {
 
     const loadStudents = async () => {
         try {
-            const response = await axios.get("http://192.168.8.101:8080/student/viewall");
+            const response = await axios.get("http://192.168.8.115:8080/student/viewall");
             setStudents(response.data);
         } catch (error) {
             console.error('Error fetching student data:', error);
@@ -30,7 +30,7 @@ export default function Students() {
     };
 
     const deleteStudent = async (regNo)=>{
-        await axios.delete(`http://localhost:8080/student/delete/${regNo}`)
+        await axios.delete(`http://192.168.8.115:8080/student/delete?regNo=${regNo}`)
         loadStudents();
     }
 

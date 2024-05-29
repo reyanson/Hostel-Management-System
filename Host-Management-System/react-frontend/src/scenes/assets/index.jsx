@@ -15,7 +15,7 @@ export default function RoomAssetsTable() {
   
   const loadAssets = async () => {
     try {
-        const response = await axios.get("http://localhost:8080/room-assets/get-all-asset-info");
+        const response = await axios.get("http://192.168.8.115:8080/room-assets/get-all-asset-info");
         setData(response.data);
     } catch (error) {
         console.error('Error fetching', error);
